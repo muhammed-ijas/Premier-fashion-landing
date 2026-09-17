@@ -1,0 +1,558 @@
+@import "tailwindcss";
+
+/* ============================================================
+   PREMIER FASHION — PREMIER GROUP HOUSE STYLE
+
+   Colours sampled from the existing Premier Group sites:
+     blue #0B73B5   green #7CB715   cyan #1CB7E0
+     page #F4F4F5   tint #F0F9FF
+
+   Poppins throughout. Flat colour only — no gradients anywhere.
+   Page headers use a photograph with a flat dark overlay.
+
+   Components never name a colour. A section declares what it is
+   (surface-light / surface-tint / surface-blue / surface-media)
+   and the text, rules, cards and buttons inside follow from it.
+
+   Green is the mark that draws the eye — eyebrows, the nav
+   underline, icon squares, bullets, card hover edges, one button
+   per screen. Blue is structural — headings, footer, primary fills.
+   ============================================================ */
+
+/* ---------- 1. PALETTE ---------- */
+:root {
+  --c-blue: #0B73B5;
+  --c-blue-deep: #085B8F;
+  --c-blue-light: #1B85C8;
+  --c-green: #7CB715;
+  --c-green-deep: #5E8C10;
+  --c-green-light: #B2D576;
+  --c-cyan: #1CB7E0;
+
+  --c-white: #FFFFFF;
+  --c-gray-100: #F4F4F5;
+  --c-tint: #F0F9FF;
+  --c-border: #E2E7EA;
+  --c-ink: #1B2A3B;
+  --c-body: #5A6B76;
+
+  /* flat overlay used over hero photography */
+  --hero-overlay: rgb(18 26 34 / 0.58);
+}
+
+/* ---------- 2. STATIC TOKENS ----------
+   Literal hex only — @theme needs build-time values. */
+@theme {
+  --color-blue: #0B73B5;
+  --color-blue-deep: #085B8F;
+  --color-blue-light: #1B85C8;
+  --color-green: #7CB715;
+  --color-green-deep: #5E8C10;
+  --color-green-light: #B2D576;
+  --color-cyan: #1CB7E0;
+  --color-page: #F4F4F5;
+  --color-tint: #F0F9FF;
+  --color-ink: #1B2A3B;
+  --color-body: #5A6B76;
+  --color-hairline: #E2E7EA;
+
+  /* Legacy names — unmigrated components keep working.
+     Delete this block once nothing references them. */
+  --color-navy: #0B73B5;
+  --color-navy-deep: #085B8F;
+  --color-navy-mid: #1B85C8;
+  --color-paper: #FFFFFF;
+  --color-paper-warm: #F4F4F5;
+  --color-mist: #F4F4F5;
+  --color-charcoal: #5A6B76;
+  --color-ground: #0B73B5;
+  --color-ground-deep: #085B8F;
+  --color-premier-blue: #0B73B5;
+  --color-premier-cyan: #1CB7E0;
+  --color-premier-cyan-light: #5DC7F5;
+  --color-premier-green: #7CB715;
+  --color-premier-green-light: #B2D576;
+  --color-light-green: #B2D576;
+  --color-brand-blue: #0B73B5;
+  --color-brand-cyan: #1CB7E0;
+  --color-brand-green: #7CB715;
+  --color-burgundy: #5E8C10;
+
+  --font-sans: "Poppins", system-ui, -apple-system, sans-serif;
+  --font-display: "Poppins", system-ui, -apple-system, sans-serif;
+}
+
+/* ---------- 3. DEFAULT SURFACE ROLES (light) ----------
+   In @layer base so surface classes can override them. */
+@layer base {
+  :root {
+    --fg: #1B2A3B;
+    --fg-muted: #5A6B76;
+    --fg-subtle: #8C99A2;
+    --line: #E2E7EA;
+    --line-strong: #C9D2D8;
+    --accent: #7CB715;
+    --accent-alt: #0B73B5;
+    --surface: #FFFFFF;
+    --surface-raised: #FFFFFF;
+
+    --btn-solid-bg: #0B73B5;
+    --btn-solid-fg: #FFFFFF;
+    --btn-solid-bg-hover: #085B8F;
+    --btn-outline-fg: #0B73B5;
+    --btn-outline-bd: #0B73B5;
+    --btn-outline-bg-hover: #0B73B5;
+    --btn-outline-fg-hover: #FFFFFF;
+  }
+
+  * { border-color: var(--line); }
+  html { scroll-behavior: smooth; }
+
+  body {
+    background-color: var(--surface);
+    color: var(--fg-muted);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  h1, h2, h3, h4 {
+    font-family: var(--font-sans);
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    line-height: 1.15;
+    color: var(--fg);
+  }
+
+  ::selection { background-color: #0B73B5; color: #FFFFFF; }
+  a, button { -webkit-tap-highlight-color: transparent; }
+  :focus-visible { outline: 2px solid #7CB715; outline-offset: 3px; }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+}
+
+/* ---------- 4. SURFACES ---------- */
+@layer components {
+  .surface-light,
+  .surface-tint,
+  .surface-sky,
+  .surface-blue,
+  .surface-dark,
+  .surface-media {
+    position: relative;
+    background-color: var(--surface);
+    color: var(--fg-muted);
+  }
+
+  .surface-light { --surface: #FFFFFF; }
+
+  /* flat light-gray band between white sections */
+  .surface-tint { --surface: #F4F4F5; }
+
+  /* very pale blue band — flat, no gradient */
+  .surface-sky { --surface: #F0F9FF; }
+
+  /* solid Premier Blue — footer, CTA bands.
+     surface-dark is an alias so unmigrated bg-navy sections work. */
+  .surface-blue,
+  .surface-dark,
+  .surface-media {
+    --fg: #FFFFFF;
+    --fg-muted: rgb(255 255 255 / 0.85);
+    --fg-subtle: rgb(255 255 255 / 0.65);
+    --line: rgb(255 255 255 / 0.22);
+    --line-strong: rgb(255 255 255 / 0.40);
+    --accent: #7CB715;
+    --accent-alt: #FFFFFF;
+    --surface: #0B73B5;
+    --surface-raised: #1B85C8;
+
+    --btn-solid-bg: #7CB715;
+    --btn-solid-fg: #FFFFFF;
+    --btn-solid-bg-hover: #5E8C10;
+    --btn-outline-fg: #FFFFFF;
+    --btn-outline-bd: rgb(255 255 255 / 0.55);
+    --btn-outline-bg-hover: #FFFFFF;
+    --btn-outline-fg-hover: #0B73B5;
+
+    color: var(--fg-muted);
+  }
+
+  /* ---------- 5. PHOTO PAGE HEADER ----------
+     Set the image with an inline style:
+       <section className="surface-media page-header"
+                style={{ backgroundImage: "url(/hero-about.jpg)" }}>
+     Falls back to solid Premier Blue if the image is missing. */
+  .surface-media {
+    background-color: #0B73B5;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+  }
+  .surface-media::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    /* functional scrim, not a decorative gradient: keeps the headline
+       legible on the left while the subject stays clear on the right */
+    background-image: linear-gradient(
+      100deg,
+      rgb(8 14 20 / 0.94) 0%,
+      rgb(8 14 20 / 0.88) 30%,
+      rgb(8 14 20 / 0.55) 55%,
+      rgb(8 14 20 / 0.18) 75%,
+      rgb(8 14 20 / 0.06) 100%
+    );
+  }
+
+  /* phones: text sits over the middle, so it needs an even wash */
+  @media (max-width: 767px) {
+    .surface-media::before {
+      background-image: none;
+      background-color: rgb(8 14 20 / 0.72);
+    }
+  }
+
+  /* no photo set yet — flat Premier Blue, no overlay on top of it */
+  .surface-media.no-media { background-image: none; }
+  .surface-media.no-media::before { background-color: transparent; }
+  .surface-media > * { position: relative; z-index: 1; }
+
+  .page-header {
+    display: flex;
+    align-items: flex-end;
+    min-height: 100vh;
+    min-height: 100svh;   /* mobile: ignores the address bar */
+    padding-top: 9rem;
+    padding-bottom: 5rem;
+  }
+  @media (min-width: 768px) {
+    .page-header { padding-bottom: 7rem; }
+  }
+
+  .hero-title {
+    font-size: clamp(2.1rem, 5.2vw, 4rem);
+    font-weight: 700;
+    line-height: 1.08;
+    letter-spacing: -0.01em;
+    text-transform: uppercase;
+    color: #FFFFFF;
+  }
+
+  .breadcrumb {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    font-size: 0.85rem;
+    color: rgb(255 255 255 / 0.75);
+  }
+  .breadcrumb a { transition: color 0.25s; }
+  .breadcrumb a:hover { color: #7CB715; }
+  .breadcrumb span[aria-current] { color: #FFFFFF; }
+
+  /* ---------- 6. TYPE PATTERNS ---------- */
+
+  /* small uppercase green line above a section title */
+  .eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--accent);
+  }
+  .eyebrow::before {
+    content: "";
+    width: 1.75rem;
+    height: 2px;
+    background-color: var(--accent);
+  }
+  .eyebrow-plain::before { display: none; }
+
+  /* blue uppercase section heading */
+  .section-title {
+    font-weight: 700;
+    letter-spacing: 0.01em;
+    text-transform: uppercase;
+    color: var(--accent-alt);
+    font-size: clamp(1.6rem, 3vw, 2.25rem);
+    line-height: 1.12;
+  }
+
+  /* ink variant, for pale fields */
+  .section-title-dark {
+    font-weight: 700;
+    letter-spacing: 0.01em;
+    text-transform: uppercase;
+    color: var(--fg);
+    font-size: clamp(1.6rem, 3vw, 2.25rem);
+    line-height: 1.12;
+  }
+
+  .surface-blue .section-title,
+  .surface-dark .section-title,
+  .surface-media .section-title,
+  .surface-blue .section-title-dark,
+  .surface-dark .section-title-dark,
+  .surface-media .section-title-dark { color: #FFFFFF; }
+
+  .card-title {
+    font-size: 0.95rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--fg);
+  }
+
+  .lede { font-size: 1rem; line-height: 1.7; color: var(--fg-muted); }
+
+  /* ---------- 7. CARDS ---------- */
+  .card {
+    position: relative;
+    overflow: hidden;
+    background-color: #FFFFFF;
+    border: 1px solid var(--line);
+    padding: 1.6rem;
+    transition:
+      transform 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+      box-shadow 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+      border-color 0.3s ease,
+      background-color 0.3s ease;
+  }
+
+  .card:hover {
+    transform: translateY(-6px);
+    border-color: #7CB715;
+    background-color: #FCFDFA;
+    box-shadow:
+      0 18px 40px -22px rgb(11 115 181 / 0.40),
+      0 4px 12px -6px rgb(27 42 59 / 0.12);
+  }
+
+  /* on blue surfaces the card inverts */
+  .surface-blue .card {
+    background-color: rgb(255 255 255 / 0.06);
+    border-color: var(--line);
+  }
+  .surface-blue .card:hover {
+    background-color: rgb(255 255 255 / 0.10);
+    box-shadow: 0 18px 40px -22px rgb(0 0 0 / 0.45);
+  }
+
+  .card-index {
+    position: absolute;
+    top: 1rem;
+    right: 1.25rem;
+    font-size: 0.7rem;
+    font-weight: 500;
+    color: var(--fg-subtle);
+  }
+
+  /* small square icon holder — flat green */
+  .icon-chip {
+    display: grid;
+    place-items: center;
+    width: 2.75rem;
+    height: 2.75rem;
+    color: #FFFFFF;
+    background-color: #7CB715;
+  }
+  .icon-chip-blue { background-color: #0B73B5; }
+
+  /* ---------- 8. BUTTONS ---------- */
+  .btn {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.6rem;
+    padding: 0.8rem 1.6rem;
+    font-size: 0.78rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    box-shadow: inset 0 0 0 0 transparent;
+    transition:
+      box-shadow 0.45s cubic-bezier(0.16, 1, 0.3, 1),
+      color 0.3s ease,
+      border-color 0.3s ease,
+      background-color 0.3s ease;
+  }
+
+  .btn svg { transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1); }
+  .btn:hover svg { transform: translateX(4px); }
+
+  .btn-solid {
+    background-color: var(--btn-solid-bg);
+    color: var(--btn-solid-fg);
+  }
+  .btn-solid:hover { box-shadow: inset 0 -4rem 0 0 var(--btn-solid-bg-hover); }
+
+  .btn-outline {
+    border: 1px solid var(--btn-outline-bd);
+    color: var(--btn-outline-fg);
+  }
+  .btn-outline:hover {
+    color: var(--btn-outline-fg-hover);
+    border-color: var(--btn-outline-bg-hover);
+    box-shadow: inset 0 -4rem 0 0 var(--btn-outline-bg-hover);
+  }
+
+  /* green button — navbar CTA, one CTA per screen */
+  .btn-green {
+    background-color: #7CB715;
+    color: #FFFFFF;
+  }
+  .btn-green:hover { box-shadow: inset 0 -4rem 0 0 #5E8C10; }
+
+  .btn-ghost {
+    color: var(--accent-alt);
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  /* ---------- 9. NAV ----------
+     Underline grows from the centre out to both edges, on hover and
+     when active. transform-origin: center is what does that. */
+  .nav-link {
+    position: relative;
+    padding-bottom: 0.4rem;
+    font-size: 0.95rem;
+    font-weight: 500;
+    color: var(--fg);
+    transition: color 0.3s ease;
+  }
+  .nav-link::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 2px;
+    background-color: #7CB715;
+    transform: scaleX(0);
+    transform-origin: center;
+    transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .nav-link:hover,
+  .nav-link.is-active { color: #7CB715; }
+  .nav-link:hover::after,
+  .nav-link.is-active::after { transform: scaleX(1); }
+
+  /* over photography the links are white until hovered or active */
+  .nav-over-media .nav-link { color: #FFFFFF; }
+  .nav-over-media .nav-link:hover,
+  .nav-over-media .nav-link.is-active { color: #7CB715; }
+}
+
+/* ---------- 10. ROLE UTILITIES ----------
+   Hand-written rather than declared in @theme: a property written as
+   --color-fg-muted: var(--fg-muted) computes at :root and inherits that
+   computed result, so a surface override would never reach it. */
+@layer utilities {
+  .text-fg { color: var(--fg); }
+  .text-fg-muted { color: var(--fg-muted); }
+  .text-fg-subtle { color: var(--fg-subtle); }
+  .text-accent { color: var(--accent); }
+  .text-accent-alt { color: var(--accent-alt); }
+
+  .bg-surface { background-color: var(--surface); }
+  .bg-surface-raised { background-color: var(--surface-raised); }
+  .bg-accent { background-color: var(--accent); }
+  .bg-accent-alt { background-color: var(--accent-alt); }
+
+  .border-line { border-color: var(--line); }
+  .border-line-strong { border-color: var(--line-strong); }
+  .divide-line > * + * { border-color: var(--line); }
+
+  .rule { background-color: var(--accent); }
+  .text-balance { text-wrap: balance; }
+}
+
+/* --------------------------------------------------------
+   MIGRATION MAP
+
+   PAGE HEADERS
+     <section className="surface-media page-header"
+              style={{ backgroundImage: "url(/hero-about.jpg)" }}>
+       <Container>
+         <h1 className="hero-title">…</h1>
+         <p className="mt-5 max-w-xl text-fg-muted">…</p>
+         <nav className="breadcrumb mt-6">…</nav>
+       </Container>
+     </section>
+
+   SECTIONS
+     bg-navy ............ surface-blue
+     bg-paper ........... surface-light
+     bg-paper-warm ...... surface-tint
+     pale band .......... surface-sky
+
+   TEXT
+     text-navy / text-paper ............ text-fg
+     text-charcoal/80 / text-paper/70 .. text-fg-muted
+     text-charcoal/50 .................. text-fg-subtle
+     section kicker .................... .eyebrow          (green)
+     section heading ................... .section-title    (blue)
+                                         .section-title-dark (ink)
+
+   MARKS, CARDS, BUTTONS
+     border-navy/10 ..... border-line
+     accent span ........ .rule
+     icon square ........ .icon-chip / .icon-chip-blue
+     card wrapper ....... .card  (+ .card-index for 01/02)
+     nav item ........... .nav-link  (+ .is-active when active)
+     primary ............ btn btn-solid
+     outlined ........... btn btn-outline
+     navbar / green CTA . btn btn-green
+
+   Button.jsx variants map:
+     primary: "btn btn-solid"     light:  "btn btn-solid"
+     secondary: "btn btn-outline" green:  "btn btn-green"
+     ghost: "btn btn-ghost"
+
+   IMAGES TO DROP IN public/
+     hero-home.jpg, hero-about.jpg, hero-products.jpg,
+     hero-services.jpg, hero-clients.jpg, hero-careers.jpg,
+     hero-contact.jpg
+     Until they exist, page headers show solid Premier Blue.
+
+   CONTRAST
+     green #7CB715 is 2.6:1 on white — eyebrows, rules, icons and
+     button fills only, never body text. Blue #0B73B5 on white is
+     5.0:1 and safe for headings, links and body. The hero overlay
+     is 58% to keep white text above 7:1 on most photography.
+   -------------------------------------------------------- */
+
+/* ---------- LANDING PAGE ADDITIONS ---------- */
+@layer base {
+  /* anchor targets clear the fixed navbar when jumped to */
+  section[id] { scroll-margin-top: 5.5rem; }
+}
+
+@layer components {
+  /* marquee for the client logo strip */
+  .marquee { position: relative; overflow: hidden; }
+  .marquee-track {
+    display: flex;
+    width: max-content;
+    animation: marquee-scroll 40s linear infinite;
+  }
+  .marquee:hover .marquee-track { animation-play-state: paused; }
+  @keyframes marquee-scroll {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .marquee-track { animation: none; }
+  }
+}
