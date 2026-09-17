@@ -123,3 +123,16 @@ export const brands = [
     { name: "Premier Life", logo: "/brands/brand-05.png" },
     { name: "Brand partner", logo: "/brands/brand-06.png" },
 ];
+
+/* ---------- CATEGORY TILES ----------
+   Portrait 4:5, at least 800×1000. Files in public/categories/. */
+export const categoryImages = {
+  bottoms: "",
+  jackets: "",
+  tops: "",
+  "t-shirts": "",
+  polo: "",
+  shirts: "",
+  dresses: "",
+  denims: "",
+};

@@ -71,6 +71,7 @@ export const services = [
 
 export const offices = [
   {
+    city: "Ho Chi Minh City",
     country: "Vietnam",
     label: "Head Office",
     function: "Garment production / PD / QA",
@@ -80,7 +81,8 @@ export const offices = [
     email: "info@premierfashionvn.com",
   },
   {
-    country: "Hong Kong",
+    city: "Hong Kong",
+    country: "Hong Kong SAR",
     label: "Finance Office",
     function: "Finance office",
     entity: "Premier Exim Hong Kong Limited",
@@ -89,6 +91,7 @@ export const offices = [
     email: "mjuddin@premierfashionvn.com",
   },
   {
+    city: "Shaoxing",
     country: "China",
     label: "Fabric & Trims Sourcing",
     function: "Fabric and trims sourcing",
@@ -99,7 +102,8 @@ export const offices = [
     email: "ahad@premierexim.com",
   },
   {
-    country: "New York",
+    city: "New York",
+    country: "United States",
     label: "R&D, Marketing & Showroom",
     function: "R&D and marketing, design and showroom",
     entity: "Premier Exim USA — The Concept Shop",
@@ -108,6 +112,7 @@ export const offices = [
     email: "",
   },
   {
+    city: "Johannesburg",
     country: "South Africa",
     label: "Marketing Office",
     function: "Marketing office",
@@ -117,6 +122,7 @@ export const offices = [
     email: "",
   },
   {
+    city: "Biratnagar",
     country: "Nepal",
     label: "Garment Production",
     function: "Garment production",
@@ -127,7 +133,9 @@ export const offices = [
   },
 ];
 
-export const additionalPresence = ["India", "Bangladesh", "Dubai"];
+// Countries the source site references without a listed office.
+export const additionalPresence = ["India", "Bangladesh", "United Arab Emirates"];
+
 
 export const ceoMessage = {
   quote:
