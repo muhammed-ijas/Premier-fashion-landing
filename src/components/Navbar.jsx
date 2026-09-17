@@ -20,7 +20,7 @@ export default function Navbar() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  // scrollspy — highlights the section currently in view
+  // scrollspy — highlights whichever section is in view
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
@@ -38,15 +38,46 @@ export default function Navbar() {
     return () => observer.disconnect();
   }, []);
 
+  // lock the page while the mobile menu is open, or the body scrolls
+  // behind the panel on iOS
+  useEffect(() => {
+    document.body.style.overflow = open ? "hidden" : "";
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [open]);
+
+  /**
+   * Close the menu first, then scroll. Letting the browser handle the
+   * anchor natively means the page jumps while the mobile panel is still
+   * collapsing, so it lands short of the section — or not at all.
+   */
+  const goToSection = (e, href) => {
+    e.preventDefault();
+    const el = document.querySelector(href);
+    if (!el) return;
+
+    if (open) {
+      setOpen(false);
+      window.setTimeout(() => {
+        el.scrollIntoView({ behavior: "smooth", block: "start" });
+      }, 380); // matches the panel's 0.35s collapse
+    } else {
+      el.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+  };
+
   return (
     <header
       className={clsx(
         "fixed inset-x-0 top-0 z-50 transition-colors duration-500",
-        scrolled ? "border-b border-hairline bg-white/95 backdrop-blur" : "nav-over-media bg-transparent"
+        scrolled || open
+          ? "border-b border-hairline bg-white/95 backdrop-blur"
+          : "nav-over-media bg-transparent"
       )}
     >
       <nav className="mx-auto flex w-full max-w-[1440px] items-center justify-between px-6 py-4 md:px-10 lg:px-16">
-        <a href="#home" aria-label="Premier Fashion home">
+        <a href="#home" onClick={(e) => goToSection(e, "#home")} aria-label="Premier Fashion home">
           <img src="/PGLogo.png" alt="Premier Fashion" className="h-12 w-auto object-contain md:h-14" />
         </a>
 
@@ -55,6 +86,7 @@ export default function Navbar() {
             <li key={item.href}>
               <a
                 href={item.href}
+                onClick={(e) => goToSection(e, item.href)}
                 className={clsx("nav-link", active === item.href.replace("#", "") && "is-active")}
               >
                 {item.name}
@@ -70,7 +102,7 @@ export default function Navbar() {
         <button
           className={clsx(
             "flex h-10 w-10 items-center justify-center transition-colors lg:hidden",
-            scrolled ? "text-ink" : "text-white"
+            scrolled || open ? "text-ink" : "text-white"
           )}
           onClick={() => setOpen((v) => !v)}
           aria-label={open ? "Close menu" : "Open menu"}
@@ -100,7 +132,7 @@ export default function Navbar() {
                 >
                   <a
                     href={item.href}
-                    onClick={() => setOpen(false)}
+                    onClick={(e) => goToSection(e, item.href)}
                     className={clsx(
                       "block py-3.5 text-[0.95rem] font-medium transition-colors",
                       active === item.href.replace("#", "") ? "text-green" : "text-ink hover:text-green"
@@ -112,7 +144,13 @@ export default function Navbar() {
               ))}
             </ul>
             <div className="px-6 pb-8">
-              <Button to="#contact" variant="green" className="w-full">Get in touch</Button>
+              <a
+                href="#contact"
+                onClick={(e) => goToSection(e, "#contact")}
+                className="btn btn-green w-full"
+              >
+                Get in touch
+              </a>
             </div>
           </motion.div>
         )}

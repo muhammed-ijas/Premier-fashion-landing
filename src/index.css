@@ -536,7 +536,7 @@
 /* ---------- LANDING PAGE ADDITIONS ---------- */
 @layer base {
   /* anchor targets clear the fixed navbar when jumped to */
-  section[id] { scroll-margin-top: 5.5rem; }
+  section[id] { scroll-margin-top: 7rem; }
 }
 
 @layer components {
@@ -556,3 +556,4 @@
     .marquee-track { animation: none; }
   }
 }
+
