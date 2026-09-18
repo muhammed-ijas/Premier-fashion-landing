@@ -110,6 +110,24 @@ export const clientLogos = [
 /* ---------- HELPER ----------
    Returns true when a path is actually set, so components can pick
    between the real image and their placeholder state. */
+
+
+/* ---------- PROCESS STEPS ----------
+   Portrait 3:4, at least 600x800. Files in public/process/.
+   Keys must match the `slug` of each entry in company.js processSteps. */
+export const processImages = {
+  design: "/process/design.png",
+  sourcing: "/process/sourcing.png",
+  sampling: "/process/sampling.png",
+  manufacturing: "/process/manufacturing.png",
+  quality: "/process/quality.png",
+  logistics: "/process/logistics.png",
+};
+
+/* ---------- PRODUCTION ----------
+   Portrait or landscape, at least 1200x1000. File in public/. */
+export const productionImage = "/production.png";
+
 export const hasMedia = (path) => typeof path === "string" && path.length > 0;
 
 /* ---------- BRAND PARTNERS (About page) ----------
@@ -135,4 +153,27 @@ export const categoryImages = {
   shirts: "",
   dresses: "",
   denims: "",
+};
+
+export const teamPhotos = {
+  "abdul-ahad": "/team/abdul-ahad.png",
+  "chu-dao-linh-suong": "/team/chu-dao-linh-suong.png",
+  "kadiravelu-saravana-kumar": "/team/kadiravelu-saravana-kumar.png",
+  "ketan-patel": "/team/ketan-patel.png",
+  "hussnain-ghafoor": "/team/hussnain-ghafoor.png",
+  "raza-farhan": "/team/raza-farhan.png",
+  "grace-nguyen": "/team/grace-nguyen.png",
+  "prashant-khandalkar": "/team/prashant-khandalkar.png",
+  "mari-payes-micheal-pius-angolo": "/team/mari-payes-micheal-pius-angolo.png",
+  sarah: "/team/sarah.png",
+};
+
+/* ---------- OFFICE PHOTOS ----------
+   Portrait 3:4, at least 600×800. Files in public/offices/. */
+export const officePhotos = {
+  vietnam: "",
+  china: "",
+  "hong-kong": "",
+  india: "",
+  usa: "",
 };

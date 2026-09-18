@@ -10,7 +10,7 @@ export default function Story() {
     <section id="story" className="surface-blue py-16 md:py-24">
       {/* ---------- CHAIRMAN ---------- */}
       <Container>
-        <div className="grid grid-cols-1 items-center gap-10 md:grid-cols-[minmax(0,300px)_1fr] md:gap-14">
+        <div className="grid grid-cols-1 items-center gap-10 md:grid-cols-[minmax(0,280px)_1fr] md:gap-12">
           {hasMedia(aboutMedia.ceoPortrait) && (
             <Reveal as="right" className="mx-auto w-full max-w-[260px] md:mx-0 md:max-w-none">
               <div className="relative">
@@ -30,7 +30,7 @@ export default function Story() {
           )}
 
           <div>
-         
+
 
             <Reveal as="up" delay={0.06}>
               <Quote className="h-8 w-8 text-green" strokeWidth={1.75} aria-hidden="true" />
@@ -39,8 +39,14 @@ export default function Story() {
               </blockquote>
             </Reveal>
 
-            <Reveal as="up" delay={0.12}>
-              <div className="mt-7 flex items-center gap-4 border-t border-line pt-6">
+               <Reveal as="up" delay={0.12}>
+              <p className="mt-6 text-[0.85rem] leading-[1.9] text-fg-muted">
+                {ceoMessage.statement}
+              </p>
+            </Reveal>
+
+            <Reveal as="up" delay={0.18}>
+              <div className="mt-8 flex items-center gap-4 border-t border-line pt-6">
                 <span className="h-[2px] w-10 shrink-0 bg-green" />
                 <div>
                   <p className="text-[0.85rem] font-semibold uppercase tracking-[0.06em] text-white">
@@ -51,11 +57,7 @@ export default function Story() {
               </div>
             </Reveal>
 
-            <Reveal as="up" delay={0.18}>
-              <p className="mt-6 max-w-2xl text-[0.85rem] leading-[1.9] text-fg-muted">
-                {ceoMessage.statement}
-              </p>
-            </Reveal>
+         
           </div>
         </div>
       </Container>

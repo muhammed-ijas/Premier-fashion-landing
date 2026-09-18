@@ -5,6 +5,9 @@ import About from "./sections/About";
 import Story from "./sections/Story";
 import ProductsServices from "./sections/ProductsServices";
 import Approach from "./sections/Approach";
+import Process from "./sections/Process";
+import Production from "./sections/Production";
+import Team from "./sections/Team";
 import Clients from "./sections/Clients";
 import Contact from "./sections/Contact";
 
@@ -17,7 +20,10 @@ export default function App() {
         <About />
         <Story />
         <ProductsServices />
+        <Process />
+        <Production />
         <Approach />
+        <Team />
         <Clients />
         <Contact />
       </main>
