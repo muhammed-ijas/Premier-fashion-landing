@@ -24,9 +24,7 @@ export default function Clients() {
             {clientLogos.map((client, i) => (
               <Stagger.Item key={client.logo} as="scale" className="h-full">
                 <div className="group relative h-full w-full overflow-hidden border border-line bg-white transition-all duration-300 hover:-translate-y-1 hover:border-green hover:shadow-[0_14px_30px_-20px_rgba(11,115,181,0.45)]">
-                  {/* ratio spacer — fixes the box height off its own width */}
                   <div className="pt-[60%]" aria-hidden="true" />
-
                   <img
                     src={client.logo}
                     alt={client.name === "Client" ? `Client ${i + 1}` : client.name}
@@ -40,43 +38,44 @@ export default function Clients() {
         )}
       </Container>
 
-      {/* brand partners — continuous strip */}
+      {/* ---------- BRAND PARTNERS ----------
+          Six marks, so a static row reads better than a marquee —
+          nothing moves, each gets a numbered frame and its name. */}
       {brands.length > 0 && (
-        <>
-          <Container className="mt-16">
-            <SectionHeading
-              kicker="Our brands"
-              title="Brand partners"
-              align="center"
-              plainKicker
-            />
-          </Container>
+        <Container className="mt-16 md:mt-20">
+          <div className="flex flex-col items-start justify-between gap-4 border-t border-line pt-10 md:flex-row md:items-end">
+            <Reveal as="up">
+              <p className="eyebrow mb-3">Our brands</p>
+              <h2 className="section-title text-balance">Brand partners</h2>
+            </Reveal>
 
-          <Container className="mt-8">
-            <div className="marquee">
-              <div className="marquee-track">
-                {[...brands, ...brands].map((brand, i) => (
-                  <div
-                    key={`${brand.logo}-${i}`}
-                    className="relative mx-2.5 h-20 w-40 shrink-0 overflow-hidden border border-line bg-white transition-colors duration-300 hover:border-green sm:h-24 sm:w-48 md:h-28 md:w-56"
-                  >
+            <Reveal as="up" delay={0.08}>
+              <p className="max-w-xs text-[0.8rem] leading-[1.75] text-fg-muted">
+                Labels developed and produced across the Premier network.
+              </p>
+            </Reveal>
+          </div>
+
+          <Stagger className="mt-8 grid grid-cols-3 gap-2 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6">
+            {brands.map((brand, i) => {
+              const named = brand.name !== "Brand partner";
+
+              return (
+                <Stagger.Item key={brand.logo} as="up" className="h-full">
+                  <div className="group relative h-full w-full overflow-hidden border border-line bg-white transition-all duration-300 hover:-translate-y-1 hover:border-green hover:shadow-[0_14px_30px_-20px_rgba(11,115,181,0.45)]">
+                    <div className="pt-[60%]" aria-hidden="true" />
                     <img
                       src={brand.logo}
-                      alt={
-                        brand.name === "Brand partner"
-                          ? `Brand partner ${(i % brands.length) + 1}`
-                          : brand.name
-                      }
+                      alt={named ? brand.name : `Brand partner ${i + 1}`}
                       loading="lazy"
-                      aria-hidden={i >= brands.length}
                       className="absolute inset-0 m-auto max-h-[62%] max-w-[76%] object-contain"
                     />
                   </div>
-                ))}
-              </div>
-            </div>
-          </Container>
-        </>
+                </Stagger.Item>
+              );
+            })}
+          </Stagger>
+        </Container>
       )}
 
       {/* global presence */}

@@ -56,7 +56,7 @@ export const services = {
    Added as we convert About.jsx. */
 export const about = {
     overview: "/about/overview.png",   // facility or head office, 5:4
-    ceoPortrait: "/about/ceo.jpg",
+    ceoPortrait: "/about/ceo.png",
     designStudio: "/about/design-studio.png",
     chinaSourcing: "/about/china-sourcing.png",
 };

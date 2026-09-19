@@ -1,10 +1,13 @@
 import { useState } from "react";
-import { motion } from "framer-motion";
 import { Globe } from "lucide-react";
 import clsx from "clsx";
-import { WORLD_PATH, WORLD_VIEWBOX, officePoints } from "../data/worldMap";
+import {
+  BASE_PATH,
+  WORLD_VIEWBOX,
+  countryShapes,
+  countryLabels,
+} from "../data/worldMap";
 import { offices } from "../data/company";
-import { EASE } from "../lib/motion";
 
 const VB_W = 1000;
 const VB_H = 500;
@@ -12,38 +15,35 @@ const ZOOM = 2.3;
 const EASE_CSS = "cubic-bezier(0.16, 1, 0.3, 1)";
 
 /**
- * Label placement, tuned per office. India, Nepal and Bangladesh sit
- * within ~10px of each other at world scale, so their labels fan out
- * instead of stacking.
+ * Hong Kong has no separate shape at this scale, so it shares China's.
+ * Label nudges keep names off their neighbours where countries cluster.
  */
-const LABELS = {
-  canada: { anchor: "end", dx: -14, dy: 4 },
-  usa: { anchor: "end", dx: -14, dy: 4 },
-  "south-africa": { anchor: "start", dx: 14, dy: 4 },
-  uae: { anchor: "end", dx: -14, dy: 3 },
-  nepal: { anchor: "end", dx: -14, dy: -11 },
-  india: { anchor: "end", dx: -14, dy: 13 },
-  bangladesh: { anchor: "start", dx: 14, dy: -10 },
-  china: { anchor: "start", dx: 14, dy: -5 },
-  "hong-kong": { anchor: "start", dx: 15, dy: 14 },
-  vietnam: { anchor: "start", dx: 14, dy: 15 },
+const SHAPE_FOR = { "hong-kong": "china" };
+
+const LABEL_NUDGE = {
+  usa: { dx: -6, dy: 4, anchor: "middle" },
+  canada: { dx: 0, dy: -4, anchor: "middle" },
+  "south-africa": { dx: 0, dy: 16, anchor: "middle" },
+  uae: { dx: -4, dy: 14, anchor: "middle" },
+  nepal: { dx: -14, dy: -10, anchor: "end" },
+  india: { dx: -4, dy: 12, anchor: "middle" },
+  bangladesh: { dx: 16, dy: -6, anchor: "start" },
+  china: { dx: 6, dy: -6, anchor: "middle" },
+  "hong-kong": { dx: 14, dy: 16, anchor: "start" },
+  vietnam: { dx: 12, dy: 20, anchor: "start" },
 };
 
 export default function WorldMap() {
   const [activeSlug, setActiveSlug] = useState(null);
 
   const points = offices
-    .map((office) => ({ ...office, point: officePoints[office.slug] }))
-    .filter((office) => office.point);
+    .map((office) => ({ ...office, label: countryLabels[office.slug] }))
+    .filter((office) => office.label);
 
   const active = points.find((p) => p.slug === activeSlug) ?? null;
   const scale = active ? ZOOM : 1;
-
-  // Plain CSS transform on the <g>. framer-motion's originX/originY
-  // resolve against the element's bounding box rather than the viewBox,
-  // which is why the transform has to be set directly here.
-  const tx = active ? VB_W / 2 - active.point.x * scale : 0;
-  const ty = active ? VB_H / 2 - active.point.y * scale : 0;
+  const tx = active ? VB_W / 2 - active.label.x * scale : 0;
+  const ty = active ? VB_H / 2 - active.label.y * scale : 0;
 
   return (
     <div className="grid grid-cols-1 gap-5 md:grid-cols-[minmax(0,260px)_1fr] md:gap-7">
@@ -51,13 +51,13 @@ export default function WorldMap() {
       <div className="order-2 border border-line bg-white md:order-1">
         <div className="flex items-center justify-between border-b border-line px-4 py-3">
           <p className="text-[0.66rem] font-semibold uppercase tracking-[0.12em] text-fg-subtle">
-            {points.length} locations
+            {offices.length} locations
           </p>
           {active && (
             <button
               type="button"
               onClick={() => setActiveSlug(null)}
-              className="flex items-center gap-1.5 text-[0.66rem] font-medium uppercase tracking-[0.08em] text-blue transition-colors duration-200 hover:text-green"
+              className="flex cursor-pointer items-center gap-1.5 text-[0.66rem] font-medium uppercase tracking-[0.08em] text-blue transition-colors duration-200 hover:text-green"
             >
               <Globe size={12} strokeWidth={2.2} />
               View all
@@ -65,7 +65,7 @@ export default function WorldMap() {
           )}
         </div>
 
-        <ul className="max-h-[260px] overflow-y-auto sm:max-h-[320px] md:max-h-[400px]">
+        <ul className="max-h-[280px] overflow-y-auto md:max-h-[400px]">
           {points.map((office) => {
             const isActive = office.slug === activeSlug;
             return (
@@ -93,7 +93,7 @@ export default function WorldMap() {
                       {office.country}
                     </span>
                     <span className="block truncate text-[0.68rem] text-fg-subtle">
-                      {office.label}
+                      {office.label && office.city ? office.city : office.function}
                     </span>
                   </span>
                 </button>
@@ -110,7 +110,7 @@ export default function WorldMap() {
             viewBox={WORLD_VIEWBOX}
             className="h-auto w-full"
             role="img"
-            aria-label={`Premier Fashion locations in ${points
+            aria-label={`Premier Fashion operates in ${points
               .map((p) => p.country)
               .join(", ")}`}
           >
@@ -121,71 +121,72 @@ export default function WorldMap() {
                 transition: `transform 0.8s ${EASE_CSS}`,
               }}
             >
-              <path d={WORLD_PATH} fill="#DDE7ED" stroke="#FFFFFF" strokeWidth="0.6" />
+              {/* everywhere we do not operate */}
+              <path d={BASE_PATH} fill="#E4EBF0" stroke="#FFFFFF" strokeWidth="0.5" />
 
-              {points.map((office, i) => {
+              {/* countries we operate in, filled */}
+              {points.map((office) => {
+                const shapeKey = SHAPE_FOR[office.slug] ?? office.slug;
+                const d = countryShapes[shapeKey];
+                if (!d) return null;
+
                 const isActive = office.slug === activeSlug;
                 const dimmed = active && !isActive;
-                const { x, y } = office.point;
-                const label = LABELS[office.slug] ?? { anchor: "start", dx: 13, dy: 4 };
 
-                // counter-scale so markers and labels stay the same
-                // visual size while the map zooms beneath them
+                return (
+                  <path
+                    key={office.slug}
+                    d={d}
+                    fill={isActive ? "#7CB715" : "#0B73B5"}
+                    stroke="#FFFFFF"
+                    strokeWidth={0.6 / scale}
+                    opacity={dimmed ? 0.35 : 1}
+                    style={{
+                      cursor: "pointer",
+                      transition: `fill 0.4s ease, opacity 0.4s ease`,
+                    }}
+                    onClick={() => setActiveSlug(isActive ? null : office.slug)}
+                  />
+                );
+              })}
+
+              {/* names */}
+              {points.map((office) => {
+                const isActive = office.slug === activeSlug;
+                const dimmed = active && !isActive;
+                const n = LABEL_NUDGE[office.slug] ?? { dx: 0, dy: 4, anchor: "middle" };
                 const k = 1 / scale;
 
                 return (
-                  <motion.g
-                    key={office.slug}
-                    initial={{ opacity: 0 }}
-                    whileInView={{ opacity: 1 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.4, delay: 0.2 + i * 0.05, ease: EASE }}
-                    style={{ cursor: "pointer" }}
-                    onClick={() => setActiveSlug(isActive ? null : office.slug)}
+                  <text
+                    key={`${office.slug}-label`}
+                    x={office.label.x + n.dx * k}
+                    y={office.label.y + n.dy * k}
+                    textAnchor={n.anchor}
+                    className="hidden sm:block"
+                    style={{
+                      fontSize: `${11.5 * k}px`,
+                      fontWeight: 700,
+                      letterSpacing: "0.05em",
+                      textTransform: "uppercase",
+                      fill: isActive ? "#1B2A3B" : "#1B2A3B",
+                      opacity: dimmed ? 0.3 : 1,
+                      paintOrder: "stroke",
+                      stroke: "#FFFFFF",
+                      strokeWidth: `${2.5 * k}px`,
+                      strokeLinejoin: "round",
+                      transition: "opacity 0.4s ease",
+                      pointerEvents: "none",
+                    }}
                   >
-                    <circle cx={x} cy={y} r={16 * k} fill="transparent" />
-
-                    {isActive && (
-                      <circle cx={x} cy={y} r={11 * k} fill="#7CB715" opacity="0.2" />
-                    )}
-
-                    <circle
-                      cx={x}
-                      cy={y}
-                      r={(isActive ? 6 : 4.5) * k}
-                      fill={isActive ? "#7CB715" : "#0B73B5"}
-                      stroke="#FFFFFF"
-                      strokeWidth={2 * k}
-                      opacity={dimmed ? 0.35 : 1}
-                      style={{ transition: `all 0.8s ${EASE_CSS}` }}
-                    />
-
-                    <text
-                      x={x + label.dx * k}
-                      y={y + label.dy * k}
-                      textAnchor={label.anchor}
-                      className="hidden sm:block"
-                      style={{
-                        fontSize: `${14 * k}px`,
-                        fontWeight: 600,
-                        letterSpacing: "0.04em",
-                        textTransform: "uppercase",
-                        fill: isActive ? "#7CB715" : "#1B2A3B",
-                        opacity: dimmed ? 0.25 : 1,
-                        transition: `all 0.8s ${EASE_CSS}`,
-                        pointerEvents: "none",
-                      }}
-                    >
-                      {office.country}
-                    </text>
-                  </motion.g>
+                    {office.country}
+                  </text>
                 );
               })}
             </g>
           </svg>
         </div>
 
-        {/* detail line — fixed height so nothing shifts */}
         <div className="mt-3 flex min-h-[2.75rem] items-start justify-center px-4 text-center">
           {active ? (
             <div>

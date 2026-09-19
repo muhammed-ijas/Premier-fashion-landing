@@ -5,15 +5,9 @@ import Container from "../components/Container";
 import Reveal from "../components/Reveal";
 import { processSteps } from "../data/company";
 import { processImages, hasMedia } from "../data/media";
+import { EASE } from "../lib/motion";
 
 const TOTAL = processSteps.length;
-
-/**
- * Connector geometry. The SVG uses a 100x100 viewBox with
- * preserveAspectRatio="none", so every coordinate is a percentage of
- * the container and the dotted line stays attached to the cards at any
- * width. Odd cards sit lower, so the line steps down and back up.
- */
 const cx = (i) => ((i + 0.5) / TOTAL) * 100;
 const cy = (i) => (i % 2 === 0 ? 32 : 68);
 
@@ -26,44 +20,53 @@ const connectorPath = processSteps
   .join(" ");
 
 function StepCard({ step, index, progress }) {
-  const start = index / (TOTAL + 0.8);
+  // Each card has its own slice of the scroll range: it rises, settles
+  // and its rule fills as that slice passes. Works the same on phones,
+  // where the cards are stacked two-up.
+  const start = index / (TOTAL + 1.2);
+  const mid = start + 0.16;
 
-  const opacity = useTransform(progress, [start - 0.1, start + 0.05], [0.45, 1], {
-    clamp: true,
-  });
+  const y = useTransform(progress, [start, mid], [26, 0], { clamp: true });
+  const opacity = useTransform(progress, [start, mid], [0.25, 1], { clamp: true });
+  const scale = useTransform(progress, [start, mid], [0.94, 1], { clamp: true });
+  const rule = useTransform(progress, [start, mid + 0.06], [0, 1], { clamp: true });
 
   const image = processImages[step.slug];
 
   return (
     <motion.article
-      style={{ opacity }}
+      style={{ y, opacity, scale }}
       className={clsx(
         "group relative mx-auto w-full max-w-[132px]",
         index % 2 === 0 ? "md:-translate-y-8" : "md:translate-y-8"
       )}
-     
     >
       <div className="relative aspect-[3/4] overflow-hidden">
         {hasMedia(image) ? (
-          <motion.img
+          <img
             src={image}
             alt={step.name}
             loading="lazy"
-           
             className="absolute inset-0 h-full w-full object-cover transition-transform duration-[700ms] ease-out group-hover:scale-110"
           />
         ) : (
           <div className="absolute inset-0 bg-white/10" />
         )}
-
-      
       </div>
 
-      <div className="mt-3 text-center">
-        <span className="text-[0.58rem] font-semibold tracking-[0.14em] text-green">
+      {/* rule fills as this step's turn arrives */}
+      <div className="relative mx-auto mt-3 h-[2px] w-8 bg-white/20">
+        <motion.span
+          style={{ scaleX: rule }}
+          className="absolute inset-0 origin-left bg-green"
+        />
+      </div>
+
+      <div className="mt-2.5 text-center">
+        <span className="text-[0.56rem] font-semibold tracking-[0.14em] text-green">
           {String(index + 1).padStart(2, "0")}
         </span>
-        <h3 className="mt-1 text-[0.66rem] font-semibold uppercase leading-snug tracking-[0.05em] text-white">
+        <h3 className="mt-1 text-[0.64rem] font-semibold uppercase leading-snug tracking-[0.05em] text-white">
           {step.name}
         </h3>
       </div>
@@ -76,7 +79,7 @@ export default function Process() {
 
   const { scrollYProgress } = useScroll({
     target: ref,
-    offset: ["start 0.85", "end 0.7"],
+    offset: ["start 0.9", "end 0.6"],
   });
   const progress = useSpring(scrollYProgress, {
     stiffness: 70,
@@ -102,7 +105,7 @@ export default function Process() {
         </div>
 
         <div ref={ref} className="relative mt-10 md:mt-16">
-          {/* static dotted connector — desktop only */}
+          {/* dotted connector, desktop only */}
           <svg
             aria-hidden="true"
             viewBox="0 0 100 100"

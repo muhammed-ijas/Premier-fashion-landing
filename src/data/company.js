@@ -21,19 +21,19 @@ export const about = {
   intro:
     "Premier Fashion Co., Ltd. is now a part of Premier Group, established in 2005 with garment manufacturing facilities in Vietnam. It was founded by Mr. Mohammad Jamaluddin, the CEO of the company.",
   today:
-    "Today we are a one-stop shop dealing in apparel exports consisting of Men's, Women's and Kids' wear, from our different facilities spread across Asia subsisting countries such as Vietnam, Cambodia, China, India, Pakistan, Bangladesh and Nepal.",
+    "Today we are a one-stop shop for apparel exports — Men's, Women's and Kids' wear — produced across our facilities in Vietnam, Cambodia, China, India, Pakistan, Bangladesh and Nepal.",
   reach:
-    "We have PD, marketing and merchandising offices in the USA, Vietnam, Bangladesh, India and RSA, so that our services are available round the clock, providing day-to-day query solutions. We offer multi-country production facilities depending on clients' requirements, such as product category, cost and lead-time.",
+    "Our product development, marketing and merchandising offices in the USA, Vietnam, Bangladesh, India and South Africa keep our services available round the clock, with day-to-day answers whenever you need them. Production can be placed across multiple countries to suit your requirements for product category, cost and lead time.",
 };
 
 export const highlights = [
   {
     title: "One-stop solution",
-    body: "Everything made under one roof — saving time, money and the effort of dealing with multiple suppliers.",
+    body: "Everything made under one roof, saving you the time, cost and effort of managing multiple suppliers.",
   },
   {
     title: "We make it easy",
-    body: "Share your vision and ideas. We bring it to life, so you can focus on building your brand.",
+    body: "Share your vision and we will bring it to life, so you can focus on building your brand.",
   },
   {
     title: "Guaranteed quality",
@@ -69,7 +69,7 @@ export const processSteps = [
 
 export const production = {
   statement:
-    "An advantage of having vast capacities is that we are able to make a large volume of garments with short lead times in various countries, and have a wide range of multi-category products.",
+    "Our capacity across several countries lets us produce high volumes on short lead times, with a wide range of products across categories.",
   // Annual capacity by category — brochure page 9, stated as approximate.
   volumes: [
     { value: "5.5", label: "Active / Sport Wear" },
@@ -141,7 +141,7 @@ export const services = [
     slug: "sampling",
     name: "Sampling",
     summary:
-      "Turning sketches and tech packs into a physical product you can hold, before it goes into production.",
+      "Turning sketches and tech packs into a physical product you can hold, before anything goes into production.",
     items: ["Pre-Production Sample", "Salesmen Sample", "Top of Production (TOP) Sample"],
   },
   {
@@ -155,7 +155,7 @@ export const services = [
     slug: "fabric-sourcing",
     name: "Fabric Sourcing",
     summary:
-      "A team of experts sourcing the right fabric for every product, general or highly specific.",
+      "A team of specialists sourcing the right fabric for every product, whether standard or highly specific.",
     items: ["Knits", "Woven", "Denim", "Lace", "Synthetics", "Core cotton", "Recycled cotton"],
   },
 ];
@@ -319,8 +319,8 @@ export const capabilities = [
     summary:
       "Headquarters with sales, manufacturing and development facilities, along with core production factories.",
     points: [
-      "More than 20 years of mutual understanding with factory — 45 sewing lines across Vietnam and several subcontractors, with nearly 3,500 workers.",
-      "All factories are under buyer protocol and compliance with valid certification.",
+      "More than 20 years of partnership with our factories — 45 sewing lines across Vietnam plus several subcontractors, with nearly 3,500 workers.",
+      "All factories operate under buyer protocol and compliance, with valid certification.",
       "Capacity of 700,000 to 800,000 pieces per month.",
     ],
   },
@@ -328,10 +328,10 @@ export const capabilities = [
     country: "China",
     summary: "Fabrics and trims procurement office with an experienced sourcing and quality team.",
     points: [
-      "More than 18 years in partnership with reputed China fabric mills to control yarn prices, deliveries and new fabric developments.",
-      "Maintaining mill compliance as per buyer requirement.",
-      "Six months advance yarn bookings and internal well-equipped fabric testing labs.",
-      "Trims — trusted own nominated suppliers providing round-the-clock service with quality and prices.",
+      "More than 18 years working with established Chinese fabric mills to control yarn prices, deliveries and new fabric development.",
+      "Mill compliance maintained to each buyer's requirements.",
+      "Yarn booked six months in advance, with well-equipped in-house fabric testing labs.",
+      "Trims from our own nominated suppliers, offering round-the-clock service on both quality and price.",
       "90% of production material accessories are sourced from our China suppliers.",
     ],
   },
@@ -339,7 +339,7 @@ export const capabilities = [
     country: "India",
     summary: "Merchandising and development office.",
     points: [
-      "Basic knit manufacturing facilities in Tirupur (South India) and high fashion apparel in New Delhi factories.",
+      "Basic knit manufacturing in Tirupur, South India, and high-fashion apparel from our New Delhi factories.",
       "Categories — knitwear, woven, and men's and women's clothing.",
     ],
   },
@@ -347,7 +347,7 @@ export const capabilities = [
     country: "Bangladesh & Nepal",
     summary: "Production base.",
     points: [
-      "Well-invested factories for products like chino, cargo, construed jacket, t-shirts and track-suits for the US, European and RSA markets.",
+      "Well-invested factories producing chinos, cargos, constructed jackets, t-shirts and tracksuits for the US, European and South African markets.",
     ],
   },
 ];
@@ -378,17 +378,17 @@ export const team = [
    Brochure page 4, "Our Journey".                                */
 
 export const history = [
-  { year: "2005", title: "Established", description: "Premier Exim HK founded." },
-  { year: "2006", title: "Trading office", description: "Pha Re Mi En Ri Company in Vietnam, former name of Premier Fashion Co., Ltd." },
-  { year: "2008", title: "Cooperate", description: "Premier incorporates 50% in Ben Tre Factory — Premier Pearl Garment JSC." },
-  { year: "2010", title: "Fabric sourcing office established", description: "Premier Exim China Ltd. established in China." },
-  { year: "2011", title: "The base & head office", description: "Premier Fashion Co., Ltd in Viet Nam." },
-  { year: "2012", title: "Investment", description: "Co-founder of Bangladesh factory with 50% investment." },
+  { year: "2005", title: "Established", description: "Premier Exim Hong Kong founded." },
+  { year: "2006", title: "Trading office", description: "Pha Re Mi En Ri Company opened in Vietnam — the former name of Premier Fashion Co., Ltd." },
+  { year: "2008", title: "Joint venture", description: "Premier took a 50% share in the Ben Tre factory — Premier Pearl Garment JSC." },
+  { year: "2010", title: "Fabric sourcing office", description: "Premier Exim China Ltd. established in Zhejiang." },
+  { year: "2011", title: "Head office", description: "Premier Fashion Co., Ltd established in Vietnam as the company base." },
+  { year: "2012", title: "Investment", description: "Co-founded a Bangladesh factory with a 50% investment." },
   { year: "2013", title: "Marketing office", description: "Established a marketing office in South Africa — Premier Fashion (SA) PVT Ltd." },
-  { year: "2016", title: "Design & marketing office", description: "The Concept Shop — Premier Exim USA." },
-  { year: "2021", title: "Expanded the design & production base", description: "Premier Creative India." },
-  { year: "2024", title: "Expansion of USA office", description: "Additional team onboarding to meet increasing buyer requirements." },
-  { year: "2025", title: "Expanded presence in Canada & Dubai", description: "Strengthening our global network, marketing and customer services." },
+  { year: "2016", title: "Design & marketing office", description: "The Concept Shop opened in New York — Premier Exim USA." },
+  { year: "2021", title: "Design & production base", description: "Premier Creative India expanded our design and production capability." },
+  { year: "2024", title: "USA office expanded", description: "Additional team members onboarded to meet growing buyer requirements." },
+  { year: "2025", title: "Canada & Dubai", description: "New offices strengthening our global network, marketing and customer service." },
 ];
 
 /* ---------------- APPROACH ---------------- */
@@ -402,10 +402,10 @@ export const pillars = [
 ];
 
 export const designInitiatives = [
-  "Design offices in the US, Vietnam and India combine the best intelligence of the West and the East.",
-  "Development teams across the US, Vietnam, India and China evolve each season with new fabrics and silhouettes. Sample turnaround is 3 days once fabric is sourced.",
-  "Design teams work closely with buyers to keep market intelligence and upcoming trends current, offering CAD support to turn concepts into reality.",
-  "Premier USA — The Concept Shop is the company's own office and showroom, housing designers, marketing and merchandising teams.",
+  "Design offices in the US, Vietnam and India bring together the best of Western and Eastern market intelligence.",
+  "Development teams across the US, Vietnam, India and China work each season on new fabrics and silhouettes. Samples turn around in three days once the fabric is sourced.",
+  "Our design teams work closely with buyers to stay current on market intelligence and emerging trends, with CAD support to turn concepts into finished product.",
+  "Premier USA — The Concept Shop is our own office and showroom, housing the design, marketing and merchandising teams.",
 ];
 
 /* ---------------- NAVIGATION ---------------- */
