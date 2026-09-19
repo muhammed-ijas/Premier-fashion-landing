@@ -6,7 +6,6 @@ import WorldMap from "../components/WorldMap";
 import { clientLogos, brands } from "../data/media";
 
 export default function Clients() {
-
   return (
     <section id="clients" className="surface-light py-16 md:py-20">
       <Container>
@@ -17,17 +16,22 @@ export default function Clients() {
           plainKicker
         />
 
-        {/* six per row, five clean rows of thirty */}
+        {/* Every tile is the same box whatever the logo's own proportions:
+            the frame sets the size, the image is centred inside it and
+            never allowed to influence layout. */}
         {clientLogos.length > 0 && (
-          <Stagger className="mt-10 grid grid-cols-3 gap-2.5 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6">
+          <Stagger className="mt-10 grid grid-cols-3 gap-2 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6">
             {clientLogos.map((client, i) => (
-              <Stagger.Item key={client.logo} as="scale">
-                <div className="flex aspect-[5/3] items-center justify-center border border-line bg-white p-2.5 transition-all duration-300 hover:-translate-y-1 hover:border-green hover:shadow-[0_14px_30px_-20px_rgba(11,115,181,0.45)]">
+              <Stagger.Item key={client.logo} as="scale" className="h-full">
+                <div className="group relative h-full w-full overflow-hidden border border-line bg-white transition-all duration-300 hover:-translate-y-1 hover:border-green hover:shadow-[0_14px_30px_-20px_rgba(11,115,181,0.45)]">
+                  {/* ratio spacer — fixes the box height off its own width */}
+                  <div className="pt-[60%]" aria-hidden="true" />
+
                   <img
                     src={client.logo}
                     alt={client.name === "Client" ? `Client ${i + 1}` : client.name}
                     loading="lazy"
-                    className="max-h-[72%] max-w-[85%] object-contain"
+                    className="absolute inset-0 m-auto max-h-[62%] max-w-[76%] object-contain"
                   />
                 </div>
               </Stagger.Item>
@@ -54,7 +58,7 @@ export default function Clients() {
                 {[...brands, ...brands].map((brand, i) => (
                   <div
                     key={`${brand.logo}-${i}`}
-                    className="mx-2.5 flex h-24 w-52 shrink-0 items-center justify-center border border-line bg-white px-6 transition-colors duration-300 hover:border-green md:h-28 md:w-60"
+                    className="relative mx-2.5 h-20 w-40 shrink-0 overflow-hidden border border-line bg-white transition-colors duration-300 hover:border-green sm:h-24 sm:w-48 md:h-28 md:w-56"
                   >
                     <img
                       src={brand.logo}
@@ -65,7 +69,7 @@ export default function Clients() {
                       }
                       loading="lazy"
                       aria-hidden={i >= brands.length}
-                      className="max-h-[70%] max-w-full object-contain"
+                      className="absolute inset-0 m-auto max-h-[62%] max-w-[76%] object-contain"
                     />
                   </div>
                 ))}
@@ -88,7 +92,6 @@ export default function Clients() {
         <Reveal as="fade" delay={0.12} className="mx-auto mt-8 max-w-5xl">
           <WorldMap />
         </Reveal>
-
       </Container>
     </section>
   );
