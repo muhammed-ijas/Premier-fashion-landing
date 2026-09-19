@@ -143,8 +143,7 @@ function History() {
 
 export default function Story() {
   return (
-    <>
-      <section id="story" className="surface-light py-14 md:py-20">
+    <section id="story" className="surface-blue py-14 md:py-20">
       {/* ---------- CHAIRMAN ----------
            Cut-out portrait overlapping a raised panel. The image is a
            transparent PNG anchored to the panel's bottom edge and allowed
@@ -152,15 +151,15 @@ export default function Story() {
       <Container>
         <Reveal as="up" className="max-w-2xl">
           <p className="eyebrow mb-3">Leadership</p>
-          <h2 className="section-title-dark text-balance">A message from our CEO</h2>
+          <h2 className="section-title text-balance">A message from our CEO</h2>
         </Reveal>
 
         <Reveal as="up" delay={0.08} className="mt-16 md:mt-20">
-          <div className="relative bg-page px-6 pb-8 pt-28 sm:px-8 md:px-10 md:pb-10 md:pt-10">
+          <div className="relative bg-white/[0.07] px-6 pb-8 pt-28 sm:px-8 md:px-10 md:pb-10 md:pt-10">
             {/* faint quote glyph, sized as a graphic rather than an icon */}
             <span
               aria-hidden="true"
-              className="pointer-events-none absolute right-5 top-2 select-none font-sans text-[7rem] leading-none text-ink/[0.07] md:text-[9rem]"
+              className="pointer-events-none absolute right-5 top-2 select-none font-sans text-[7rem] leading-none text-white/[0.07] md:text-[9rem]"
             >
               &rdquo;
             </span>
@@ -172,7 +171,8 @@ export default function Story() {
                   src={aboutMedia.ceoPortrait}
                   alt={`${company.founder}, ${company.founderTitle}`}
                   loading="lazy"
-                  className="absolute bottom-0 left-1/2 h-[calc(100%+6rem)] w-auto max-w-none -translate-x-1/2 object-contain object-bottom md:left-0 md:h-[calc(100%+5rem)] md:translate-x-0"
+                  className="absolute -top-28 left-1/2 w-[190px] -translate-x-1/2 object-contain object-bottom md:-top-24 md:left-0 md:w-[240px] md:translate-x-0 lg:-top-28 lg:w-[280px]"
+                  style={{ bottom: 0, height: "auto", maxHeight: "none" }}
                 />
               )}
 
@@ -180,23 +180,23 @@ export default function Story() {
               <div aria-hidden="true" className="hidden md:block" />
 
               <div className="pt-2 md:pt-0">
-                <blockquote className="text-balance text-[1.1rem] font-medium leading-[1.5] text-ink md:text-[1.4rem]">
+                <blockquote className="text-balance text-[1.1rem] font-medium leading-[1.5] text-white md:text-[1.4rem]">
                   {ceoMessage.quote}
                 </blockquote>
 
                 <div className="mt-5 flex items-center gap-3">
                   <span aria-hidden="true" className="h-[2px] w-7 shrink-0 bg-green" />
                   <div>
-                    <p className="text-[0.78rem] font-semibold uppercase tracking-[0.06em] text-ink">
+                    <p className="text-[0.78rem] font-semibold uppercase tracking-[0.06em] text-white">
                       {company.founder}
                     </p>
-                    <p className="mt-0.5 text-[0.7rem] text-body">
+                    <p className="mt-0.5 text-[0.7rem] text-fg-muted">
                       {company.founderTitle}
                     </p>
                   </div>
                 </div>
 
-                <p className="mt-6 border-t border-hairline pt-5 text-[0.8rem] leading-[1.95] text-body">
+                <p className="mt-6 border-t border-line pt-5 text-[0.8rem] leading-[1.95] text-fg-muted">
                   {ceoMessage.statement}
                 </p>
               </div>
@@ -205,11 +205,8 @@ export default function Story() {
         </Reveal>
       </Container>
 
-      </section>
-
-      <section className="surface-blue py-14 md:py-20">
-        {/* ---------- HISTORY ---------- */}
-        <Container>
+      {/* ---------- HISTORY ---------- */}
+      <Container className="mt-14 md:mt-20">
         <Reveal as="up" className="max-w-2xl">
           <p className="eyebrow mb-3">Our history</p>
           <h2 className="section-title text-balance">Two decades of advancement</h2>
@@ -218,8 +215,7 @@ export default function Story() {
         <Reveal as="up" delay={0.08} className="mt-7">
           <History />
         </Reveal>
-        </Container>
-      </section>
-    </>
+      </Container>
+    </section>
   );
 }
