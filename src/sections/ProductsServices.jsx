@@ -99,23 +99,34 @@ export default function ProductsServices() {
           </div>
         </div>
 
-        {/* Row 1 — 5 items, full width */}
-        <Stagger className="mt-6 grid grid-cols-3 gap-3 lg:grid-cols-5">
-          {row1.map((cat) => (
-            <Stagger.Item key={cat.slug} as="scale">
-              <CategoryCard cat={cat} />
-            </Stagger.Item>
-          ))}
-        </Stagger>
+        {/* Mobile — 3 cols, 9 items = exactly 3 clean rows */}
+        <div className="mt-6 lg:hidden">
+          <Stagger className="grid grid-cols-3 gap-3">
+            {categories.map((cat) => (
+              <Stagger.Item key={cat.slug} as="scale">
+                <CategoryCard cat={cat} />
+              </Stagger.Item>
+            ))}
+          </Stagger>
+        </div>
 
-        {/* Row 2 — remaining items, centred on desktop */}
-        <Stagger className="mt-3 grid grid-cols-3 gap-3 lg:flex lg:justify-center lg:gap-3">
-          {row2.map((cat) => (
-            <Stagger.Item key={cat.slug} as="scale" className="lg:w-[18.5%]">
-              <CategoryCard cat={cat} />
-            </Stagger.Item>
-          ))}
-        </Stagger>
+        {/* Desktop — row 1: 5 items full width, row 2: 4 items centred */}
+        <div className="mt-6 hidden lg:block">
+          <Stagger className="grid grid-cols-5 gap-3">
+            {row1.map((cat) => (
+              <Stagger.Item key={cat.slug} as="scale">
+                <CategoryCard cat={cat} />
+              </Stagger.Item>
+            ))}
+          </Stagger>
+          <Stagger className="mt-3 flex justify-center gap-3">
+            {row2.map((cat) => (
+              <Stagger.Item key={cat.slug} as="scale" className="w-[18.5%]">
+                <CategoryCard cat={cat} />
+              </Stagger.Item>
+            ))}
+          </Stagger>
+        </div>
 
       </Container>
 
