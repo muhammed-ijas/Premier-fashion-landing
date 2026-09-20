@@ -56,7 +56,7 @@ export const services = {
    Added as we convert About.jsx. */
 export const about = {
     overview: "/about/overview.png",   // facility or head office, 5:4
-    ceoPortrait: "/about/ceo.png",
+      ceoPortrait: "/about/ceo.png",        // desktop cut-out, transparent PNG, full length
     designStudio: "/about/design-studio.png",
     chinaSourcing: "/about/china-sourcing.png",
 };
@@ -156,12 +156,13 @@ export const categoryImages = {
 };
 
 export const teamPhotos = {
+  jamaluddin: "/about/ceo.png",
+  "farhan-raza": "/team/raza-farhan.png",
   "abdul-ahad": "/team/abdul-ahad.png",
   "chu-dao-linh-suong": "/team/chu-dao-linh-suong.png",
   "kadiravelu-saravana-kumar": "/team/kadiravelu-saravana-kumar.png",
   "ketan-patel": "/team/ketan-patel.png",
   "hussnain-ghafoor": "/team/hussnain-ghafoor.png",
-  "raza-farhan": "/team/raza-farhan.png",
   "grace-nguyen": "/team/grace-nguyen.png",
   "prashant-khandalkar": "/team/prashant-khandalkar.png",
   "mari-payes-micheal-pius-angolo": "/team/mari-payes-micheal-pius-angolo.png",

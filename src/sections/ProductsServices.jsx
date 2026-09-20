@@ -2,8 +2,10 @@ import { CheckCircle2 } from "lucide-react";
 import Container from "../components/Container";
 import Stagger from "../components/Stagger";
 import SectionHeading from "../components/SectionHeading";
-import { products, services } from "../data/company";
-import { products as productMedia, hasMedia } from "../data/media";
+import { products, services, categories, ownDesignShare } from "../data/company";
+import { products as productMedia, categoryImages, hasMedia } from "../data/media";
+
+const slugify = (value) => value.toLowerCase().replace(/[^a-z0-9]+/g, "-");
 
 export default function ProductsServices() {
   return (
@@ -38,6 +40,66 @@ export default function ProductsServices() {
               </article>
             </Stagger.Item>
           ))}
+        </Stagger>
+
+        {/* garment types — the same range cut by product rather than by
+            audience, so it belongs with the categories above */}
+        <div className="mt-12 flex flex-col items-start justify-between gap-4 border-t border-line pt-10 md:flex-row md:items-end">
+          <div>
+            <p className="eyebrow mb-3">Category mix</p>
+                      <h3 className="section-title text-balance">A diverse range</h3>
+          </div>
+
+          <div className="shrink-0">
+            <p className="text-2xl font-bold leading-none text-green md:text-3xl">
+              {ownDesignShare}
+            </p>
+            <p className="mt-1.5 max-w-[15rem] text-[0.75rem] leading-[1.7] text-fg-muted">
+              of turnover is business booked on Premier&rsquo;s own design.
+            </p>
+          </div>
+        </div>
+
+        <Stagger className="mt-6 grid grid-cols-4 gap-2 sm:grid-cols-4 lg:grid-cols-8">
+          {categories.map((cat) => {
+            const image = categoryImages[slugify(cat)];
+            const hasImage = hasMedia(image);
+
+            return (
+              <Stagger.Item key={cat} as="scale">
+                <article
+                  className={
+                    "group relative flex aspect-[3/4] items-end overflow-hidden transition-colors duration-300 " +
+                    (hasImage ? "bg-ink" : "border border-line bg-white")
+                  }
+                >
+                  {hasImage && (
+                    <>
+                      <img
+                        src={image}
+                        alt={cat}
+                        loading="lazy"
+                        className="absolute inset-0 h-full w-full object-cover transition-transform duration-[600ms] ease-out group-hover:scale-105"
+                      />
+                      <span
+                        aria-hidden="true"
+                        className="absolute inset-0 bg-[rgb(8_14_20/0.42)] transition-colors duration-300 group-hover:bg-[rgb(8_14_20/0.58)]"
+                      />
+                    </>
+                  )}
+
+                  <p
+                    className={
+                      "relative w-full px-1.5 py-2.5 text-center text-[0.6rem] font-semibold uppercase tracking-[0.05em] " +
+                      (hasImage ? "text-white" : "text-ink")
+                    }
+                  >
+                    {cat}
+                  </p>
+                </article>
+              </Stagger.Item>
+            );
+          })}
         </Stagger>
       </Container>
 

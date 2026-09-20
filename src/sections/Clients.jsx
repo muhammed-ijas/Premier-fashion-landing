@@ -7,7 +7,7 @@ import { clientLogos, brands } from "../data/media";
 
 export default function Clients() {
   return (
-    <section id="clients" className="surface-light py-16 md:py-20">
+    <section id="clients" className="surface-light pb-14 pt-8 md:py-20">
       <Container>
         <SectionHeading
           kicker="Clients"

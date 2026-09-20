@@ -9,8 +9,8 @@ export default function Footer() {
   return (
     <footer className="surface-blue">
       <Container className="grid grid-cols-2 gap-x-8 gap-y-12 py-14 lg:grid-cols-[1.3fr_0.8fr_1fr_1.2fr] lg:gap-x-10 lg:py-16">
-        <div className="col-span-2 max-w-[330px] lg:col-span-1">
-          <img src="/PGLogo-whitened.png" alt={company.group} className="h-[68px] w-auto object-contain" />
+        <div className="col-span-2 max-w-[330px] text-center sm:text-left lg:col-span-1">
+          <img src="/PGLogo-whitened.png" alt={company.group} className="mx-auto h-[68px] w-auto object-contain sm:mx-0" />
           <p className="mt-5 text-[0.875rem] leading-[1.75] text-fg-muted">
             A one-stop apparel sourcing, design, product development and manufacturing partner,
             operating across Vietnam, China, India, Bangladesh, Nepal and beyond.

@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { ChevronDown } from "lucide-react";
+import { Quote, ChevronDown } from "lucide-react";
 import clsx from "clsx";
 import Container from "../components/Container";
 import Reveal from "../components/Reveal";
@@ -144,65 +144,52 @@ function History() {
 export default function Story() {
   return (
     <section id="story" className="surface-blue py-14 md:py-20">
-      {/* ---------- CHAIRMAN ----------
-           Cut-out portrait overlapping a raised panel. The image is a
-           transparent PNG anchored to the panel's bottom edge and allowed
-           to rise above it, so it reads as stepping out of the card. */}
+      {/* ---------- CHAIRMAN ---------- */}
       <Container>
-        <Reveal as="up" className="max-w-2xl">
-          <p className="eyebrow mb-3">Leadership</p>
-          <h2 className="section-title text-balance">A message from our CEO</h2>
-        </Reveal>
-
-        <Reveal as="up" delay={0.08} className="mt-16 md:mt-20">
-          <div className="relative bg-white/[0.07] px-6 pb-8 pt-28 sm:px-8 md:px-10 md:pb-10 md:pt-10">
-            {/* faint quote glyph, sized as a graphic rather than an icon */}
-            <span
-              aria-hidden="true"
-              className="pointer-events-none absolute right-5 top-2 select-none font-sans text-[7rem] leading-none text-white/[0.07] md:text-[9rem]"
-            >
-              &rdquo;
-            </span>
-
-            <div className="relative md:grid md:grid-cols-[240px_1fr] md:gap-10 lg:grid-cols-[280px_1fr]">
-              {/* portrait — absolute on desktop so it can overflow upward */}
-              {hasMedia(aboutMedia.ceoPortrait) && (
+        <div className="grid grid-cols-1 items-center gap-8 md:grid-cols-[minmax(0,240px)_1fr] md:gap-12">
+          {hasMedia(aboutMedia.ceoPortrait) && (
+            <Reveal as="right" className="mx-auto w-full max-w-[210px] md:mx-0 md:max-w-none">
+              <div className="relative">
                 <img
                   src={aboutMedia.ceoPortrait}
                   alt={`${company.founder}, ${company.founderTitle}`}
                   loading="lazy"
-                  className="absolute -top-28 left-1/2 w-[190px] -translate-x-1/2 object-contain object-bottom md:-top-24 md:left-0 md:w-[240px] md:translate-x-0 lg:-top-28 lg:w-[280px]"
-                  style={{ bottom: 0, height: "auto", maxHeight: "none" }}
+                  className="aspect-[4/5] w-full object-cover"
                 />
-              )}
-
-              {/* spacer holds the portrait's column on desktop */}
-              <div aria-hidden="true" className="hidden md:block" />
-
-              <div className="pt-2 md:pt-0">
-                <blockquote className="text-balance text-[1.1rem] font-medium leading-[1.5] text-white md:text-[1.4rem]">
-                  {ceoMessage.quote}
-                </blockquote>
-
-                <div className="mt-5 flex items-center gap-3">
-                  <span aria-hidden="true" className="h-[2px] w-7 shrink-0 bg-green" />
-                  <div>
-                    <p className="text-[0.78rem] font-semibold uppercase tracking-[0.06em] text-white">
-                      {company.founder}
-                    </p>
-                    <p className="mt-0.5 text-[0.7rem] text-fg-muted">
-                      {company.founderTitle}
-                    </p>
-                  </div>
-                </div>
-
-                <p className="mt-6 border-t border-line pt-5 text-[0.8rem] leading-[1.95] text-fg-muted">
-                  {ceoMessage.statement}
-                </p>
+                <span
+                  aria-hidden="true"
+                  className="pointer-events-none absolute -bottom-3 -right-3 h-full w-full border-2 border-green"
+                />
               </div>
-            </div>
+            </Reveal>
+          )}
+
+          <div>
+            <Reveal as="up">
+              <Quote className="h-7 w-7 text-green" strokeWidth={1.75} aria-hidden="true" />
+              <blockquote className="mt-4 text-balance text-[1.1rem] font-medium leading-[1.6] text-white md:text-[1.3rem]">
+                {ceoMessage.quote}
+              </blockquote>
+            </Reveal>
+
+            <Reveal as="up" delay={0.1}>
+              <p className="mt-5 text-[0.82rem] leading-[1.9] text-fg-muted">
+                {ceoMessage.statement}
+              </p>
+            </Reveal>
+
+            <Reveal as="up" delay={0.16}>
+              <div className="mt-6 border-t border-line pt-5">
+                <div>
+                  <p className="text-[0.82rem] font-semibold uppercase tracking-[0.06em] text-white">
+                    {company.founder}
+                  </p>
+                  <p className="mt-1 text-[0.75rem] text-fg-muted">{company.founderTitle}</p>
+                </div>
+              </div>
+            </Reveal>
           </div>
-        </Reveal>
+        </div>
       </Container>
 
       {/* ---------- HISTORY ---------- */}

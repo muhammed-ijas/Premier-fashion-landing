@@ -4,13 +4,9 @@ import { Plus } from "lucide-react";
 import clsx from "clsx";
 import Container from "../components/Container";
 import Stagger from "../components/Stagger";
-import Reveal from "../components/Reveal";
 import SectionHeading from "../components/SectionHeading";
-import { pillars, designInitiatives, categories, ownDesignShare } from "../data/company";
-import { categoryImages, hasMedia } from "../data/media";
+import { pillars, designInitiatives } from "../data/company";
 import { EASE } from "../lib/motion";
-
-const slugify = (value) => value.toLowerCase().replace(/[^a-z0-9]+/g, "-");
 
 /* ---------- WHAT DRIVES US ----------
    Numbered plates on a tinted ground. The number sits large and pale
@@ -18,7 +14,7 @@ const slugify = (value) => value.toLowerCase().replace(/[^a-z0-9]+/g, "-");
    no borders, no growing rules. */
 function Pillars() {
   return (
-    <Stagger className="mt-8 grid grid-cols-1 gap-px overflow-hidden bg-hairline sm:grid-cols-2 lg:grid-cols-5">
+    <Stagger className="mt-8 grid grid-cols-2 gap-px overflow-hidden bg-hairline lg:grid-cols-5 [&>*:last-child:nth-child(odd)]:col-span-2 lg:[&>*:last-child:nth-child(odd)]:col-span-1">
       {pillars.map((pillar, i) => (
         <Stagger.Item key={pillar.title} as="up" className="h-full">
           <article className="group relative h-full overflow-hidden bg-white px-5 pb-6 pt-7 transition-colors duration-300 hover:bg-blue">
@@ -129,64 +125,6 @@ export default function Approach() {
           tone="ink"
         />
         <Pillars />
-      </Container>
-
-      {/* ---------- CATEGORY MIX ---------- */}
-      <Container className="mt-14 md:mt-16">
-        <div className="flex flex-col items-start justify-between gap-5 md:flex-row md:items-end">
-          <SectionHeading kicker="Category mix" title="A diverse range" tone="ink" />
-
-          <Reveal as="up" delay={0.1} className="shrink-0">
-            <p className="text-3xl font-bold leading-none text-green md:text-4xl">
-              {ownDesignShare}
-            </p>
-            <p className="mt-2 max-w-[15rem] text-[0.78rem] leading-[1.7] text-fg-muted">
-              of turnover is business booked on Premier&rsquo;s own design.
-            </p>
-          </Reveal>
-        </div>
-
-        <Stagger className="mt-8 grid grid-cols-3 gap-2 sm:grid-cols-4 lg:grid-cols-8">
-          {categories.map((cat) => {
-            const image = categoryImages[slugify(cat)];
-            const hasImage = hasMedia(image);
-
-            return (
-              <Stagger.Item key={cat} as="scale">
-                <article
-                  className={clsx(
-                    "group relative flex aspect-[3/4] items-end overflow-hidden transition-colors duration-300",
-                    hasImage ? "bg-ink" : "border border-line bg-white"
-                  )}
-                >
-                  {hasImage && (
-                    <>
-                      <img
-                        src={image}
-                        alt={cat}
-                        loading="lazy"
-                        className="absolute inset-0 h-full w-full object-cover transition-transform duration-[600ms] ease-out group-hover:scale-105"
-                      />
-                      <span
-                        aria-hidden="true"
-                        className="absolute inset-0 bg-[rgb(8_14_20/0.42)] transition-colors duration-300 group-hover:bg-[rgb(8_14_20/0.58)]"
-                      />
-                    </>
-                  )}
-
-                  <p
-                    className={clsx(
-                      "relative w-full px-2 py-3 text-center text-[0.66rem] font-semibold uppercase tracking-[0.06em]",
-                      hasImage ? "text-white" : "text-ink"
-                    )}
-                  >
-                    {cat}
-                  </p>
-                </article>
-              </Stagger.Item>
-            );
-          })}
-        </Stagger>
       </Container>
 
       {/* ---------- DESIGN INITIATIVES ---------- */}

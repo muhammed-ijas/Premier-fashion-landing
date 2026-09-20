@@ -21,16 +21,17 @@ const EASE_CSS = "cubic-bezier(0.16, 1, 0.3, 1)";
 const SHAPE_FOR = { "hong-kong": "china" };
 
 const LABEL_NUDGE = {
-  usa: { dx: -6, dy: 4, anchor: "middle" },
-  canada: { dx: 0, dy: -4, anchor: "middle" },
-  "south-africa": { dx: 0, dy: 16, anchor: "middle" },
-  uae: { dx: -4, dy: 14, anchor: "middle" },
-  nepal: { dx: -14, dy: -10, anchor: "end" },
-  india: { dx: -4, dy: 12, anchor: "middle" },
-  bangladesh: { dx: 16, dy: -6, anchor: "start" },
-  china: { dx: 6, dy: -6, anchor: "middle" },
-  "hong-kong": { dx: 14, dy: 16, anchor: "start" },
-  vietnam: { dx: 12, dy: 20, anchor: "start" },
+  usa: { dx: -8, dy: 5, anchor: "middle" },
+  canada: { dx: 0, dy: -7, anchor: "middle" },
+  "south-africa": { dx: 0, dy: 18, anchor: "middle" },
+  china: { dx: 4, dy: -9, anchor: "middle" },
+  india: { dx: -2, dy: 19, anchor: "middle" },
+  // South Asia is dense: these four sit off their country on a leader line
+  nepal: { dx: -20, dy: -15, anchor: "end", leader: true },
+  bangladesh: { dx: 24, dy: -7, anchor: "start", leader: true },
+  uae: { dx: -16, dy: 1, anchor: "end", leader: true },
+  "hong-kong": { dx: 20, dy: 13, anchor: "start", leader: true },
+  vietnam: { dx: 16, dy: 20, anchor: "start", leader: true },
 };
 
 export default function WorldMap() {
@@ -46,7 +47,7 @@ export default function WorldMap() {
   const ty = active ? VB_H / 2 - active.label.y * scale : 0;
 
   return (
-    <div className="grid grid-cols-1 gap-5 md:grid-cols-[minmax(0,260px)_1fr] md:gap-7">
+    <div className="grid grid-cols-1 gap-5 md:grid-cols-[minmax(0,300px)_1fr] md:gap-7">
       {/* ---- location list ---- */}
       <div className="order-2 border border-line bg-white md:order-1">
         <div className="flex items-center justify-between border-b border-line px-4 py-3">
@@ -65,20 +66,20 @@ export default function WorldMap() {
           )}
         </div>
 
-        <ul className="max-h-[280px] overflow-y-auto md:max-h-[400px]">
+        <ul className="grid grid-cols-2">
           {points.map((office) => {
             const isActive = office.slug === activeSlug;
             return (
-              <li key={office.slug}>
+              <li key={office.slug} className="border-b border-r border-line">
                 <button
                   type="button"
                   onClick={() => setActiveSlug(isActive ? null : office.slug)}
                   aria-pressed={isActive}
                   className={clsx(
-                    "flex w-full cursor-pointer items-center gap-3 border-l-2 px-4 py-3 text-left transition-colors duration-200",
+                    "flex h-full w-full cursor-pointer items-center gap-2.5 border-l-2 px-3 py-2.5 text-left transition-colors duration-200",
                     isActive
-                      ? "border-green bg-page"
-                      : "border-transparent hover:border-line-strong hover:bg-page"
+                      ? "border-l-green bg-page"
+                      : "border-l-transparent hover:border-l-line-strong hover:bg-page"
                   )}
                 >
                   <span
@@ -89,11 +90,11 @@ export default function WorldMap() {
                     )}
                   />
                   <span className="min-w-0">
-                    <span className="block truncate text-[0.78rem] font-semibold uppercase tracking-[0.04em] text-ink">
+                    <span className="block truncate text-[0.72rem] font-semibold uppercase tracking-[0.03em] text-ink">
                       {office.country}
                     </span>
-                    <span className="block truncate text-[0.68rem] text-fg-subtle">
-                      {office.label && office.city ? office.city : office.function}
+                    <span className="block truncate text-[0.62rem] text-fg-subtle">
+                      {office.city || office.function}
                     </span>
                   </span>
                 </button>
@@ -105,9 +106,10 @@ export default function WorldMap() {
 
       {/* ---- map ---- */}
       <div className="order-1 md:order-2">
-        <div className="overflow-hidden border border-line bg-white">
+        <div className="overflow-hidden border border-line bg-white p-3 md:p-4">
           <svg
             viewBox={WORLD_VIEWBOX}
+            preserveAspectRatio="xMidYMid meet"
             className="h-auto w-full"
             role="img"
             aria-label={`Premier Fashion operates in ${points
@@ -150,39 +152,55 @@ export default function WorldMap() {
                 );
               })}
 
-              {/* names */}
+              {/* names, with leader lines where countries are too close
+                  to carry a label on top of themselves */}
               {points.map((office) => {
                 const isActive = office.slug === activeSlug;
                 const dimmed = active && !isActive;
-                const n = LABEL_NUDGE[office.slug] ?? { dx: 0, dy: 4, anchor: "middle" };
+                const n = LABEL_NUDGE[office.slug] ?? { dx: 0, dy: 5, anchor: "middle" };
                 const k = 1 / scale;
+                const lx = office.label.x + n.dx * k;
+                const ly = office.label.y + n.dy * k;
 
                 return (
-                  <text
-                    key={`${office.slug}-label`}
-                    x={office.label.x + n.dx * k}
-                    y={office.label.y + n.dy * k}
-                    textAnchor={n.anchor}
-                    className="hidden sm:block"
-                    style={{
-                      fontSize: `${11.5 * k}px`,
-                      fontWeight: 700,
-                      letterSpacing: "0.05em",
-                      textTransform: "uppercase",
-                      fill: isActive ? "#1B2A3B" : "#1B2A3B",
-                      opacity: dimmed ? 0.3 : 1,
-                      paintOrder: "stroke",
-                      stroke: "#FFFFFF",
-                      strokeWidth: `${2.5 * k}px`,
-                      strokeLinejoin: "round",
-                      transition: "opacity 0.4s ease",
-                      pointerEvents: "none",
-                    }}
-                  >
-                    {office.country}
-                  </text>
+                  <g key={`${office.slug}-label`} style={{ pointerEvents: "none" }}>
+                    {n.leader && (
+                      <line
+                        x1={office.label.x}
+                        y1={office.label.y}
+                        x2={lx - (n.anchor === "end" ? -2 : 2) * k}
+                        y2={ly - 3 * k}
+                        stroke="#1B2A3B"
+                        strokeWidth={0.6 * k}
+                        opacity={dimmed ? 0.2 : 0.45}
+                      />
+                    )}
+
+                    <text
+                      x={lx}
+                      y={ly}
+                      textAnchor={n.anchor}
+                      className="hidden sm:block"
+                      style={{
+                        fontSize: `${10.5 * k}px`,
+                        fontWeight: 700,
+                        letterSpacing: "0.05em",
+                        textTransform: "uppercase",
+                        fill: "#1B2A3B",
+                        opacity: dimmed ? 0.3 : 1,
+                        paintOrder: "stroke",
+                        stroke: "#FFFFFF",
+                        strokeWidth: `${2.5 * k}px`,
+                        strokeLinejoin: "round",
+                        transition: "opacity 0.4s ease",
+                      }}
+                    >
+                      {office.country}
+                    </text>
+                  </g>
                 );
               })}
+
             </g>
           </svg>
         </div>

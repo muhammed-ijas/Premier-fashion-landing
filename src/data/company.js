@@ -14,7 +14,7 @@ export const company = {
   group: "Premier Group",
   founder: "Mr. Mohammad Jamaluddin",
   founderTitle: "Founder & CEO",
-  founded: 2005,
+  founded: 2000,
 };
 
 export const about = {
@@ -362,12 +362,13 @@ export const ceoMessage = {
 };
 
 export const team = [
+  { slug: "jamaluddin", name: "Mr. Mohammad Jamaluddin", role: "Chairman & CEO" },
+  { slug: "farhan-raza", name: "Farhan Raza", role: "Deputy CEO" },
   { slug: "abdul-ahad", name: "Abdul Ahad", role: "Managing Director (China & Hong Kong)" },
   { slug: "chu-dao-linh-suong", name: "Chu Đào Linh Sương", role: "Director (Vietnam)" },
   { slug: "kadiravelu-saravana-kumar", name: "Kadiravelu Saravana Kumar", role: "Chief Representative, Vietnam" },
-  { slug: "ketan-patel", name: "Ketan Patel", role: "Marketing & Sales Director" },
+  { slug: "ketan-patel", name: "Ketan Patel", role: "Marketing & Sales Manager" },
   { slug: "hussnain-ghafoor", name: "Hussnain Ghafoor", role: "Fabric Sourcing & Production Manager" },
-  { slug: "raza-farhan", name: "Raza Farhan", role: "Deputy CEO" },
   { slug: "grace-nguyen", name: "Grace Nguyen", role: "General Manager, Product Development" },
   { slug: "prashant-khandalkar", name: "Prashant Khandalkar", role: "Development & Merchandising Manager" },
   { slug: "mari-payes-micheal-pius-angolo", name: "Mari Payes Micheal Pius Angolo", role: "Production & Sourcing Manager (BD)" },
@@ -378,7 +379,8 @@ export const team = [
    Brochure page 4, "Our Journey".                                */
 
 export const history = [
-  { year: "2005", title: "Established", description: "Premier Exim Hong Kong founded." },
+  { year: "2000", title: "Established", description: "Premier Group established." },
+  { year: "2005", title: "Premier Exim Hong Kong", description: "Premier Exim Hong Kong founded." },
   { year: "2006", title: "Trading office", description: "Pha Re Mi En Ri Company opened in Vietnam — the former name of Premier Fashion Co., Ltd." },
   { year: "2008", title: "Joint venture", description: "Premier took a 50% share in the Ben Tre factory — Premier Pearl Garment JSC." },
   { year: "2010", title: "Fabric sourcing office", description: "Premier Exim China Ltd. established in Zhejiang." },
