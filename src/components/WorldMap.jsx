@@ -1,56 +1,94 @@
-import { useMemo, useState } from "react";
-import { MapContainer, TileLayer, CircleMarker, Tooltip, useMap } from "react-leaflet";
+import { useState, useRef, useEffect } from "react";
 import { Globe } from "lucide-react";
 import clsx from "clsx";
-import "leaflet/dist/leaflet.css";
 import { offices } from "../data/company";
+import {
+  BASE_PATH,
+  countryShapes,
+  countryLabels,
+  WORLD_VIEWBOX,
+} from "../data/worldMap";
 
-const TILE_URL = "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png";
-const TILE_ATTRIBUTION =
-  '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors';
-
-const COORDS = {
-  vietnam: [10.82, 106.63],
-  china: [30.0, 120.58],
-  "hong-kong": [22.32, 114.17],
-  india: [22.57, 88.36],
-  usa: [40.71, -74.01],
-  bangladesh: [23.81, 90.41],
-  nepal: [26.45, 87.28],
-  "south-africa": [-26.2, 28.05],
-  canada: [49.28, -123.12],
-  uae: [25.2, 55.27],
+// ─── zoom boxes [x, y, w, h] ─────────────────────────────────────────────────
+const ZOOM_BOXES = {
+  canada:         [0,    -3,  340, 200],
+  usa:            [0,    60,  340, 200],
+  "south-africa": [430, 270,  260, 158],
+  china:          [620,  60,  250, 160],
+  uae:            [500, 130,  200, 130],
+  nepal:          [560, 120,  200, 130],
+  india:          [540, 120,  220, 160],
+  bangladesh:     [600, 130,  200, 130],
+  "hong-kong":    [640, 130,  200, 130],
+  vietnam:        [660, 140,  200, 140],
 };
 
-const WORLD_CENTER = [22, 30];
-const WORLD_ZOOM = 1;
+const DEFAULT_VB = [0, -3, 1000, 425];
 
-function MapController({ target }) {
-  const map = useMap();
-  if (target) {
-    map.flyTo(COORDS[target], 4, { duration: 1.1 });
-  } else {
-    map.flyTo(WORLD_CENTER, WORLD_ZOOM, { duration: 1.1 });
-  }
-  return null;
+// ─── label nudges — offset text from centroid ─────────────────────────────────
+const LABEL_NUDGE = {
+  canada:         { dx:  0,  dy: -4,  anchor: "middle" },
+  usa:            { dx: -6,  dy:  4,  anchor: "middle" },
+  "south-africa": { dx:  0,  dy: 16,  anchor: "middle" },
+  china:          { dx:  6,  dy: -6,  anchor: "middle" },
+  uae:            { dx: -4,  dy: 14,  anchor: "middle" },
+  nepal:          { dx:-14,  dy:-10,  anchor: "end"    },
+  india:          { dx: -4,  dy: 12,  anchor: "middle" },
+  bangladesh:     { dx: 16,  dy: -6,  anchor: "start"  },
+  "hong-kong":    { dx: 14,  dy: 16,  anchor: "start"  },
+  vietnam:        { dx: 12,  dy: 20,  anchor: "start"  },
+};
+
+// ─── animation ────────────────────────────────────────────────────────────────
+const ANIM_MS = 500;
+function lerp(a, b, t) { return a + (b - a) * t; }
+function easeInOut(t) { return t < 0.5 ? 2 * t * t : -1 + (4 - 2 * t) * t; }
+
+function useAnimatedViewBox(slug) {
+  const target   = slug ? ZOOM_BOXES[slug] : DEFAULT_VB;
+  const fromRef  = useRef(DEFAULT_VB);
+  const [cur, setCur] = useState(DEFAULT_VB);
+  const startRef = useRef(null);
+  const rafRef   = useRef(null);
+
+  useEffect(() => {
+    fromRef.current  = cur;
+    startRef.current = null;
+    cancelAnimationFrame(rafRef.current);
+    function step(ts) {
+      if (!startRef.current) startRef.current = ts;
+      const t    = Math.min((ts - startRef.current) / ANIM_MS, 1);
+      const e    = easeInOut(t);
+      const next = fromRef.current.map((v, i) => lerp(v, target[i], e));
+      setCur(next);
+      if (t < 1) rafRef.current = requestAnimationFrame(step);
+    }
+    rafRef.current = requestAnimationFrame(step);
+    return () => cancelAnimationFrame(rafRef.current);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [slug]);
+
+  return cur.join(" ");
 }
 
+// ─── component ────────────────────────────────────────────────────────────────
 export default function WorldMap() {
   const [activeSlug, setActiveSlug] = useState(null);
+  const animatedVB = useAnimatedViewBox(activeSlug);
 
-  const points = useMemo(
-    () => offices.filter((office) => COORDS[office.slug]),
-    []
-  );
+  const points = offices.filter((o) => countryLabels[o.slug]);
+  const active  = points.find((p) => p.slug === activeSlug) ?? null;
 
   return (
     <div className="grid grid-cols-1 gap-5 md:grid-cols-[minmax(0,300px)_1fr] md:gap-7">
+
+      {/* ── location list ──────────────────────────────────────────────────── */}
       <div className="order-2 self-start border border-line bg-white md:order-1">
         <div className="flex items-center justify-between border-b border-line px-4 py-3">
           <p className="text-[0.66rem] font-semibold uppercase tracking-[0.12em] text-fg-subtle">
             {points.length} locations
           </p>
-          {activeSlug && (
+          {active && (
             <button
               type="button"
               onClick={() => setActiveSlug(null)}
@@ -100,83 +138,100 @@ export default function WorldMap() {
         </ul>
       </div>
 
+      {/* ── map ────────────────────────────────────────────────────────────── */}
       <div className="order-1 md:order-2">
-        <div className="overflow-hidden border border-line">
-          <MapContainer
-            center={WORLD_CENTER}
-            zoom={WORLD_ZOOM}
-            minZoom={1}
-            maxZoom={6}
-            scrollWheelZoom={false}
-            worldCopyJump
-            attributionControl={false}
-            className="h-[300px] w-full md:h-[420px]"
-          >
-            <TileLayer url={TILE_URL} attribution={TILE_ATTRIBUTION} />
-            <MapController target={activeSlug} />
-            {points.map((office) => {
-              const isActive = office.slug === activeSlug;
-              return (
-                <CircleMarker
-                  key={office.slug}
-                  center={COORDS[office.slug]}
-                  radius={isActive ? 9 : 6}
-                  pathOptions={{
-                    color: "#FFFFFF",
-                    weight: 2,
-                    fillColor: isActive ? "#7CB715" : "#0B73B5",
-                    fillOpacity: 1,
-                  }}
-                  eventHandlers={{
-                    click: () => setActiveSlug(isActive ? null : office.slug),
-                  }}
-                >
-                  <Tooltip
-                    permanent
-                    direction="right"
-                    offset={[8, 0]}
-                    opacity={1}
-                    className="pf-map-label"
+        <div className="border border-line overflow-hidden bg-[#EEF3F6]">
+          <div style={{ position: "relative", paddingBottom: "42.5%", width: "100%" }}>
+            <svg
+              viewBox={animatedVB}
+              preserveAspectRatio="xMidYMid meet"
+              style={{ position: "absolute", inset: 0, width: "100%", height: "100%" }}
+            >
+              {/* world background */}
+              <path d={BASE_PATH} fill="#D8E2E8" stroke="#fff" strokeWidth={0.4} />
+
+              {/* office country fills */}
+              {points.map(({ slug }) => {
+                const d        = countryShapes[slug];
+                const isActive = slug === activeSlug;
+                const dimmed   = active && !isActive;
+                if (!d) return null;
+                return (
+                  <path
+                    key={slug}
+                    d={d}
+                    fill={isActive ? "#7CB715" : "#0B73B5"}
+                    stroke="#fff"
+                    strokeWidth={0.4}
+                    opacity={dimmed ? 0.3 : 1}
+                    onClick={() => setActiveSlug(isActive ? null : slug)}
+                    style={{ cursor: "pointer", transition: "fill 0.3s, opacity 0.3s" }}
+                  />
+                );
+              })}
+
+              {/* country name labels — no dots */}
+              {points.map((office) => {
+                const lbl      = countryLabels[office.slug];
+                const nudge    = LABEL_NUDGE[office.slug] ?? { dx: 0, dy: 4, anchor: "middle" };
+                const isActive = office.slug === activeSlug;
+                const dimmed   = active && !isActive;
+                if (!lbl) return null;
+
+                return (
+                  <text
+                    key={office.slug}
+                    x={lbl.x + nudge.dx}
+                    y={lbl.y + nudge.dy}
+                    textAnchor={nudge.anchor}
+                    fontSize={7}
+                    fontFamily="Poppins, sans-serif"
+                    fontWeight={700}
+                    fill="#1B2A3B"
+                    stroke="#fff"
+                    strokeWidth={2}
+                    paintOrder="stroke"
+                    opacity={dimmed ? 0.25 : 1}
+                    onClick={() => setActiveSlug(isActive ? null : office.slug)}
+                    style={{
+                      userSelect: "none",
+                      textTransform: "uppercase",
+                      cursor: "pointer",
+                      transition: "opacity 0.3s",
+                    }}
                   >
                     {office.country}
-                  </Tooltip>
-                </CircleMarker>
-              );
-            })}
-          </MapContainer>
+                  </text>
+                );
+              })}
+            </svg>
+          </div>
         </div>
 
         <p className="mt-2 text-right text-[0.58rem] text-fg-subtle">
           <a
-            href="https://www.openstreetmap.org/copyright"
+            href="https://www.naturalearthdata.com"
             target="_blank"
             rel="noreferrer"
             className="transition-colors duration-200 hover:text-blue"
           >
-            © OpenStreetMap contributors
+            © Natural Earth — Indian Worldview
           </a>
         </p>
 
         <div className="mt-2 flex min-h-[2.5rem] items-start justify-center px-4 text-center">
-          {activeSlug ? (
-            <div>
-              <p className="text-[0.8rem] font-semibold uppercase tracking-[0.05em] text-ink">
-                {points.find((p) => p.slug === activeSlug)?.country}
-                {points.find((p) => p.slug === activeSlug)?.city && (
-                  <span className="font-normal normal-case text-fg-muted">
-                    {" "}
-                    — {points.find((p) => p.slug === activeSlug)?.city}
-                  </span>
-                )}
-              </p>
-            </div>
+          {active ? (
+            <p className="text-[0.8rem] font-semibold uppercase tracking-[0.05em] text-ink">
+              {active.country}
+            </p>
           ) : (
             <p className="text-[0.74rem] text-fg-subtle">
-              Select a location to view it on the map
+              Select a location to zoom in
             </p>
           )}
         </div>
       </div>
+
     </div>
   );
 }

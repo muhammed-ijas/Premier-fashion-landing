@@ -145,14 +145,27 @@ export const brands = [
 /* ---------- CATEGORY TILES ----------
    Portrait 4:5, at least 800×1000. Files in public/categories/. */
 export const categoryImages = {
-  bottoms: "",
-  jackets: "",
-  tops: "",
-  "t-shirts": "",
-  polo: "",
-  shirts: "",
-  dresses: "",
-  denims: "",
+  "mens-active-sports": "/categories/mens-active-sports.png",
+  "mens-golf":          "/categories/mens-golf.png",
+  "womens-active":      "/categories/womens-active.png",
+  "womens-fashion":     "/categories/womens-fashion.png",
+  "school-uniforms":    "/categories/school-uniforms.png",
+  "office-uniforms":    "/categories/office-uniforms.png",
+  "medical-scrubs":     "/categories/medical-scrubs.png",
+  "work-wear-safety":   "/categories/work-wear-safety.png",
+  "bags":               "/categories/bags.png",
+};
+
+export const categoryProducts = {
+  "mens-active-sports": [],
+  "mens-golf":          [],
+  "womens-active":      [],
+  "womens-fashion":     [],
+  "school-uniforms":    [],
+  "office-uniforms":    [],
+  "medical-scrubs":     [],
+  "work-wear-safety":   [],
+  "bags":               [],
 };
 
 export const teamPhotos = {

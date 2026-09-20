@@ -15,7 +15,7 @@ export default function About() {
   ];
 
   return (
-    <section id="about" className="surface-light py-16 md:py-20">
+       <section id="about" className="surface-light py-10 md:py-14">
       <Container className="grid grid-cols-1 items-center gap-12 lg:grid-cols-2 lg:gap-16">
         <div className="order-2 lg:order-1">
           <SectionHeading kicker="Who we are" title="A one-stop shop, built over two decades" />

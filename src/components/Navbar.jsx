@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { Menu, X } from "lucide-react";
+import { useNavigate, useLocation } from "react-router-dom";
 import clsx from "clsx";
 import Button from "./Button";
 import { navigation } from "../data/company";
@@ -12,6 +13,9 @@ export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
   const [active, setActive] = useState("home");
+  const navigate = useNavigate();
+  const location = useLocation();
+  const isHomePage = location.pathname === "/";
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 40);
@@ -20,8 +24,12 @@ export default function Navbar() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  // scrollspy — highlights whichever section is in view
+  // scrollspy — only on home page
   useEffect(() => {
+    if (!isHomePage) {
+      setActive("products-services");
+      return;
+    }
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
@@ -36,7 +44,7 @@ export default function Navbar() {
       if (el) observer.observe(el);
     });
     return () => observer.disconnect();
-  }, []);
+  }, [isHomePage]);
 
   // lock the page while the mobile menu is open, or the body scrolls
   // behind the panel on iOS
@@ -54,14 +62,25 @@ export default function Navbar() {
    */
   const goToSection = (e, href) => {
     e.preventDefault();
+    setOpen(false);
+
+    if (!isHomePage) {
+      // navigate to home first, then scroll after landing
+      navigate("/");
+      window.setTimeout(() => {
+        const el = document.querySelector(href);
+        if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
+      }, 400);
+      return;
+    }
+
     const el = document.querySelector(href);
     if (!el) return;
 
     if (open) {
-      setOpen(false);
       window.setTimeout(() => {
         el.scrollIntoView({ behavior: "smooth", block: "start" });
-      }, 380); // matches the panel's 0.35s collapse
+      }, 380);
     } else {
       el.scrollIntoView({ behavior: "smooth", block: "start" });
     }

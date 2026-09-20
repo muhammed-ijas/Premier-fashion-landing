@@ -144,7 +144,7 @@ function History() {
 export default function Story() {
   return (
     <>
-      <section id="story" className="surface-light py-14 md:py-20">
+      <section id="story" className="surface-light py-10 md:py-14">
         {/* ---------- CHAIRMAN ----------
            The artwork already carries its own blue ground, green frame
            and quote mark, so it is shown whole and the page around it
@@ -175,7 +175,7 @@ export default function Story() {
                     alt={`${company.founder}, ${company.founderTitle}`}
                     loading="lazy"
                     className="relative -mb-[3%] block w-full"
-                    />
+                  />
                 </div>
               </Reveal>
             )}

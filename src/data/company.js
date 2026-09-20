@@ -113,14 +113,15 @@ export const productTypes = [
 ];
 
 export const categories = [
-  "Bottoms",
-  "Jackets",
-  "Tops",
-  "T-Shirts",
-  "Polo",
-  "Shirts",
-  "Dresses",
-  "Denims",
+  { slug: "mens-active-sports",      name: "Men's Active & Sports Wear" },
+  { slug: "mens-golf",               name: "Men's Golf"                  },
+  { slug: "womens-active",           name: "Women's Active Wear"         },
+  { slug: "womens-fashion",          name: "Women's Fashion Collection"  },
+  { slug: "school-uniforms",         name: "School Uniforms"             },
+  { slug: "office-uniforms",         name: "Office Uniforms"             },
+  { slug: "medical-scrubs",          name: "Medical Scrubs"              },
+  { slug: "work-wear-safety",        name: "Work Wear & Safety"          },
+  { slug: "bags",                    name: "Bags"                        },
 ];
 
 export const services = [
