@@ -557,3 +557,30 @@
   }
 }
 
+/* ---------- LEAFLET MAP LABELS ----------
+   Leaflet's tooltip chrome (white box, border, arrow) is replaced with
+   plain type, so office names sit on the map like place names. */
+.pf-map-label.leaflet-tooltip {
+  background: transparent;
+  border: 0;
+  box-shadow: none;
+  padding: 0;
+  font-family: var(--font-sans);
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: #1B2A3B;
+  paint-order: stroke;
+  -webkit-text-stroke: 3px #FFFFFF;
+  white-space: nowrap;
+}
+.pf-map-label.leaflet-tooltip::before { display: none; }
+
+/* Leaflet's own zoom buttons, matched to the site */
+.leaflet-container .leaflet-control-zoom a {
+  border-radius: 0;
+  color: #1B2A3B;
+  border-color: #E2E7EA;
+}
+.leaflet-container .leaflet-control-zoom a:hover { color: #0B73B5; }

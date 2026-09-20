@@ -240,9 +240,9 @@ export const offices = [
     phone: "",
     email: "",
   },
-  {
+    {
     slug: "bangladesh",
-    city: "",
+    city: "Dhaka",
     country: "Bangladesh",
     label: "Production Base",
     location: "",
@@ -362,17 +362,18 @@ export const ceoMessage = {
 };
 
 export const team = [
-  { slug: "jamaluddin", name: "Mr. Mohammad Jamaluddin", role: "Chairman & CEO" },
-  { slug: "farhan-raza", name: "Farhan Raza", role: "Deputy CEO" },
+  // Country always in brackets, spelled out in full, never abbreviated.
+  { slug: "jamaluddin", name: "Mohammad Jamaluddin", role: "Chairman & CEO" },
+  { slug: "farhan-raza", name: "Farhan Raza", role: "Managing Director" },
   { slug: "abdul-ahad", name: "Abdul Ahad", role: "Managing Director (China & Hong Kong)" },
   { slug: "chu-dao-linh-suong", name: "Chu Đào Linh Sương", role: "Director (Vietnam)" },
-  { slug: "kadiravelu-saravana-kumar", name: "Kadiravelu Saravana Kumar", role: "Chief Representative, Vietnam" },
+  { slug: "kadiravelu-saravana-kumar", name: "Kadiravelu Saravana Kumar", role: "Chief Representative (Vietnam)" },
   { slug: "ketan-patel", name: "Ketan Patel", role: "Marketing & Sales Manager" },
   { slug: "hussnain-ghafoor", name: "Hussnain Ghafoor", role: "Fabric Sourcing & Production Manager" },
   { slug: "grace-nguyen", name: "Grace Nguyen", role: "General Manager, Product Development" },
   { slug: "prashant-khandalkar", name: "Prashant Khandalkar", role: "Development & Merchandising Manager" },
-  { slug: "mari-payes-micheal-pius-angolo", name: "Mari Payes Micheal Pius Angolo", role: "Production & Sourcing Manager (BD)" },
-  { slug: "sarah", name: "Sarah", role: "Merchandiser & Sourcing Manager (VN)" },
+  { slug: "mari-payes-micheal-pius-angolo", name: "Mari Payes Micheal Pius Angolo", role: "Production & Sourcing Manager (Bangladesh)" },
+  { slug: "sarah", name: "Sarah", role: "Merchandiser & Sourcing Manager (Vietnam)" },
 ];
 
 /* ---------------- HISTORY ----------------
@@ -418,4 +419,4 @@ export const navigation = [
   { name: "Products & Services", href: "#products-services" },
   { name: "Clients", href: "#clients" },
   { name: "Contact Us", href: "#contact" },
-];
+]; 

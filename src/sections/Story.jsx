@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Quote, ChevronDown } from "lucide-react";
+import { ChevronDown } from "lucide-react";
 import clsx from "clsx";
 import Container from "../components/Container";
 import Reveal from "../components/Reveal";
@@ -143,66 +143,83 @@ function History() {
 
 export default function Story() {
   return (
-    <section id="story" className="surface-blue py-14 md:py-20">
-      {/* ---------- CHAIRMAN ---------- */}
-      <Container>
-        <div className="grid grid-cols-1 items-center gap-8 md:grid-cols-[minmax(0,240px)_1fr] md:gap-12">
-          {hasMedia(aboutMedia.ceoPortrait) && (
-            <Reveal as="right" className="mx-auto w-full max-w-[210px] md:mx-0 md:max-w-none">
-              <div className="relative">
-                <img
-                  src={aboutMedia.ceoPortrait}
-                  alt={`${company.founder}, ${company.founderTitle}`}
-                  loading="lazy"
-                  className="aspect-[4/5] w-full object-cover"
-                />
-                <span
-                  aria-hidden="true"
-                  className="pointer-events-none absolute -bottom-3 -right-3 h-full w-full border-2 border-green"
-                />
-              </div>
-            </Reveal>
-          )}
+    <>
+      <section id="story" className="surface-light py-14 md:py-20">
+        {/* ---------- CHAIRMAN ----------
+           The artwork already carries its own blue ground, green frame
+           and quote mark, so it is shown whole and the page around it
+           stays quiet. Nothing overlaps or crops it. */}
+        <Container>
+          <Reveal as="up" className="max-w-2xl">
+            <p className="eyebrow mb-3">Leadership</p>
+            <h2 className="section-title-dark text-balance">A message from our CEO</h2>
+          </Reveal>
 
-          <div>
-            <Reveal as="up">
-              <Quote className="h-7 w-7 text-green" strokeWidth={1.75} aria-hidden="true" />
-              <blockquote className="mt-4 text-balance text-[1.1rem] font-medium leading-[1.6] text-white md:text-[1.3rem]">
-                {ceoMessage.quote}
-              </blockquote>
-            </Reveal>
+          <div className="mt-9 grid grid-cols-1 items-center gap-8 md:mt-12 md:grid-cols-[minmax(0,300px)_1fr] md:gap-12 lg:grid-cols-[minmax(0,340px)_1fr] lg:gap-16">
+            {hasMedia(aboutMedia.ceoPortrait) && (
+              <Reveal as="right" className="mx-auto w-full max-w-[300px] md:mx-0 md:max-w-none">
+                {/* blue square sits behind the artwork, offset down-left, so
+                  the portrait reads as lifted off the page. Offsets scale
+                  with the breakpoint so it never crowds on small screens. */}
+                <div className="relative overflow-hidden">
+                  <span
+                    aria-hidden="true"
+                    className="absolute -bottom-3 -left-3 h-full w-full bg-blue md:-bottom-4 md:-left-4"
+                  />
+                  <span
+                    aria-hidden="true"
+                    className="absolute -bottom-3 -left-3 h-full w-full border-2 border-green md:-bottom-4 md:-left-4"
+                  />
+                  <img
+                    src={aboutMedia.ceoPortrait}
+                    alt={`${company.founder}, ${company.founderTitle}`}
+                    loading="lazy"
+                    className="relative -mb-[3%] block w-full"
+                    />
+                </div>
+              </Reveal>
+            )}
 
-            <Reveal as="up" delay={0.1}>
-              <p className="mt-5 text-[0.82rem] leading-[1.9] text-fg-muted">
-                {ceoMessage.statement}
-              </p>
-            </Reveal>
+            <div>
+              <Reveal as="up">
+                <blockquote className="border-l-2 border-green pl-5 text-balance text-[1.1rem] font-medium leading-[1.55] text-ink md:pl-6 md:text-[1.4rem]">
+                  {ceoMessage.quote}
+                </blockquote>
+              </Reveal>
 
-            <Reveal as="up" delay={0.16}>
-              <div className="mt-6 border-t border-line pt-5">
-                <div>
-                  <p className="text-[0.82rem] font-semibold uppercase tracking-[0.06em] text-white">
+              <Reveal as="up" delay={0.1}>
+                <div className="mt-5 pl-5 md:pl-6">
+                  <p className="text-[0.8rem] font-semibold uppercase tracking-[0.06em] text-blue">
                     {company.founder}
                   </p>
-                  <p className="mt-1 text-[0.75rem] text-fg-muted">{company.founderTitle}</p>
+                  <p className="mt-1 text-[0.72rem] text-body">{company.founderTitle}</p>
                 </div>
-              </div>
-            </Reveal>
+              </Reveal>
+
+              <Reveal as="up" delay={0.16}>
+                <p className="mt-7 border-t border-hairline pt-6 text-[0.82rem] leading-[1.95] text-body">
+                  {ceoMessage.statement}
+                </p>
+              </Reveal>
+            </div>
           </div>
-        </div>
-      </Container>
+        </Container>
 
-      {/* ---------- HISTORY ---------- */}
-      <Container className="mt-14 md:mt-20">
-        <Reveal as="up" className="max-w-2xl">
-          <p className="eyebrow mb-3">Our history</p>
-          <h2 className="section-title text-balance">Two decades of advancement</h2>
-        </Reveal>
+      </section>
 
-        <Reveal as="up" delay={0.08} className="mt-7">
-          <History />
-        </Reveal>
-      </Container>
-    </section>
+      <section className="surface-blue py-14 md:py-20">
+        {/* ---------- HISTORY ---------- */}
+        <Container>
+          <Reveal as="up" className="max-w-2xl">
+            <p className="eyebrow mb-3">Our history</p>
+            <h2 className="section-title text-balance">Two decades of advancement</h2>
+          </Reveal>
+
+          <Reveal as="up" delay={0.08} className="mt-7">
+            <History />
+          </Reveal>
+        </Container>
+      </section>
+    </>
   );
 }
