@@ -31,16 +31,13 @@ export default function Team() {
                                 <article className="group h-full cursor-pointer">
                                     {/* one shared grey ground behind every portrait, so
                       background-removed PNGs all sit on the same card */}
-                                    <div className="relative overflow-hidden bg-page transition-shadow duration-300 group-hover:shadow-[0_16px_34px_-20px_rgba(11,115,181,0.5)]">
+                                    <div className="relative overflow-hidden bg-[linear-gradient(180deg,#9AA3AA_0%,#6B7580_100%)] transition-shadow duration-300 group-hover:shadow-[0_16px_34px_-20px_rgba(11,115,181,0.5)]">
                                         {hasMedia(photo) ? (
                                             <img
                                                 src={photo}
                                                 alt={`${member.name}, ${member.role}`}
                                                 loading="lazy"
-                                                className={clsx(
-                                                    "aspect-[3/4] w-full object-cover object-top transition-all duration-500 ease-out",
-                                                    "md:grayscale md:group-hover:scale-[1.06] md:group-hover:grayscale-0"
-                                                )}
+                                                className="aspect-[3/4] w-full object-cover object-top transition-transform duration-500 ease-out group-hover:scale-[1.06]"
                                             />
                                         ) : (
                                             <div

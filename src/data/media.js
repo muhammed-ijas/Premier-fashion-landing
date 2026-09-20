@@ -22,48 +22,48 @@
    A flat 58% dark overlay sits on top, so mid-tone images with
    space on the left work best — that is where the text sits. */
 export const heroes = {
-    home: "/hero/home.png",
-    about: "/hero/about.png",
-    productsServices: "/hero/products-services.png",
-    services: "",   // "/hero/services.jpg"
-    clients: "/hero/clients.png",
-    careers: "",    // "/hero/careers.jpg"
-    contact: "/hero/contact.png",
+  home: "/hero/home.png",
+  about: "/hero/about.png",
+  productsServices: "/hero/products-services.png",
+  services: "",   // "/hero/services.jpg"
+  clients: "/hero/clients.png",
+  careers: "",    // "/hero/careers.jpg"
+  contact: "/hero/contact.png",
 };
 
 /* ---------- PRODUCT CATEGORIES ----------
    Portrait, 4:5, at least 1000×1250.
    Added as we convert Products.jsx. */
 export const products = {
-    "mens-wear": "/products/mens-wear.png",
-    "womens-wear": "/products/womens-wear.png",
-    "kids-wear": "/products/kids-wear.png",
-    caps: "/products/caps.png",
-    "product-photography": "",
+  "mens-wear": "/products/mens-wear.png",
+  "womens-wear": "/products/womens-wear.png",
+  "kids-wear": "/products/kids-wear.png",
+  caps: "/products/caps.png",
+  "product-photography": "",
 };
 
 /* ---------- SERVICES ----------
    Landscape, 5:4, at least 1200×960.
    Added as we convert Services.jsx. */
 export const services = {
-    "design-development": "",
-    sampling: "",
-    manufacturing: "",
-    "fabric-sourcing": "",
+  "design-development": "",
+  sampling: "",
+  manufacturing: "",
+  "fabric-sourcing": "",
 };
 
 /* ---------- ABOUT / COMPANY ----------
    Added as we convert About.jsx. */
 export const about = {
-    overview: "/about/overview.png",   // facility or head office, 5:4
-      ceoPortrait: "/about/ceo.png",        // desktop cut-out, transparent PNG, full length
-    designStudio: "/about/design-studio.png",
-    chinaSourcing: "/about/china-sourcing.png",
+  overview: "/about/overview.png",   // facility or head office, 5:4
+  ceoPortrait: "/about/ceo.png",        // desktop cut-out, transparent PNG, full length
+  designStudio: "/about/design-studio.png",
+  chinaSourcing: "/about/china-sourcing.png",
 };
 
 /* ---------- CAREERS ---------- */
 export const careers = {
-    lifeAtPfg: "",     // 5:4
+  lifeAtPfg: "",     // 5:4
 };
 
 /* ---------- CLIENT LOGOS ----------
@@ -75,36 +75,36 @@ export const careers = {
    Replace each "Client" with the real brand name once known — it becomes
    the alt text and what buyers and search engines actually read. */
 export const clientLogos = [
-    { name: "Client", logo: "/clients/client-01.png" },
-    { name: "Client", logo: "/clients/client-02.png" },
-    { name: "Client", logo: "/clients/client-03.jpg" },
-    { name: "Client", logo: "/clients/client-04.png" },
-    { name: "Client", logo: "/clients/client-05.png" },
-    { name: "Client", logo: "/clients/client-06.png" },
-    { name: "Client", logo: "/clients/client-07.png" },
-    { name: "Client", logo: "/clients/client-08.png" },
-    { name: "Client", logo: "/clients/client-09.png" },
-    { name: "Client", logo: "/clients/client-10.png" },
-    { name: "Client", logo: "/clients/client-11.jpg" },
-    { name: "Client", logo: "/clients/client-12.png" },
-    { name: "Client", logo: "/clients/client-13.png" },
-    { name: "Client", logo: "/clients/client-14.png" },
-    { name: "Client", logo: "/clients/client-15.jpg" },
-    { name: "Client", logo: "/clients/client-16.png" },
-    { name: "Client", logo: "/clients/client-17.jpg" },
-    { name: "Client", logo: "/clients/client-18.png" },
-    { name: "Client", logo: "/clients/client-19.jpg" },
-    { name: "Client", logo: "/clients/client-20.jpg" },
-    { name: "Client", logo: "/clients/client-21.png" },
-    { name: "Client", logo: "/clients/client-22.jpg" },
-    { name: "Client", logo: "/clients/client-23.png" },
-    { name: "Client", logo: "/clients/client-24.png" },
-    { name: "Client", logo: "/clients/client-25.jpg" },
-    { name: "Client", logo: "/clients/client-26.jpg" },
-    { name: "Client", logo: "/clients/client-27.png" },
-    { name: "Client", logo: "/clients/client-28.jpg" },
-    { name: "Client", logo: "/clients/client-29.jpg" },
-    { name: "Client", logo: "/clients/client-30.jpg" },
+  { name: "Client", logo: "/clients/client-01.png" },
+  { name: "Client", logo: "/clients/client-02.png" },
+  { name: "Client", logo: "/clients/client-03.jpg" },
+  { name: "Client", logo: "/clients/client-04.png" },
+  { name: "Client", logo: "/clients/client-05.png" },
+  { name: "Client", logo: "/clients/client-06.png" },
+  { name: "Client", logo: "/clients/client-07.png" },
+  { name: "Client", logo: "/clients/client-08.png" },
+  { name: "Client", logo: "/clients/client-09.png" },
+  { name: "Client", logo: "/clients/client-10.png" },
+  { name: "Client", logo: "/clients/client-11.jpg" },
+  { name: "Client", logo: "/clients/client-12.png" },
+  { name: "Client", logo: "/clients/client-13.png" },
+  { name: "Client", logo: "/clients/client-14.png" },
+  { name: "Client", logo: "/clients/client-15.jpg" },
+  { name: "Client", logo: "/clients/client-16.png" },
+  { name: "Client", logo: "/clients/client-17.jpg" },
+  { name: "Client", logo: "/clients/client-18.png" },
+  { name: "Client", logo: "/clients/client-19.jpg" },
+  { name: "Client", logo: "/clients/client-20.jpg" },
+  { name: "Client", logo: "/clients/client-21.png" },
+  { name: "Client", logo: "/clients/client-22.jpg" },
+  { name: "Client", logo: "/clients/client-23.png" },
+  { name: "Client", logo: "/clients/client-24.png" },
+  { name: "Client", logo: "/clients/client-25.jpg" },
+  { name: "Client", logo: "/clients/client-26.jpg" },
+  { name: "Client", logo: "/clients/client-27.png" },
+  { name: "Client", logo: "/clients/client-28.jpg" },
+  { name: "Client", logo: "/clients/client-29.jpg" },
+  { name: "Client", logo: "/clients/client-30.jpg" },
 ];
 
 /* ---------- HELPER ----------
@@ -134,12 +134,12 @@ export const hasMedia = (path) => typeof path === "string" && path.length > 0;
    Files in public/brands/. Update the names as confirmed —
    they become the alt text. */
 export const brands = [
-    { name: "Lexi Morgan", logo: "/brands/brand-01.png" },
-    { name: "Brand partner", logo: "/brands/brand-02.png" },
-    { name: "Qube", logo: "/brands/brand-03.png" },
-    { name: "Premier Sport", logo: "/brands/brand-04.png" },
-    { name: "Premier Life", logo: "/brands/brand-05.png" },
-    { name: "Brand partner", logo: "/brands/brand-06.png" },
+  { name: "Lexi Morgan", logo: "/brands/brand-01.png" },
+  { name: "Brand partner", logo: "/brands/brand-02.png" },
+  { name: "Qube", logo: "/brands/brand-03.png" },
+  { name: "Premier Sport", logo: "/brands/brand-04.png" },
+  { name: "Premier Life", logo: "/brands/brand-05.png" },
+  { name: "Brand partner", logo: "/brands/brand-06.png" },
 ];
 
 /* ---------- CATEGORY TILES ----------
@@ -156,9 +156,9 @@ export const categoryImages = {
 };
 
 export const teamPhotos = {
-  jamaluddin: "/about/ceo.png",
-  "farhan-raza": "/team/raza-farhan.png",
-  "abdul-ahad": "/team/abdul-ahad.png",
+  jamaluddin: "/team/jamaluddin.png",
+  "farhan-raza": "/team/raza-farhan.webp",
+  "abdul-ahad": "/team/abdul-ahad.webp",
   "chu-dao-linh-suong": "/team/chu-dao-linh-suong.png",
   "kadiravelu-saravana-kumar": "/team/kadiravelu-saravana-kumar.png",
   "ketan-patel": "/team/ketan-patel.png",
