@@ -1,25 +1,14 @@
-const TILE_URL = "https://tiles.stadiamaps.com/tiles/stamen_toner_lite/{z}/{x}/{y}{r}.png";import { useMemo, useState } from "react";
+import { useMemo, useState } from "react";
 import { MapContainer, TileLayer, CircleMarker, Tooltip, useMap } from "react-leaflet";
 import { Globe } from "lucide-react";
 import clsx from "clsx";
 import "leaflet/dist/leaflet.css";
 import { offices } from "../data/company";
 
-/**
- * Real map tiles via Leaflet, so it pans, zooms and reads like a map
- * rather than an illustration. Markers are plain circles — no image
- * pins — which avoids Leaflet's default icon-path problem in Vite.
- *
- * NOTE ON TILES: CARTO's basemap renders the India–Pakistan and
- * India–China boundaries as disputed. If the site must show the
- * Indian view of Jammu & Kashmir, swap TILE_URL for a provider with
- * an Indian worldview, or go back to the SVG map, which was built
- * from Natural Earth's Indian-worldview boundaries.
- */
+const TILE_URL = "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png";
 const TILE_ATTRIBUTION =
-  '&copy; <a href="https://stadiamaps.com/">Stadia Maps</a> &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors';
+  '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors';
 
-// Office coordinates, latitude then longitude.
 const COORDS = {
   vietnam: [10.82, 106.63],
   china: [30.0, 120.58],
@@ -36,16 +25,13 @@ const COORDS = {
 const WORLD_CENTER = [22, 30];
 const WORLD_ZOOM = 1;
 
-/** Flies the map to whichever office is selected. */
 function MapController({ target }) {
   const map = useMap();
-
   if (target) {
     map.flyTo(COORDS[target], 4, { duration: 1.1 });
   } else {
     map.flyTo(WORLD_CENTER, WORLD_ZOOM, { duration: 1.1 });
   }
-
   return null;
 }
 
@@ -59,7 +45,6 @@ export default function WorldMap() {
 
   return (
     <div className="grid grid-cols-1 gap-5 md:grid-cols-[minmax(0,300px)_1fr] md:gap-7">
-      {/* ---- location list ---- */}
       <div className="order-2 self-start border border-line bg-white md:order-1">
         <div className="flex items-center justify-between border-b border-line px-4 py-3">
           <p className="text-[0.66rem] font-semibold uppercase tracking-[0.12em] text-fg-subtle">
@@ -115,7 +100,6 @@ export default function WorldMap() {
         </ul>
       </div>
 
-      {/* ---- map ---- */}
       <div className="order-1 md:order-2">
         <div className="overflow-hidden border border-line">
           <MapContainer
@@ -128,9 +112,8 @@ export default function WorldMap() {
             attributionControl={false}
             className="h-[300px] w-full md:h-[420px]"
           >
-            <TileLayer url={TILE_URL} />
+            <TileLayer url={TILE_URL} attribution={TILE_ATTRIBUTION} />
             <MapController target={activeSlug} />
-
             {points.map((office) => {
               const isActive = office.slug === activeSlug;
               return (
@@ -148,8 +131,6 @@ export default function WorldMap() {
                     click: () => setActiveSlug(isActive ? null : office.slug),
                   }}
                 >
-                  {/* permanent label, so every office reads as a name
-                      rather than an anonymous dot */}
                   <Tooltip
                     permanent
                     direction="right"
