@@ -115,7 +115,7 @@ export default function Navbar() {
         </ul>
 
         <div className="hidden lg:block">
-          <Button to="#contact" variant="green">Get in touch</Button>
+               <Button to="#contact" variant="green">Contact Us</Button>
         </div>
 
         <button
@@ -168,7 +168,7 @@ export default function Navbar() {
                 onClick={(e) => goToSection(e, "#contact")}
                 className="btn btn-green w-full"
               >
-                Get in touch
+                Contact Us
               </a>
             </div>
           </motion.div>

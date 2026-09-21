@@ -1,13 +1,8 @@
 import { useState, useRef, useEffect } from "react";
-import { Globe } from "lucide-react";
+import { Globe, MapPin, Phone, Mail } from "lucide-react";
 import clsx from "clsx";
 import { offices } from "../data/company";
-import {
-  BASE_PATH,
-  countryShapes,
-  countryLabels,
-  WORLD_VIEWBOX,
-} from "../data/worldMap";
+import { BASE_PATH, countryShapes, countryLabels } from "../data/worldMap";
 
 // ─── zoom boxes [x, y, w, h] ─────────────────────────────────────────────────
 const ZOOM_BOXES = {
@@ -71,13 +66,57 @@ function useAnimatedViewBox(slug) {
   return cur.join(" ");
 }
 
+// ─── office details panel — empty fields render nothing ──────────────────────
+function OfficeDetails({ office }) {
+  const rows = [
+    { icon: MapPin, value: office.address },
+    { icon: Phone,  value: office.phone },
+    { icon: Mail,   value: office.email, href: office.email && `mailto:${office.email}` },
+  ].filter((r) => r.value);
+
+  return (
+    <div className="border border-line bg-white px-5 py-4">
+      <p className="text-[0.62rem] font-semibold uppercase tracking-[0.12em] text-green">
+        {office.label}
+      </p>
+      <p className="mt-1 text-[0.85rem] font-semibold uppercase tracking-[0.04em] text-ink">
+        {office.country}
+        {office.city && (
+          <span className="font-normal normal-case text-fg-muted"> — {office.city}</span>
+        )}
+      </p>
+      {office.entity && (
+        <p className="mt-1 text-[0.74rem] text-fg-muted">{office.entity}</p>
+      )}
+      {office.function && (
+        <p className="mt-2 text-[0.74rem] leading-[1.7] text-fg-muted">{office.function}</p>
+      )}
+
+      {rows.length > 0 && (
+        <ul className="mt-3 space-y-1.5 border-t border-line pt-3">
+          {rows.map(({ icon: Icon, value, href }) => (
+            <li key={value} className="flex items-start gap-2 text-[0.74rem] leading-[1.6] text-fg-muted">
+              <Icon size={13} strokeWidth={2} className="mt-[3px] shrink-0 text-blue" />
+              {href ? (
+                <a href={href} className="transition-colors hover:text-blue">{value}</a>
+              ) : (
+                <span>{value}</span>
+              )}
+            </li>
+          ))}
+        </ul>
+      )}
+    </div>
+  );
+}
+
 // ─── component ────────────────────────────────────────────────────────────────
 export default function WorldMap() {
   const [activeSlug, setActiveSlug] = useState(null);
   const animatedVB = useAnimatedViewBox(activeSlug);
 
   const points = offices.filter((o) => countryLabels[o.slug]);
-  const active  = points.find((p) => p.slug === activeSlug) ?? null;
+  const active = points.find((p) => p.slug === activeSlug) ?? null;
 
   return (
     <div className="grid grid-cols-1 gap-5 md:grid-cols-[minmax(0,300px)_1fr] md:gap-7">
@@ -110,7 +149,7 @@ export default function WorldMap() {
                   onClick={() => setActiveSlug(isActive ? null : office.slug)}
                   aria-pressed={isActive}
                   className={clsx(
-                    "flex h-full w-full cursor-pointer items-center gap-2.5 border-l-2 px-3 py-2.5 text-left transition-colors duration-200",
+                    "flex h-full w-full cursor-pointer items-start gap-2.5 border-l-2 px-3 py-2.5 text-left transition-colors duration-200",
                     isActive
                       ? "border-l-green bg-page"
                       : "border-l-transparent hover:border-l-line-strong hover:bg-page"
@@ -119,7 +158,7 @@ export default function WorldMap() {
                   <span
                     aria-hidden="true"
                     className={clsx(
-                      "h-1.5 w-1.5 shrink-0 rounded-full transition-colors duration-200",
+                      "mt-[5px] h-1.5 w-1.5 shrink-0 rounded-full transition-colors duration-200",
                       isActive ? "bg-green" : "bg-blue"
                     )}
                   />
@@ -127,9 +166,21 @@ export default function WorldMap() {
                     <span className="block truncate text-[0.72rem] font-semibold uppercase tracking-[0.03em] text-ink">
                       {office.country}
                     </span>
-                    <span className="block truncate text-[0.62rem] text-fg-subtle">
-                      {office.city || office.function}
-                    </span>
+                    {office.city && (
+                      <span className="block truncate text-[0.62rem] text-fg-subtle">
+                        {office.city}
+                      </span>
+                    )}
+                    {office.label && (
+                      <span
+                        className={clsx(
+                          "mt-0.5 block truncate text-[0.58rem] font-medium uppercase tracking-[0.06em]",
+                          isActive ? "text-green" : "text-blue"
+                        )}
+                      >
+                        {office.label}
+                      </span>
+                    )}
                   </span>
                 </button>
               </li>
@@ -140,7 +191,7 @@ export default function WorldMap() {
 
       {/* ── map ────────────────────────────────────────────────────────────── */}
       <div className="order-1 md:order-2">
-        <div className="border border-line overflow-hidden bg-[#EEF3F6]">
+        <div className="overflow-hidden border border-line bg-[#EEF3F6]">
           <div style={{ position: "relative", paddingBottom: "42.5%", width: "100%" }}>
             <svg
               viewBox={animatedVB}
@@ -170,7 +221,7 @@ export default function WorldMap() {
                 );
               })}
 
-              {/* country name labels — no dots */}
+              {/* country names — on phones only the selected country's name shows */}
               {points.map((office) => {
                 const lbl      = countryLabels[office.slug];
                 const nudge    = LABEL_NUDGE[office.slug] ?? { dx: 0, dy: 4, anchor: "middle" };
@@ -193,6 +244,7 @@ export default function WorldMap() {
                     paintOrder="stroke"
                     opacity={dimmed ? 0.25 : 1}
                     onClick={() => setActiveSlug(isActive ? null : office.slug)}
+                    className={isActive ? "" : "hidden md:block"}
                     style={{
                       userSelect: "none",
                       textTransform: "uppercase",
@@ -219,14 +271,13 @@ export default function WorldMap() {
           </a>
         </p>
 
-        <div className="mt-2 flex min-h-[2.5rem] items-start justify-center px-4 text-center">
+        {/* selected office details */}
+        <div className="mt-3">
           {active ? (
-            <p className="text-[0.8rem] font-semibold uppercase tracking-[0.05em] text-ink">
-              {active.country}
-            </p>
+            <OfficeDetails office={active} />
           ) : (
-            <p className="text-[0.74rem] text-fg-subtle">
-              Select a location to zoom in
+            <p className="py-2 text-center text-[0.74rem] text-fg-subtle">
+              Select a location to view office details
             </p>
           )}
         </div>

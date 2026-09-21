@@ -28,15 +28,15 @@ export const about = {
 
 export const highlights = [
   {
-    title: "One-stop solution",
+    title: "One-Stop Solution",
     body: "Everything made under one roof, saving you the time, cost and effort of managing multiple suppliers.",
   },
   {
-    title: "We make it easy",
+    title: "We Make It Easy",
     body: "Share your vision and we will bring it to life, so you can focus on building your brand.",
   },
   {
-    title: "Guaranteed quality",
+    title: "Guaranteed Quality",
     body: "All factories operate under buyer protocol and compliance, with valid certification.",
   },
 ];
@@ -44,9 +44,9 @@ export const highlights = [
 /* ---------------- GROUP FIGURES ---------------- */
 
 export const groupStats = [
-  { value: "US$ 85M", label: "Group turnover", note: "FY 2024-25" },
-  { value: "12M", label: "Garments annually" },
-  { value: "45", label: "Sewing lines in Vietnam" },
+  { value: "US$ 85M", label: "Group Turnover", note: "FY 2024-25" },
+  { value: "12M", label: "Garments Annually" },
+  { value: "45", label: "Sewing Lines in Vietnam" },
   { value: "3,500", label: "Workers" },
 ];
 
@@ -80,9 +80,9 @@ export const production = {
   volumeNote: "Approximate, per year",
   // Brochure page 9.
   leadTimes: [
-    { days: "70", basis: "Vertical denim fabric" },
-    { days: "90", basis: "Local fabric" },
-    { days: "120", basis: "Imported fabric" },
+    { days: "70", basis: "Vertical Denim Fabric" },
+    { days: "90", basis: "Local Fabric" },
+    { days: "120", basis: "Imported Fabric" },
   ],
   // Export markets by share — brochure page 10.
   markets: [
@@ -98,30 +98,30 @@ export const production = {
 export const products = [
   { slug: "mens-wear", name: "Men's Wear" },
   { slug: "womens-wear", name: "Women's Wear" },
-  { slug: "kids-wear", name: "Kid's Wear" },
+  { slug: "kids-wear", name: "Kids' Wear" },
   { slug: "caps", name: "Caps" },
 ];
 
 // Product types produced across the network — brochure page 3.
 export const productTypes = [
-  "Woven soft separates",
-  "Cut & sew knits",
-  "Active knits and woven",
-  "Woven bottoms",
+  "Woven Soft Separates",
+  "Cut & Sew Knits",
+  "Active Knits and Woven",
+  "Woven Bottoms",
   "Denim",
-  "Seam sealing",
+  "Seam Sealing",
 ];
 
 export const categories = [
-  { slug: "mens-active-sports",      name: "Men's Active & Sports Wear" },
-  { slug: "mens-golf",               name: "Men's Golf"                  },
-  { slug: "womens-active",           name: "Women's Active Wear"         },
-  { slug: "womens-fashion",          name: "Women's Fashion Collection"  },
-  { slug: "school-uniforms",         name: "School Uniforms"             },
-  { slug: "office-uniforms",         name: "Office Uniforms"             },
-  { slug: "medical-scrubs",          name: "Medical Scrubs"              },
-  { slug: "work-wear-safety",        name: "Work Wear & Safety"          },
-  { slug: "bags",                    name: "Bags"                        },
+  { slug: "mens-active-sports", name: "Men's Active & Sports Wear" },
+  { slug: "mens-golf", name: "Men's Golf" },
+  { slug: "womens-active", name: "Women's Active Wear" },
+  { slug: "womens-fashion", name: "Women's Fashion Collection" },
+  { slug: "school-uniforms", name: "School Uniforms" },
+  { slug: "office-uniforms", name: "Office Uniforms" },
+  { slug: "medical-scrubs", name: "Medical Scrubs" },
+  { slug: "work-wear-safety", name: "Work Wear & Safety" },
+  { slug: "bags", name: "Bags" },
 ];
 
 export const services = [
@@ -157,7 +157,7 @@ export const services = [
     name: "Fabric Sourcing",
     summary:
       "A team of specialists sourcing the right fabric for every product, whether standard or highly specific.",
-    items: ["Knits", "Woven", "Denim", "Lace", "Synthetics", "Core cotton", "Recycled cotton"],
+    items: ["Knits", "Woven", "Denim", "Lace", "Synthetics", "Core Cotton", "Recycled Cotton"],
   },
 ];
 
@@ -241,7 +241,7 @@ export const offices = [
     phone: "",
     email: "",
   },
-    {
+  {
     slug: "bangladesh",
     city: "Dhaka",
     country: "Bangladesh",
@@ -383,15 +383,15 @@ export const team = [
 export const history = [
   { year: "2000", title: "Established", description: "Premier Group established." },
   { year: "2005", title: "Premier Exim Hong Kong", description: "Premier Exim Hong Kong founded." },
-  { year: "2006", title: "Trading office", description: "Pha Re Mi En Ri Company opened in Vietnam — the former name of Premier Fashion Co., Ltd." },
-  { year: "2008", title: "Joint venture", description: "Premier took a 50% share in the Ben Tre factory — Premier Pearl Garment JSC." },
-  { year: "2010", title: "Fabric sourcing office", description: "Premier Exim China Ltd. established in Zhejiang." },
+  { year: "2006", title: "Trading Office", description: "Pha Re Mi En Ri Company opened in Vietnam — the former name of Premier Fashion Co., Ltd." },
+  { year: "2008", title: "Joint Venture", description: "Premier took a 50% share in the Ben Tre factory — Premier Pearl Garment JSC." },
+  { year: "2010", title: "Fabric Sourcing Office", description: "Premier Exim China Ltd. established in Zhejiang." },
   { year: "2011", title: "Head office", description: "Premier Fashion Co., Ltd established in Vietnam as the company base." },
   { year: "2012", title: "Investment", description: "Co-founded a Bangladesh factory with a 50% investment." },
-  { year: "2013", title: "Marketing office", description: "Established a marketing office in South Africa — Premier Fashion (SA) PVT Ltd." },
+  { year: "2013", title: "Marketing Office", description: "Established a marketing office in South Africa — Premier Fashion (SA) PVT Ltd." },
   { year: "2016", title: "Design & marketing office", description: "The Concept Shop opened in New York — Premier Exim USA." },
-  { year: "2021", title: "Design & production base", description: "Premier Creative India expanded our design and production capability." },
-  { year: "2024", title: "USA office expanded", description: "Additional team members onboarded to meet growing buyer requirements." },
+  { year: "2021", title: "Design & Production Base", description: "Premier Creative India expanded our design and production capability." },
+  { year: "2024", title: "USA Office Expanded", description: "Additional team members onboarded to meet growing buyer requirements." },
   { year: "2025", title: "Canada & Dubai", description: "New offices strengthening our global network, marketing and customer service." },
 ];
 
@@ -400,7 +400,7 @@ export const history = [
 export const pillars = [
   { title: "Cost effectiveness", description: "Cost reduction through productivity improvement and technology investment." },
   { title: "Delivery", description: "Strategic planning to ensure on-time delivery." },
-  { title: "Customer service", description: "Excel through efficient and dedicated service." },
+  { title: "Customer Service", description: "Excel through efficient and dedicated service." },
   { title: "Design", description: "Design support to clients from concept to production." },
   { title: "Quality", description: "Continuous quality improvement to reinforce global competition." },
 ];
@@ -419,5 +419,4 @@ export const navigation = [
   { name: "About Us", href: "#about" },
   { name: "Products & Services", href: "#products-services" },
   { name: "Clients", href: "#clients" },
-  { name: "Contact Us", href: "#contact" },
 ]; 

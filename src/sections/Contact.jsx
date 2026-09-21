@@ -2,7 +2,6 @@ import { useState } from "react";
 import { Mail, Phone, MapPin, Send } from "lucide-react";
 import Container from "../components/Container";
 import Reveal from "../components/Reveal";
-import Stagger from "../components/Stagger";
 import SectionHeading from "../components/SectionHeading";
 import Button from "../components/Button";
 import { offices } from "../data/company";
@@ -12,7 +11,6 @@ const FIELD =
 
 export default function Contact() {
   const headOffice = offices.find((o) => o.country === "Vietnam");
-  const otherOffices = offices.filter((o) => o.country !== "Vietnam");
 
   const [values, setValues] = useState({ name: "", company: "", email: "", message: "" });
   const [errors, setErrors] = useState({});
@@ -75,17 +73,6 @@ export default function Contact() {
               </div>
             )}
           </div>
-
-          <Stagger className="mt-8 grid grid-cols-2 gap-3 border-t border-line pt-6 sm:grid-cols-3">
-            {otherOffices.map((office) => (
-              <Stagger.Item key={office.country} as="up">
-                <p className="text-[0.82rem] font-semibold uppercase tracking-[0.06em] text-ink">
-                  {office.country}
-                </p>
-                <p className="mt-1 text-[0.68rem] leading-snug text-fg-subtle">{office.label}</p>
-              </Stagger.Item>
-            ))}
-          </Stagger>
         </Reveal>
 
         <Reveal as="up" delay={0.1}>

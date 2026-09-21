@@ -84,7 +84,6 @@ export default function Footer() {
       <div className="border-t border-line">
         <Container className="flex flex-col items-center justify-between gap-2 py-5 text-[0.8rem] text-fg-subtle md:flex-row">
           <p>© {year} {company.legalName} All rights reserved.</p>
-          <p>Part of {company.group}</p>
         </Container>
       </div>
     </footer>

@@ -23,7 +23,7 @@ export default function Hero() {
           transition={{ duration: 0.6, ease: EASE }}
           className="eyebrow mb-6"
         >
-          Established {company.founded} · {company.group}
+          {company.legalName}
         </motion.div>
 
         <motion.h1
