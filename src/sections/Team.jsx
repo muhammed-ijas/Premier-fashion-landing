@@ -18,16 +18,16 @@ export default function Team() {
 
                 {/* A plain grid, left aligned. Items fill from the left so a short
             final row sits under the others rather than floating centred. */}
-                <Stagger className="mt-10 flex flex-wrap justify-center gap-3">
-                    {team.map((member) => {
+                            <Stagger className="mt-10 flex flex-wrap justify-center gap-3">
+                                    {team.map((member) => {
                         const photo = teamPhotos[member.slug];
 
                         return (
                             <Stagger.Item
                                 key={member.slug}
                                 as="up"
-                                className="w-[calc(33.333%-0.5rem)] sm:w-[calc(25%-0.563rem)] md:w-[calc(20%-0.6rem)] lg:w-[calc(16.666%-0.625rem)]"
-                            >
+                                className="w-[calc(50%-0.375rem)] sm:w-[calc(25%-0.563rem)] md:w-[calc(20%-0.6rem)] lg:w-[calc(16.666%-0.625rem)]"
+                                                            >
                                 <article className="group h-full cursor-pointer">
                                     {/* one shared grey ground behind every portrait, so
                       background-removed PNGs all sit on the same card */}

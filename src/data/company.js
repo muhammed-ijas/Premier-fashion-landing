@@ -364,7 +364,7 @@ export const ceoMessage = {
 
 export const team = [
   // Country always in brackets, spelled out in full, never abbreviated.
-  { slug: "jamaluddin", name: "Mohammad Jamaluddin", role: "Chairman & CEO" },
+
   { slug: "farhan-raza", name: "Farhan Raza", role: "Managing Director" },
   { slug: "abdul-ahad", name: "Abdul Ahad", role: "Managing Director (China & Hong Kong)" },
   { slug: "chu-dao-linh-suong", name: "Chu Đào Linh Sương", role: "Director (Vietnam)" },
