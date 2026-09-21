@@ -9,7 +9,7 @@ export default function Clients() {
   return (
     <section id="clients" className="surface-light pb-14 pt-8 md:py-20">
       <Container>
-             <SectionHeading
+        <SectionHeading
           kicker="Clients"
           title="Trusted by international retail brands"
         />
@@ -23,7 +23,7 @@ export default function Clients() {
               <Stagger.Item
                 key={client.logo}
                 as="scale"
-                className="w-[calc(25%-0.375rem)] md:w-[calc(20%-0.4rem)] lg:w-[calc(16.666%-0.417rem)]"
+                className="w-[calc(33.333%-0.334rem)] md:w-[calc(20%-0.4rem)] lg:w-[calc(16.666%-0.417rem)]"
               >
                 <div className="group relative h-full w-full overflow-hidden border border-line bg-white transition-all duration-300 hover:-translate-y-1 hover:border-green hover:shadow-[0_14px_30px_-20px_rgba(11,115,181,0.45)]">
                   <div className="pt-[60%]" aria-hidden="true" />
@@ -85,9 +85,7 @@ export default function Clients() {
         <SectionHeading
           kicker="Worldwide reach"
           title="Global presence"
-          align="center"
           tone="ink"
-          plainKicker
         />
 
         <Reveal as="fade" delay={0.12} className="mx-auto mt-8 max-w-5xl">

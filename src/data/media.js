@@ -86,7 +86,6 @@ export const clientLogos = [
   { name: "Client", logo: "/pptclients/pptclient (9).png" },
   { name: "Client", logo: "/pptclients/pptclient (10).png" },
   { name: "Client", logo: "/pptclients/pptclient (11).png" },
-  { name: "Client", logo: "/pptclients/pptclient (12).png" },
   { name: "Client", logo: "/pptclients/pptclient (13).png" },
   { name: "Client", logo: "/pptclients/pptclient (14).png" },
   { name: "Client", logo: "/pptclients/pptclient (15).png" },
