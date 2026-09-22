@@ -215,7 +215,7 @@ export default function WorldMap() {
                 const nudge    = LABEL_NUDGE[office.slug] ?? { dx: 0, dy: 4, anchor: "middle" };
                 const isActive = office.slug === activeSlug;
                 const dimmed   = active && !isActive;
-                if (!lbl) return null;
+                              if (!lbl || !isActive) return null;
 
                 return (
                   <text
