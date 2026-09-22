@@ -22,7 +22,7 @@ function History() {
            The slot is a fixed height, so opening a year swaps the text
            without moving anything on the page. */}
       <div className="hidden md:block">
-        <div className="flex flex-wrap items-stretch border-b border-line">
+             <div className="flex items-stretch justify-between border-b border-line">
           {history.map((entry) => {
             const isActive = entry.year === openYear;
 
@@ -32,7 +32,7 @@ function History() {
                 type="button"
                 onClick={() => setOpenYear(entry.year)}
                 aria-expanded={isActive}
-                className="group relative cursor-pointer px-4 py-3 first:pl-0"
+                              className="group relative cursor-pointer px-1 py-3 first:pl-0 last:pr-0"
               >
                 <span
                   className={clsx(
@@ -46,8 +46,7 @@ function History() {
                 {/* underline sits on the rule, grows from the centre */}
                 <span
                   aria-hidden="true"
-                  className={clsx(
-                    "absolute inset-x-2 bottom-0 h-[2px] origin-center bg-green transition-transform duration-[400ms] ease-[cubic-bezier(0.16,1,0.3,1)]",
+                  className={clsx(                    "absolute inset-x-0 bottom-0 h-[2px] origin-center bg-green transition-transform duration-[400ms] ease-[cubic-bezier(0.16,1,0.3,1)]",
                     isActive ? "scale-x-100" : "scale-x-0 group-hover:scale-x-50"
                   )}
                 />
