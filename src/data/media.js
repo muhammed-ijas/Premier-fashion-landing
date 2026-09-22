@@ -148,7 +148,7 @@ export const brands = [
 /* ---------- CATEGORY TILES ----------
    Portrait 4:5, at least 800×1000. Files in public/categories/. */
 export const categoryImages = {
-  "mens-active-sports": "/categories/mens-active-sports.png",
+  "mens-active-sports": "/categories/mens-active-sports.jpg",
   "mens-golf":          "/categories/mens-golf.png",
   "womens-active":      "/categories/womens-active.png",
   "womens-fashion":     "/categories/womens-fashion.png",

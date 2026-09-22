@@ -2,7 +2,7 @@ import Container from "../components/Container";
 import Reveal from "../components/Reveal";
 import Stagger from "../components/Stagger";
 import SectionHeading from "../components/SectionHeading";
-import { about, company, highlights, offices, additionalPresence } from "../data/company";
+import { about, company, highlights, offices, additionalPresence, ownDesignShare } from "../data/company";
 import { about as aboutMedia, hasMedia } from "../data/media";
 
 export default function About() {
@@ -11,7 +11,7 @@ export default function About() {
   const stats = [
     { value: company.founded, label: "Founded" },
     { value: locationCount, label: "Locations" },
-    { value: "18+", label: "Years" },
+    { value: "25+", label: "Years" },
   ];
 
   return (

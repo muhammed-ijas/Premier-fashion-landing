@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import Container from "../components/Container";
 import Stagger from "../components/Stagger";
 import SectionHeading from "../components/SectionHeading";
-import { products, services, categories, ownDesignShare } from "../data/company";
+import { products, services, categories } from "../data/company";
 import { products as productMedia, categoryImages, hasMedia } from "../data/media";
 
 function CategoryCard({ cat }) {
@@ -86,17 +86,13 @@ export default function ProductsServices() {
         {/* category mix header */}
         <div className="mt-12 flex flex-col items-start justify-between gap-4 border-t border-line pt-10 md:flex-row md:items-end">
           <div>
-            <p className="eyebrow mb-3">Category mix</p>
-            <h3 className="section-title text-balance">A diverse range</h3>
-          </div>
-          <div className="shrink-0">
-            <p className="text-2xl font-bold leading-none text-green md:text-3xl">
-              {ownDesignShare}
-            </p>
-            <p className="mt-1.5 max-w-[15rem] text-[0.75rem] leading-[1.7] text-fg-muted">
-              of turnover is business booked on Premier&rsquo;s own design.
+            <p className="eyebrow mb-3">Collections</p>
+            <h3 className="section-title text-balance">Explore our collections</h3>
+            <p className="mt-3 max-w-lg text-[0.82rem] leading-[1.8] text-fg-muted">
+              From active and golf wear to uniforms, scrubs, safety wear and bags. Select a collection to view the range.
             </p>
           </div>
+     
         </div>
 
         {/* Mobile — 3 cols, 9 items = exactly 3 clean rows */}

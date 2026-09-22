@@ -19,7 +19,7 @@ export const company = {
 
 export const about = {
   intro:
-    "Premier Fashion Co., Ltd. is now a part of Premier Group, established in 2005 with garment manufacturing facilities in Vietnam. It was founded by Mr. Mohammad Jamaluddin, the CEO of the company.",
+       "Premier Fashion Co., Ltd. is part of Premier Group, established in 2000. Founded by Mr. Mohammad Jamaluddin, the company operates garment manufacturing facilities in Vietnam.",
   today:
     "Today we are a one-stop shop for apparel exports — Men's, Women's and Kids' wear — produced across our facilities in Vietnam, Cambodia, China, India, Pakistan, Bangladesh and Nepal.",
   reach:
