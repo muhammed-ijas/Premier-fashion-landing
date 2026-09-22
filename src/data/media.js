@@ -74,41 +74,62 @@ export const careers = {
 /* ---------- CLIENT LOGOS ----------
    Replace each "Client" with the real brand name once known — it becomes
    the alt text and what buyers and search engines actually read. */
-export const clientLogos = [
-  { name: "Client", logo: "/pptclients/pptclient (1).png" },
-  { name: "Client", logo: "/pptclients/pptclient (2).png" },
-  { name: "Client", logo: "/pptclients/pptclient (3).png" },
-  { name: "Client", logo: "/pptclients/pptclient (4).png" },
-  { name: "Client", logo: "/pptclients/pptclient (5).png" },
-  { name: "Client", logo: "/pptclients/pptclient (6).png" },
-  { name: "Client", logo: "/pptclients/pptclient (7).png" },
-  { name: "Client", logo: "/pptclients/pptclient (8).png" },
-  { name: "Client", logo: "/pptclients/pptclient (9).png" },
-  { name: "Client", logo: "/pptclients/pptclient (10).png" },
-  { name: "Client", logo: "/pptclients/pptclient (11).png" },
-  { name: "Client", logo: "/pptclients/pptclient (13).png" },
-  { name: "Client", logo: "/pptclients/pptclient (14).png" },
-  { name: "Client", logo: "/pptclients/pptclient (15).png" },
-  { name: "Client", logo: "/pptclients/pptclient (16).png" },
-  { name: "Client", logo: "/pptclients/pptclient (17).png" },
-  { name: "Client", logo: "/pptclients/pptclient (18).png" },
-  { name: "Client", logo: "/pptclients/pptclient (19).png" },
-  { name: "Client", logo: "/pptclients/pptclient (20).png" },
-  { name: "Client", logo: "/pptclients/pptclient (21).png" },
-  { name: "Client", logo: "/pptclients/pptclient (22).png" },
-  { name: "Client", logo: "/pptclients/pptclient (23).png" },
-  { name: "Client", logo: "/pptclients/pptclient (24).png" },
-  { name: "Client", logo: "/pptclients/pptclient (25).png" },
-  { name: "Client", logo: "/pptclients/pptclient (26).png" },
-  { name: "Client", logo: "/pptclients/pptclient (27).png" },
-  { name: "Client", logo: "/pptclients/pptclient (28).png" },
-  { name: "Client", logo: "/pptclients/pptclient (29).png" },
-  { name: "Client", logo: "/pptclients/pptclient (30).png" },
-  { name: "Client", logo: "/pptclients/pptclient (31).png" },
-  { name: "Client", logo: "/pptclients/pptclient (32).png" },
-  { name: "Client", logo: "/pptclients/pptclient (33).png" },
-  { name: "Client", logo: "/pptclients/pptclient (34).png" },
+export const clientGroups = [
+  {
+    slug: "retailers",
+    title: "Key Retailers",
+    logos: [
+      { name: "Client", logo: "/pptclients/pptclient (2).png" },
+      { name: "Client", logo: "/pptclients/pptclient (3).png" },
+      { name: "Client", logo: "/pptclients/pptclient (4).png" },
+      { name: "Client", logo: "/pptclients/pptclient (5).png" },
+      { name: "Client", logo: "/pptclients/pptclient (6).png" },
+      { name: "Client", logo: "/pptclients/pptclient (7).png" },
+      { name: "Client", logo: "/pptclients/pptclient (8).png" },
+      { name: "Client", logo: "/pptclients/pptclient (9).png" },
+      { name: "Client", logo: "/pptclients/pptclient (10).png" },
+      { name: "Client", logo: "/pptclients/pptclient (11).png" },
+      { name: "Client", logo: "/pptclients/pptclient (13).png" },
+      { name: "Client", logo: "/pptclients/pptclient (14).png" },
+      { name: "Client", logo: "/pptclients/pptclient (15).png" },
+    ],
+  },
+  {
+    slug: "buyers",
+    title: "Key Buyers & Brands",
+    logos: [
+      { name: "Client", logo: "/pptclients/pptclient (16).png" },
+      { name: "Client", logo: "/pptclients/pptclient (17).png" },
+      { name: "Client", logo: "/pptclients/pptclient (18).png" },
+      { name: "Client", logo: "/pptclients/pptclient (19).png" },
+      { name: "Client", logo: "/pptclients/pptclient (20).png" },
+      { name: "Client", logo: "/pptclients/pptclient (21).png" },
+      { name: "Client", logo: "/pptclients/pptclient (22).png" },
+      { name: "Client", logo: "/pptclients/pptclient (23).png" },
+      { name: "Client", logo: "/pptclients/pptclient (24).png" },
+      { name: "Client", logo: "/pptclients/pptclient (25).png" },
+      { name: "Client", logo: "/pptclients/pptclient (26).png" },
+      { name: "Client", logo: "/pptclients/pptclient (27).png" },
+    ],
+  },
+  {
+    slug: "partners",
+    title: "Our Factory Partners",
+    logos: [
+      { name: "Client", logo: "/pptclients/pptclient (1).png" },
+      { name: "Client", logo: "/pptclients/pptclient (28).png" },
+      { name: "Client", logo: "/pptclients/pptclient (29).png" },
+      { name: "Client", logo: "/pptclients/pptclient (30).png" },
+      { name: "Client", logo: "/pptclients/pptclient (31).png" },
+      { name: "Client", logo: "/pptclients/pptclient (32).png" },
+      { name: "Client", logo: "/pptclients/pptclient (33).png" },
+      { name: "Client", logo: "/pptclients/pptclient (34).png" },
+    ],
+  },
 ];
+
+// flat list, kept in case anything else still reads it
+export const clientLogos = clientGroups.flatMap((group) => group.logos);
 
 /* ---------- HELPER ----------
    Returns true when a path is actually set, so components can pick
@@ -149,26 +170,26 @@ export const brands = [
    Portrait 4:5, at least 800×1000. Files in public/categories/. */
 export const categoryImages = {
   "mens-active-sports": "/categories/mens-active-sports.jpg",
-  "mens-golf":          "/categories/mens-golf.png",
-  "womens-active":      "/categories/womens-active.png",
-  "womens-fashion":     "/categories/womens-fashion.png",
-  "school-uniforms":    "/categories/school-uniforms.png",
-  "office-uniforms":    "/categories/office-uniforms.png",
-  "medical-scrubs":     "/categories/medical-scrubs.png",
-  "work-wear-safety":   "/categories/work-wear-safety.png",
-  "bags":               "/categories/bags.png",
+  "mens-golf": "/categories/mens-golf.png",
+  "womens-active": "/categories/womens-active.png",
+  "womens-fashion": "/categories/womens-fashion.png",
+  "school-uniforms": "/categories/school-uniforms.png",
+  "office-uniforms": "/categories/office-uniforms.png",
+  "medical-scrubs": "/categories/medical-scrubs.png",
+  "work-wear-safety": "/categories/work-wear-safety.png",
+  "bags": "/categories/bags.png",
 };
 
 export const categoryProducts = {
   "mens-active-sports": [],
-  "mens-golf":          [],
-  "womens-active":      [],
-  "womens-fashion":     [],
-  "school-uniforms":    [],
-  "office-uniforms":    [],
-  "medical-scrubs":     [],
-  "work-wear-safety":   [],
-  "bags":               [],
+  "mens-golf": [],
+  "womens-active": [],
+  "womens-fashion": [],
+  "school-uniforms": [],
+  "office-uniforms": [],
+  "medical-scrubs": [],
+  "work-wear-safety": [],
+  "bags": [],
 };
 
 export const teamPhotos = {

@@ -3,7 +3,26 @@ import Stagger from "../components/Stagger";
 import Reveal from "../components/Reveal";
 import SectionHeading from "../components/SectionHeading";
 import WorldMap from "../components/WorldMap";
-import { clientLogos, brands } from "../data/media";
+import { clientGroups, brands } from "../data/media";
+
+/* 3 per row on phones, 5 on tablets, 6 on laptops; the last row is centred.
+   Every tile is the same box whatever the logo's own proportions. */
+const TILE_WIDTH =
+  "w-[calc(33.333%-0.334rem)] md:w-[calc(20%-0.4rem)] lg:w-[calc(16.666%-0.417rem)]";
+
+function LogoTile({ src, alt }) {
+  return (
+    <div className="group relative h-full w-full overflow-hidden border border-line bg-white transition-all duration-300 hover:-translate-y-1 hover:border-green hover:shadow-[0_14px_30px_-20px_rgba(11,115,181,0.45)]">
+      <div className="pt-[60%]" aria-hidden="true" />
+      <img
+        src={src}
+        alt={alt}
+        loading="lazy"
+        className="absolute inset-0 m-auto max-h-[62%] max-w-[76%] object-contain"
+      />
+    </div>
+  );
+}
 
 export default function Clients() {
   return (
@@ -15,28 +34,26 @@ export default function Clients() {
             title="Trusted by international retail brands"
           />
 
-          {/* Every tile is the same box whatever the logo's own proportions */}
-          {clientLogos.length > 0 && (
-            <Stagger className="mt-10 flex flex-wrap justify-center gap-2">
-              {clientLogos.map((client, i) => (
-                <Stagger.Item
-                  key={client.logo}
-                  as="scale"
-                  className="w-[calc(33.333%-0.334rem)] md:w-[calc(20%-0.4rem)] lg:w-[calc(16.666%-0.417rem)]"
-                >
-                  <div className="group relative h-full w-full overflow-hidden border border-line bg-white transition-all duration-300 hover:-translate-y-1 hover:border-green hover:shadow-[0_14px_30px_-20px_rgba(11,115,181,0.45)]">
-                    <div className="pt-[60%]" aria-hidden="true" />
-                    <img
+          {/* three groups: retailers, buyers & brands, factory partners */}
+          {clientGroups.map((group) => (
+            <div key={group.slug} className="mt-10 md:mt-12">
+              <Reveal as="up" className="mb-5 flex items-center gap-4">
+                <h3 className="card-title shrink-0">{group.title}</h3>
+                <span aria-hidden="true" className="h-px flex-1 bg-line" />
+              </Reveal>
+
+              <Stagger className="flex flex-wrap justify-center gap-2">
+                {group.logos.map((client, i) => (
+                  <Stagger.Item key={client.logo} as="scale" className={TILE_WIDTH}>
+                    <LogoTile
                       src={client.logo}
-                      alt={client.name === "Client" ? `Client ${i + 1}` : client.name}
-                      loading="lazy"
-                      className="absolute inset-0 m-auto max-h-[62%] max-w-[76%] object-contain"
+                      alt={client.name === "Client" ? `${group.title} logo ${i + 1}` : client.name}
                     />
-                  </div>
-                </Stagger.Item>
-              ))}
-            </Stagger>
-          )}
+                  </Stagger.Item>
+                ))}
+              </Stagger>
+            </div>
+          ))}
         </Container>
       </div>
 
@@ -59,18 +76,9 @@ export default function Clients() {
           <Stagger className="mt-8 grid grid-cols-3 gap-2 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6">
             {brands.map((brand, i) => {
               const named = brand.name !== "Brand partner";
-
               return (
                 <Stagger.Item key={brand.logo} as="up" className="h-full">
-                  <div className="group relative h-full w-full overflow-hidden border border-line bg-white transition-all duration-300 hover:-translate-y-1 hover:border-green hover:shadow-[0_14px_30px_-20px_rgba(11,115,181,0.45)]">
-                    <div className="pt-[60%]" aria-hidden="true" />
-                    <img
-                      src={brand.logo}
-                      alt={named ? brand.name : `Brand partner ${i + 1}`}
-                      loading="lazy"
-                      className="absolute inset-0 m-auto max-h-[62%] max-w-[76%] object-contain"
-                    />
-                  </div>
+                  <LogoTile src={brand.logo} alt={named ? brand.name : `Brand partner ${i + 1}`} />
                 </Stagger.Item>
               );
             })}
