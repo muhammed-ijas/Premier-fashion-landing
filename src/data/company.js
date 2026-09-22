@@ -19,7 +19,7 @@ export const company = {
 
 export const about = {
   intro:
-       "Premier Fashion Co., Ltd. is part of Premier Group, established in 2000. Founded by Mr. Mohammad Jamaluddin, the company operates garment manufacturing facilities in Vietnam.",
+    "Premier Fashion Co., Ltd. is part of Premier Group, established in 2000. Founded by Mr. Mohammad Jamaluddin, the company operates garment manufacturing facilities in Vietnam.",
   today:
     "Today we are a one-stop shop for apparel exports — Men's, Women's and Kids' wear — produced across our facilities in Vietnam, Cambodia, China, India, Pakistan, Bangladesh and Nepal.",
   reach:
@@ -44,10 +44,10 @@ export const highlights = [
 /* ---------------- GROUP FIGURES ---------------- */
 
 export const groupStats = [
-  { value: "US$ 85M", label: "Group Turnover", note: "FY 2024-25" },
-  { value: "12M", label: "Garments Annually" },
-  { value: "45", label: "Sewing Lines in Vietnam" },
-  { value: "3,500", label: "Workers" },
+   { value: "US$100M+", label: "Group Turnover" },
+  { value: "12–13M", label: "Garments Annually" },
+  { value: "60", label: "Production Lines" },
+  { value: "4,500+", label: "Workforce" },
 ];
 
 export const ownDesignShare = "30%";
@@ -68,21 +68,27 @@ export const processSteps = [
    Brochure page 9. Category volumes are stated as approximate.   */
 
 export const production = {
+  // Figures confirmed by Grace Nguyen, September 2026.
   statement:
-    "Our capacity across several countries lets us produce high volumes on short lead times, with a wide range of products across categories.",
-  // Annual capacity by category — brochure page 9, stated as approximate.
-  volumes: [
-    { value: "5.5", label: "Active / Sport Wear" },
-    { value: "4.5", label: "Casual Woven / Knitted" },
-    { value: "1.5", label: "Work Wear / Outerwear" },
+    "Our integrated manufacturing platform enables us to deliver high-volume, multi-category garment programs with consistent quality, reliable lead times, and scalable capacity to meet evolving customer requirements.",
+  annualOutput: { value: "12–13M", label: "Garments Annually" },
+  portfolio: [
+    { share: "60%", label: "Activewear & Sportswear" },
+    { share: "40%", label: "Workwear, Casualwear & Lightweight Outerwear" },
   ],
-  volumeUnit: "Million units",
-  volumeNote: "Approximate, per year",
-  // Brochure page 9.
+  portfolioNote: "Multi-category expertise across performance, lifestyle and workwear programs.",
+  scale: [
+    { value: "60", label: "Production Lines" },
+    { value: "4,500+", label: "Direct & Indirect Workforce" },
+  ],
+  turnover: {
+    value: "US$100M+",
+    label: "Business Turnover",
+    note: "Annual turnover across garments, fabrics and own-design products.",
+  },
   leadTimes: [
-    { days: "70", basis: "Vertical Denim Fabric" },
-    { days: "90", basis: "Local Fabric" },
-    { days: "120", basis: "Imported Fabric" },
+    { days: "90", basis: "Repeat Orders & Repeat Colors", note: "" },
+    { days: "120–150", basis: "New Fabric & Color Orders", note: "Including production, import & export lead times." },
   ],
   // Export markets by share — brochure page 10.
   markets: [
@@ -374,7 +380,7 @@ export const team = [
   { slug: "grace-nguyen", name: "Grace Nguyen", role: "General Manager, Product Development" },
   { slug: "prashant-khandalkar", name: "Prashant Khandalkar", role: "Development & Merchandising Manager" },
   { slug: "mari-payes-micheal-pius-angolo", name: "Mari Payes Micheal Pius Angolo", role: "Production & Sourcing Manager (Bangladesh)" },
-  { slug: "sarah", name: "Sarah", role: "Merchandiser & Sourcing Manager (Vietnam)" },
+  { slug: "sarah", name: "Sarah Phan", role: "Merchandiser & Sourcing Manager (Vietnam)" },
 ];
 
 /* ---------------- HISTORY ----------------

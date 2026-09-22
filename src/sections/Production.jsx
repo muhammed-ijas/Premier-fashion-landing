@@ -1,10 +1,10 @@
 import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
-import { Clock, Globe2 } from "lucide-react";
+import { Clock, Globe2, Factory, TrendingUp } from "lucide-react";
 import Container from "../components/Container";
 import Stagger from "../components/Stagger";
 import SectionHeading from "../components/SectionHeading";
-import { production, groupStats } from "../data/company";
+import { production } from "../data/company";
 import { productionImage, hasMedia } from "../data/media";
 import { EASE } from "../lib/motion";
 
@@ -36,44 +36,82 @@ function MarketBars() {
   );
 }
 
+function Label({ icon: Icon, children }) {
+  return (
+    <p className="mb-3 flex items-center gap-2 text-[0.65rem] font-semibold uppercase tracking-[0.12em] text-fg-subtle">
+      {Icon && <Icon size={13} strokeWidth={2.2} className="text-green" />}
+      {children}
+    </p>
+  );
+}
+
 export default function Production() {
-  const turnover = groupStats.find((s) => s.label === "Group Turnover");
+  const { annualOutput, portfolio, portfolioNote, scale, turnover } = production;
 
   return (
     <section id="production" className="surface-light py-16 md:py-20">
       <Container>
         <SectionHeading
           kicker="Production"
-          title="Vast capacity, short lead times"
+          title="Scalable capacity, reliable lead times"
           lede={production.statement}
         />
 
-        {/* items-stretch keeps both columns' bottom edges aligned */}
         <div className="mt-10 grid grid-cols-1 items-stretch gap-6 lg:grid-cols-[1.15fr_1fr] lg:gap-8">
 
-          {/* ── left: capacity figures + image ── */}
-          <div className="flex flex-col">
-            <Stagger className="grid grid-cols-3 gap-px border border-line bg-line">
-              {production.volumes.map((volume) => (
-                <Stagger.Item key={volume.label} as="up" className="bg-white px-4 py-6 md:px-6">
-                  <p className="text-2xl font-bold leading-none text-blue md:text-3xl">
-                    {volume.value}
-                    <span className="ml-1 align-top text-[0.6rem] font-semibold uppercase tracking-[0.08em] text-fg-subtle">
-                      M
-                    </span>
-                  </p>
-                  <p className="mt-3 text-[0.66rem] font-semibold uppercase leading-snug tracking-[0.05em] text-ink md:text-[0.72rem]">
-                    {volume.label}
-                  </p>
-                </Stagger.Item>
-              ))}
+          {/* ── left: figures + image ── */}
+          <div className="flex flex-col gap-6">
+
+            {/* annual output + product portfolio */}
+            <Stagger className="grid grid-cols-1 gap-px border border-line bg-line sm:grid-cols-[0.9fr_1.4fr]">
+              <Stagger.Item as="up" className="flex flex-col justify-center bg-white px-5 py-6 md:px-6">
+                <p className="text-3xl font-bold leading-none text-blue md:text-4xl">
+                  {annualOutput.value}
+                </p>
+                <p className="mt-3 text-[0.68rem] font-semibold uppercase tracking-[0.08em] text-ink">
+                  {annualOutput.label}
+                </p>
+              </Stagger.Item>
+
+              <Stagger.Item as="up" className="bg-white px-5 py-6 md:px-6">
+                <Label>Product portfolio</Label>
+                <div className="grid grid-cols-2 gap-4">
+                  {portfolio.map((item) => (
+                    <div key={item.label}>
+                      <p className="text-2xl font-bold leading-none text-blue md:text-3xl">{item.share}</p>
+                      <p className="mt-2 text-[0.72rem] leading-snug text-fg-muted">{item.label}</p>
+                    </div>
+                  ))}
+                </div>
+                <p className="mt-4 border-t border-line pt-3 text-[0.7rem] leading-[1.6] text-fg-subtle">
+                  {portfolioNote}
+                </p>
+              </Stagger.Item>
             </Stagger>
 
-            <p className="mt-3 text-[0.68rem] text-fg-subtle">
-              {production.volumeUnit} — {production.volumeNote.toLowerCase()}
-            </p>
+            {/* manufacturing scale + turnover */}
+            <Stagger className="grid grid-cols-1 gap-px border border-line bg-line sm:grid-cols-2">
+              <Stagger.Item as="up" className="bg-white px-5 py-6 md:px-6">
+                <Label icon={Factory}>Manufacturing scale</Label>
+                <div className="grid grid-cols-2 gap-4">
+                  {scale.map((item) => (
+                    <div key={item.label}>
+                      <p className="text-2xl font-bold leading-none text-blue">{item.value}</p>
+                      <p className="mt-2 text-[0.72rem] leading-snug text-fg-muted">{item.label}</p>
+                    </div>
+                  ))}
+                </div>
+              </Stagger.Item>
 
-            <div className="relative mt-6 min-h-[240px] flex-1 md:min-h-[280px]">
+              <Stagger.Item as="up" className="bg-white px-5 py-6 md:px-6">
+                <Label icon={TrendingUp}>{turnover.label}</Label>
+                <p className="text-2xl font-bold leading-none text-blue">{turnover.value}</p>
+                <p className="mt-2 text-[0.72rem] leading-[1.6] text-fg-muted">{turnover.note}</p>
+              </Stagger.Item>
+            </Stagger>
+
+            {/* image fills the remaining height */}
+            <div className="relative min-h-[220px] flex-1 md:min-h-[260px]">
               {hasMedia(productionImage) ? (
                 <img
                   src={productionImage}
@@ -86,52 +124,40 @@ export default function Production() {
                   Production image
                 </div>
               )}
-
-              {turnover && (
-                <div className="absolute bottom-0 left-0 bg-blue px-5 py-4 md:px-6">
-                  <p className="text-[0.58rem] font-semibold uppercase tracking-[0.12em] text-white/70">
-                    {turnover.label} {turnover.note}
-                  </p>
-                  <p className="mt-1.5 text-xl font-bold leading-none text-white md:text-2xl">
-                    {turnover.value}
-                  </p>
-                </div>
-              )}
             </div>
           </div>
 
           {/* ── right: lead times + export markets ── */}
           <div className="surface-blue flex h-full flex-col justify-center p-6 md:p-8">
-            <p className="mb-4 flex items-center gap-2 text-[0.65rem] font-semibold uppercase tracking-[0.12em] text-fg-subtle">
-              <Clock size={13} strokeWidth={2.2} className="text-green" />
-              Lead times
-            </p>
+            <Label icon={Clock}>Reliable lead times</Label>
 
-            <Stagger className="space-y-3">
+            <Stagger className="space-y-4">
               {production.leadTimes.map((lead) => (
                 <Stagger.Item
                   key={lead.days}
                   as="up"
-                  className="flex items-baseline gap-4 border-b border-white/10 pb-3"
+                  className="flex items-baseline gap-4 border-b border-white/10 pb-4"
                 >
-                  <span className="w-[4.5rem] shrink-0 text-xl font-bold leading-none text-green">
+                  <span className="w-[6.5rem] shrink-0 text-xl font-bold leading-none text-green">
                     {lead.days}
                     <span className="ml-1 text-[0.58rem] font-medium uppercase tracking-[0.08em] text-white/50">
                       days
                     </span>
                   </span>
-                  <span className="text-[0.8rem] leading-snug text-fg-muted">
-                    {lead.basis}
+                  <span>
+                    <span className="block text-[0.8rem] leading-snug text-white">{lead.basis}</span>
+                    {lead.note && (
+                      <span className="mt-1 block text-[0.7rem] leading-snug text-fg-muted">{lead.note}</span>
+                    )}
                   </span>
                 </Stagger.Item>
               ))}
             </Stagger>
 
-            <p className="mb-4 mt-9 flex items-center gap-2 text-[0.65rem] font-semibold uppercase tracking-[0.12em] text-fg-subtle">
-              <Globe2 size={13} strokeWidth={2.2} className="text-green" />
-              Export markets
-            </p>
-            <MarketBars />
+            <div className="mt-9">
+              <Label icon={Globe2}>Global export markets</Label>
+              <MarketBars />
+            </div>
           </div>
         </div>
       </Container>
