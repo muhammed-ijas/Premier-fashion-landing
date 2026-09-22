@@ -2,7 +2,7 @@ import { useParams, Link } from "react-router-dom";
 import { ArrowLeft } from "lucide-react";
 import Container from "../components/Container";
 import { categories } from "../data/company";
-import { categoryProducts, categoryImages, hasMedia } from "../data/media";
+import { categoryProducts } from "../data/media";
 
 export default function CategoryPage() {
   const { slug } = useParams();
@@ -11,8 +11,8 @@ export default function CategoryPage() {
   if (!category) {
     return (
       <Container className="py-20 text-center">
-        <p className="text-fg-muted">Category not found.</p>
-        <Link to="/" className="mt-4 inline-block text-blue hover:underline">
+        <p className="type-body">Category not found.</p>
+        <Link to="/" className="type-body mt-4 inline-block text-blue hover:underline">
           Back to home
         </Link>
       </Container>
@@ -26,7 +26,7 @@ export default function CategoryPage() {
       <Container>
         <Link
           to="/"
-          className="mb-8 flex items-center gap-2 text-[0.75rem] font-medium uppercase tracking-[0.08em] text-fg-subtle transition-colors hover:text-blue"
+          className="type-label mb-8 flex items-center gap-2 transition-colors hover:text-blue"
         >
           <ArrowLeft size={14} />
           Back
@@ -48,9 +48,7 @@ export default function CategoryPage() {
             ))}
           </div>
         ) : (
-          <p className="text-[0.82rem] text-fg-subtle">
-            Product images coming soon.
-          </p>
+          <p className="type-body text-fg-subtle">Product images coming soon.</p>
         )}
       </Container>
     </section>

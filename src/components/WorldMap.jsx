@@ -76,26 +76,20 @@ function OfficeDetails({ office }) {
 
   return (
     <div className="border border-line bg-white px-5 py-4">
-      <p className="text-[0.62rem] font-semibold uppercase tracking-[0.12em] text-green">
-        {office.label}
-      </p>
-      <p className="mt-1 text-[0.85rem] font-semibold uppercase tracking-[0.04em] text-ink">
+      <p className="type-label text-green">{office.label}</p>
+      <p className="card-title mt-1">
         {office.country}
         {office.city && (
-          <span className="font-normal normal-case text-fg-muted"> — {office.city}</span>
+          <span className="font-normal normal-case tracking-normal text-fg-muted"> — {office.city}</span>
         )}
       </p>
-      {office.entity && (
-        <p className="mt-1 text-[0.74rem] text-fg-muted">{office.entity}</p>
-      )}
-      {office.function && (
-        <p className="mt-2 text-[0.74rem] leading-[1.7] text-fg-muted">{office.function}</p>
-      )}
+      {office.entity && <p className="type-small mt-1">{office.entity}</p>}
+      {office.function && <p className="type-small mt-2">{office.function}</p>}
 
       {rows.length > 0 && (
         <ul className="mt-3 space-y-1.5 border-t border-line pt-3">
           {rows.map(({ icon: Icon, value, href }) => (
-            <li key={value} className="flex items-start gap-2 text-[0.74rem] leading-[1.6] text-fg-muted">
+            <li key={value} className="type-small flex items-start gap-2">
               <Icon size={13} strokeWidth={2} className="mt-[3px] shrink-0 text-blue" />
               {href ? (
                 <a href={href} className="transition-colors hover:text-blue">{value}</a>
@@ -124,14 +118,12 @@ export default function WorldMap() {
       {/* ── location list ──────────────────────────────────────────────────── */}
       <div className="order-2 self-start border border-line bg-white md:order-1">
         <div className="flex items-center justify-between border-b border-line px-4 py-3">
-          <p className="text-[0.66rem] font-semibold uppercase tracking-[0.12em] text-fg-subtle">
-            {points.length} locations
-          </p>
+          <p className="type-label">{points.length} locations</p>
           {active && (
             <button
               type="button"
               onClick={() => setActiveSlug(null)}
-              className="flex cursor-pointer items-center gap-1.5 text-[0.66rem] font-medium uppercase tracking-[0.08em] text-blue transition-colors duration-200 hover:text-green"
+              className="type-label flex cursor-pointer items-center gap-1.5 text-blue transition-colors duration-200 hover:text-green"
             >
               <Globe size={12} strokeWidth={2.2} />
               View all
@@ -163,18 +155,14 @@ export default function WorldMap() {
                     )}
                   />
                   <span className="min-w-0">
-                    <span className="block truncate text-[0.72rem] font-semibold uppercase tracking-[0.03em] text-ink">
-                      {office.country}
-                    </span>
+                    <span className="type-label block truncate text-ink">{office.country}</span>
                     {office.city && (
-                      <span className="block truncate text-[0.62rem] text-fg-subtle">
-                        {office.city}
-                      </span>
+                      <span className="type-small block truncate text-fg-subtle">{office.city}</span>
                     )}
                     {office.label && (
                       <span
                         className={clsx(
-                          "mt-0.5 block truncate text-[0.58rem] font-medium uppercase tracking-[0.06em]",
+                          "type-label mt-0.5 block truncate tracking-[0.06em]",
                           isActive ? "text-green" : "text-blue"
                         )}
                       >
@@ -221,7 +209,7 @@ export default function WorldMap() {
                 );
               })}
 
-              {/* country names — on phones only the selected country's name shows */}
+              {/* country names — map units, not page text; on phones only the selected one shows */}
               {points.map((office) => {
                 const lbl      = countryLabels[office.slug];
                 const nudge    = LABEL_NUDGE[office.slug] ?? { dx: 0, dy: 4, anchor: "middle" };
@@ -260,7 +248,7 @@ export default function WorldMap() {
           </div>
         </div>
 
-        <p className="mt-2 text-right text-[0.58rem] text-fg-subtle">
+        <p className="type-small mt-2 text-right text-fg-subtle">
           <a
             href="https://www.naturalearthdata.com"
             target="_blank"
@@ -276,7 +264,7 @@ export default function WorldMap() {
           {active ? (
             <OfficeDetails office={active} />
           ) : (
-            <p className="py-2 text-center text-[0.74rem] text-fg-subtle">
+            <p className="type-small py-2 text-center text-fg-subtle">
               Select a location to view office details
             </p>
           )}

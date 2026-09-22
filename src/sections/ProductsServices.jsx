@@ -34,7 +34,7 @@ function CategoryCard({ cat }) {
         )}
         <p
           className={
-            "relative w-full px-1.5 py-2.5 text-center text-[0.6rem] font-semibold uppercase tracking-[0.05em] " +
+            "type-label relative w-full px-1.5 py-2.5 text-center leading-snug " +
             (hasImage ? "text-white" : "text-ink")
           }
         >
@@ -70,12 +70,12 @@ export default function ProductsServices() {
                     className="aspect-[4/5] w-full border border-line object-cover"
                   />
                 ) : (
-                  <div className="flex aspect-[4/5] items-center justify-center border border-dashed border-line-strong bg-white px-3 text-center text-[0.65rem] uppercase tracking-[0.1em] text-fg-subtle">
+                  <div className="type-label flex aspect-[4/5] items-center justify-center border border-dashed border-line-strong bg-white px-3 text-center">
                     {product.name}
                   </div>
                 )}
                 <div className="mt-3 flex items-baseline gap-2">
-                  <span className="text-[0.65rem] font-medium text-fg-subtle">0{i + 1}</span>
+                  <span className="type-label">0{i + 1}</span>
                   <h3 className="card-title">{product.name}</h3>
                 </div>
               </article>
@@ -83,23 +83,20 @@ export default function ProductsServices() {
           ))}
         </Stagger>
 
-        {/* category mix header */}
-        <div className="mt-12 flex flex-col items-start justify-between gap-4 border-t border-line pt-10 md:flex-row md:items-end">
-          <div>
-            <p className="eyebrow mb-3">Collections</p>
-            <h3 className="section-title text-balance">Explore our collections</h3>
-            <p className="mt-3 max-w-lg text-[0.82rem] leading-[1.8] text-fg-muted">
-              From active and golf wear to uniforms, scrubs, safety wear and bags. Select a collection to view the range.
-            </p>
-          </div>
-     
+        {/* collections header */}
+        <div className="mt-12 border-t border-line pt-10">
+          <p className="eyebrow mb-3">Collections</p>
+          <h3 className="section-title text-balance">Explore our collections</h3>
+          <p className="type-body mt-3 max-w-lg">
+            From active and golf wear to uniforms, scrubs, safety wear and bags. Select a collection to view the range.
+          </p>
         </div>
 
-        {/* Mobile — 3 cols, 9 items = exactly 3 clean rows */}
+        {/* Mobile — 2 per row, last tile centred */}
         <div className="mt-6 lg:hidden">
-          <Stagger className="grid grid-cols-3 gap-3">
+          <Stagger className="flex flex-wrap justify-center gap-3">
             {categories.map((cat) => (
-              <Stagger.Item key={cat.slug} as="scale">
+              <Stagger.Item key={cat.slug} as="scale" className="w-[calc(50%-0.375rem)]">
                 <CategoryCard cat={cat} />
               </Stagger.Item>
             ))}
@@ -123,7 +120,6 @@ export default function ProductsServices() {
             ))}
           </Stagger>
         </div>
-
       </Container>
 
       <Container className="mt-16">
@@ -139,12 +135,12 @@ export default function ProductsServices() {
               <article className="card h-full">
                 <span className="card-index">0{i + 1}</span>
                 <h3 className="card-title pr-8">{service.name}</h3>
-                <p className="mt-3 text-[0.82rem] leading-[1.8] text-fg-muted">{service.summary}</p>
+                <p className="type-body mt-3">{service.summary}</p>
 
                 {service.items.length > 0 && (
                   <ul className="mt-4 space-y-1.5 border-t border-line pt-4">
                     {service.items.map((item) => (
-                      <li key={item} className="flex items-center gap-2 text-[0.78rem] text-fg-muted">
+                      <li key={item} className="type-small flex items-center gap-2">
                         <CheckCircle2 className="h-3 w-3 shrink-0 text-green" strokeWidth={2.2} />
                         {item}
                       </li>

@@ -37,7 +37,7 @@ export default function Hero() {
         <motion.p
           initial="hidden" animate="visible" variants={line}
           transition={{ duration: 0.7, delay: 0.18, ease: EASE }}
-          className="mt-5 max-w-xl text-[0.95rem] leading-[1.75] text-fg-muted"
+          className="lede mt-5 max-w-xl"
         >
           {company.name} designs, develops and manufactures Men's, Women's and Kids' apparel from
           facilities across Vietnam, China, India, Bangladesh and Nepal — everything made under one roof.

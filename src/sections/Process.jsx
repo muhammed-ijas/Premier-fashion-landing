@@ -21,8 +21,7 @@ const connectorPath = processSteps
 
 function StepCard({ step, index, progress }) {
   // Each card has its own slice of the scroll range: it rises, settles
-  // and its rule fills as that slice passes. Works the same on phones,
-  // where the cards are stacked two-up.
+  // and its rule fills as that slice passes.
   const start = index / (TOTAL + 1.2);
   const mid = start + 0.16;
 
@@ -63,10 +62,10 @@ function StepCard({ step, index, progress }) {
       </div>
 
       <div className="mt-2.5 text-center">
-        <span className="text-[0.56rem] font-semibold tracking-[0.14em] text-green">
+        <span className="type-label text-green">
           {String(index + 1).padStart(2, "0")}
         </span>
-        <h3 className="mt-1 text-[0.64rem] font-semibold uppercase leading-snug tracking-[0.05em] text-white">
+        <h3 className="type-label mt-1 leading-snug text-white">
           {step.name}
         </h3>
       </div>
@@ -97,7 +96,7 @@ export default function Process() {
           </Reveal>
 
           <Reveal as="up" delay={0.08}>
-            <p className="max-w-sm text-[0.82rem] leading-[1.75] text-fg-muted">
+            <p className="type-body max-w-sm">
               Six stages, one vendor — every step handled in-house or by partners we
               have worked with for years.
             </p>

@@ -15,9 +15,7 @@ export default function Clients() {
             title="Trusted by international retail brands"
           />
 
-          {/* Every tile is the same box whatever the logo's own proportions:
-            the frame sets the size, the image is centred inside it and
-            never allowed to influence layout. */}
+          {/* Every tile is the same box whatever the logo's own proportions */}
           {clientLogos.length > 0 && (
             <Stagger className="mt-10 flex flex-wrap justify-center gap-2">
               {clientLogos.map((client, i) => (
@@ -42,9 +40,7 @@ export default function Clients() {
         </Container>
       </div>
 
-      {/* ---------- BRAND PARTNERS ----------
-          Six marks, so a static row reads better than a marquee —
-          nothing moves, each gets a numbered frame and its name. */}
+      {/* ---------- BRAND PARTNERS ---------- */}
       {brands.length > 0 && (
         <Container className="mt-14 md:mt-20">
           <div className="flex flex-col items-start justify-between gap-4 md:flex-row md:items-end">
@@ -54,7 +50,7 @@ export default function Clients() {
             </Reveal>
 
             <Reveal as="up" delay={0.08}>
-              <p className="max-w-xs text-[0.8rem] leading-[1.75] text-fg-muted">
+              <p className="type-body max-w-xs">
                 Labels developed and produced across the Premier network.
               </p>
             </Reveal>

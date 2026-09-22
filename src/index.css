@@ -312,8 +312,40 @@
     text-transform: uppercase;
     color: var(--fg);
   }
-
   .lede { font-size: 1rem; line-height: 1.7; color: var(--fg-muted); }
+
+  /* ---- fixed type scale: use these instead of text-[x.xxrem] ---- */
+
+  /* all descriptions and paragraphs */
+  .type-body { font-size: 0.875rem; line-height: 1.8; color: var(--fg-muted); }
+
+  /* notes, captions, sub-lines under a figure or name */
+  .type-small { font-size: 0.75rem; line-height: 1.6; color: var(--fg-muted); }
+
+  /* small uppercase labels, e.g. "Manufacturing Scale", "Days" */
+  .type-label {
+    font-size: 0.68rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--fg-subtle);
+  }
+
+  /* big figures: 12–13M, 2000, 25+ */
+  .type-stat-lg {
+    font-size: clamp(1.9rem, 3.2vw, 2.5rem);
+    font-weight: 700;
+    line-height: 1;
+    color: var(--accent-alt);
+  }
+
+  /* regular figures: 60%, 4,500+, 90 days */
+  .type-stat {
+    font-size: 1.5rem;
+    font-weight: 700;
+    line-height: 1;
+    color: var(--accent-alt);
+  }
 
   /* ---------- 7. CARDS ---------- */
   .card {

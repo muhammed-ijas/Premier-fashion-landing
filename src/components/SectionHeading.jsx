@@ -27,7 +27,7 @@ export default function SectionHeading({
       </Reveal>
       {lede && (
         <Reveal as="up" delay={0.1}>
-          <p className="mt-5 text-[0.92rem] leading-[1.8] text-fg-muted">{lede}</p>
+          <p className="lede mt-5">{lede}</p>
         </Reveal>
       )}
     </div>

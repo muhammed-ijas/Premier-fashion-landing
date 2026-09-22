@@ -9,15 +9,15 @@ import { pillars, designInitiatives } from "../data/company";
 import { EASE } from "../lib/motion";
 
 /* ---------- WHAT DRIVES US ----------
-   Numbered plates on a tinted ground. The number sits large and pale
-   behind the title, and the whole plate shifts to white on hover —
-   no borders, no growing rules. */
+   Numbered plates. The number sits large and pale behind the title,
+   and the whole plate shifts to blue on hover. */
 function Pillars() {
   return (
     <Stagger className="mt-8 grid grid-cols-2 gap-px overflow-hidden bg-hairline lg:grid-cols-5 [&>*:last-child:nth-child(odd)]:col-span-2 lg:[&>*:last-child:nth-child(odd)]:col-span-1">
       {pillars.map((pillar, i) => (
         <Stagger.Item key={pillar.title} as="up" className="h-full">
           <article className="group relative h-full overflow-hidden bg-white px-5 pb-6 pt-7 transition-colors duration-300 hover:bg-blue">
+            {/* decorative number, not text */}
             <span
               aria-hidden="true"
               className="pointer-events-none absolute -right-1 -top-3 text-[3.4rem] font-bold leading-none text-ink/[0.06] transition-colors duration-300 group-hover:text-white/15"
@@ -25,10 +25,10 @@ function Pillars() {
               {String(i + 1).padStart(2, "0")}
             </span>
 
-            <h3 className="relative text-[0.78rem] font-semibold uppercase leading-snug tracking-[0.06em] text-ink transition-colors duration-300 group-hover:text-white">
+            <h3 className="card-title relative leading-snug text-ink transition-colors duration-300 group-hover:text-white">
               {pillar.title}
             </h3>
-            <p className="relative mt-3 text-[0.78rem] leading-[1.75] text-fg-muted transition-colors duration-300 group-hover:text-white/80">
+            <p className="type-body relative mt-3 transition-colors duration-300 group-hover:text-white/80">
               {pillar.description}
             </p>
           </article>
@@ -39,8 +39,7 @@ function Pillars() {
 }
 
 /* ---------- KEY INITIATIVES ----------
-   An accordion: one open at a time, the rest collapsed to a line.
-   Reads as a considered list rather than four equal boxes. */
+   An accordion: one open at a time, the rest collapsed to a line. */
 function Initiatives() {
   const [open, setOpen] = useState(0);
 
@@ -66,7 +65,7 @@ function Initiatives() {
             >
               <span
                 className={clsx(
-                  "text-[0.62rem] font-semibold tracking-[0.12em] transition-colors duration-300",
+                  "type-label transition-colors duration-300",
                   isOpen ? "text-green" : "text-fg-subtle"
                 )}
               >
@@ -75,7 +74,7 @@ function Initiatives() {
 
               <span
                 className={clsx(
-                  "flex-1 text-[0.85rem] font-semibold uppercase tracking-[0.05em] transition-colors duration-300",
+                  "card-title flex-1 transition-colors duration-300",
                   isOpen ? "text-blue" : "text-ink"
                 )}
               >
@@ -101,9 +100,7 @@ function Initiatives() {
                   transition={{ duration: 0.35, ease: EASE }}
                   className="overflow-hidden"
                 >
-                  <p className="max-w-2xl pb-5 pl-9 text-[0.82rem] leading-[1.85] text-fg-muted">
-                    {point}
-                  </p>
+                  <p className="type-body max-w-2xl pb-5 pl-9">{point}</p>
                 </motion.div>
               )}
             </AnimatePresence>

@@ -2,7 +2,7 @@ import Container from "../components/Container";
 import Reveal from "../components/Reveal";
 import Stagger from "../components/Stagger";
 import SectionHeading from "../components/SectionHeading";
-import { about, company, highlights, offices, additionalPresence, ownDesignShare } from "../data/company";
+import { about, company, highlights, offices, additionalPresence } from "../data/company";
 import { about as aboutMedia, hasMedia } from "../data/media";
 
 export default function About() {
@@ -15,26 +15,24 @@ export default function About() {
   ];
 
   return (
-       <section id="about" className="surface-light py-10 md:py-14">
+    <section id="about" className="surface-light py-10 md:py-14">
       <Container className="grid grid-cols-1 items-center gap-12 lg:grid-cols-2 lg:gap-16">
         <div className="order-2 lg:order-1">
           <SectionHeading kicker="Who we are" title="A one-stop shop, built over two decades" />
 
           <Reveal as="up" delay={0.1}>
-            <p className="mt-5 max-w-lg text-[0.88rem] leading-[1.85] text-fg-muted">{about.intro}</p>
+            <p className="type-body mt-5 max-w-lg">{about.intro}</p>
           </Reveal>
           <Reveal as="up" delay={0.16}>
-            <p className="mt-3 max-w-lg text-[0.88rem] leading-[1.85] text-fg-muted">{about.today}</p>
+            <p className="type-body mt-3 max-w-lg">{about.today}</p>
           </Reveal>
 
           <Reveal as="up" delay={0.22}>
             <dl className="mt-8 grid grid-cols-3 gap-4 border-t border-line pt-6">
               {stats.map((stat) => (
                 <div key={stat.label}>
-                  <dd className="text-xl font-bold leading-none text-blue md:text-2xl">{stat.value}</dd>
-                  <dt className="mt-2 text-[0.6rem] font-medium uppercase tracking-[0.1em] text-fg-subtle md:text-[0.65rem]">
-                    {stat.label}
-                  </dt>
+                  <dd className="type-stat">{stat.value}</dd>
+                  <dt className="type-label mt-2">{stat.label}</dt>
                 </div>
               ))}
             </dl>
@@ -50,7 +48,7 @@ export default function About() {
               className="aspect-[5/4] w-full border border-line object-cover"
             />
           ) : (
-            <div className="flex aspect-[5/4] items-center justify-center border border-dashed border-line-strong bg-page text-[0.7rem] uppercase tracking-[0.1em] text-fg-subtle">
+            <div className="type-label flex aspect-[5/4] items-center justify-center border border-dashed border-line-strong bg-page">
               Image placeholder
             </div>
           )}
@@ -64,7 +62,7 @@ export default function About() {
               <article className="card h-full">
                 <span className="card-index">0{i + 1}</span>
                 <h3 className="card-title pr-8">{point.title}</h3>
-                <p className="mt-3 text-[0.82rem] leading-[1.8] text-fg-muted">{point.body}</p>
+                <p className="type-body mt-3">{point.body}</p>
               </article>
             </Stagger.Item>
           ))}
