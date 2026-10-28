@@ -387,18 +387,78 @@ export const team = [
    Brochure page 4, "Our Journey".                                */
 
 export const history = [
-  { year: "2000", title: "Established", description: "Premier Group established." },
-  { year: "2005", title: "Premier Exim Hong Kong", description: "Premier Exim Hong Kong founded." },
-  { year: "2006", title: "Trading Office", description: "Pha Re Mi En Ri Company opened in Vietnam — the former name of Premier Fashion Co., Ltd." },
-  { year: "2008", title: "Joint Venture", description: "Premier took a 50% share in the Ben Tre factory — Premier Pearl Garment JSC." },
-  { year: "2010", title: "Fabric Sourcing Office", description: "Premier Exim China Ltd. established in Zhejiang." },
-  { year: "2011", title: "Head office", description: "Premier Fashion Co., Ltd established in Vietnam as the company base." },
-  { year: "2012", title: "Investment", description: "Co-founded a Bangladesh factory with a 50% investment." },
-  { year: "2013", title: "Marketing Office", description: "Established a marketing office in South Africa — Premier Fashion (SA) PVT Ltd." },
-  { year: "2016", title: "Design & marketing office", description: "The Concept Shop opened in New York — Premier Exim USA." },
-  { year: "2021", title: "Design & Production Base", description: "Premier Creative India expanded our design and production capability." },
-  { year: "2024", title: "USA Office Expanded", description: "Additional team members onboarded to meet growing buyer requirements." },
-  { year: "2025", title: "Canada & Dubai", description: "New offices strengthening our global network, marketing and customer service." },
+  {
+    year: "2000",
+    title: "Laying the Foundation",
+    description:
+      "Established full-scale apparel manufacturing operations in Vietnam alongside our Nepal operations, while building strategic supply partnerships with major U.S. retailers, including JCPenney.",
+  },
+  {
+    year: "2005",
+    title: "Global Trade Expansion",
+    description:
+      "Launched Premier Exim Hong Kong following the end of global textile quotas, marking a pivotal step into international trade and global business operations.",
+  },
+  {
+    year: "2006",
+    title: "Dual-Hub Production Strategy",
+    description:
+      "Incorporated Pha Re Mi En Ri in Vietnam, the precursor to Premier Fashion Co., Ltd., while re-establishing operations in Nepal to build a resilient dual-hub manufacturing network.",
+  },
+  {
+    year: "2008",
+    title: "Strategic Sourcing Hub in China",
+    description:
+      "Established Premier Exim China Ltd. to strengthen direct access to the world's largest textile sourcing market, enhancing raw material quality, sourcing efficiency, and cost competitiveness.",
+  },
+  {
+    year: "2010",
+    title: "Manufacturing Investment in Vietnam",
+    description:
+      "Acquired a controlling stake in Premier Pearl Garment JSC (Ben Tre Factory), strengthening our manufacturing presence and production capabilities in Vietnam.",
+  },
+  {
+    year: "2011",
+    title: "Vietnam Headquarters & Full Ownership",
+    description:
+      "Established Premier Fashion Co., Ltd. as our Vietnam headquarters and acquired 100% ownership of the Ben Tre factory, integrating R&D, sourcing, and production capabilities to serve Walmart, Target, and JCPenney.",
+  },
+  {
+    year: "2012",
+    title: "Bangladesh Production Expansion",
+    description:
+      "Expanded our manufacturing footprint into Bangladesh through a 50% co-founder investment in a production facility, while extending our commercial presence across the U.S. and Mexico.",
+  },
+  {
+    year: "2013",
+    title: "Emerging Markets: South Africa",
+    description:
+      "Expanded into the South African market through the establishment of Premier Fashion (SA) Pvt. Ltd., strengthening our regional marketing and commercial presence.",
+  },
+  {
+    year: "2016",
+    title: "North American Presence",
+    description:
+      "Launched Premier Exim USA Inc. to strengthen direct market engagement, localized merchandising, and relationships with global brands.",
+  },
+  {
+    year: "2021",
+    title: "The Concept Shop & India Expansion",
+    description:
+      "Established The Concept Shop Inc. under Premier Exim USA as a one-stop design and product development solution, strengthened strategic partnerships with Costco, and expanded design and multi-sector operations in India.",
+  },
+  {
+    year: "2024",
+    title: "U.S. Team Scaling & Retail Partnerships",
+    description:
+      "Expanded our U.S. team to support growing buyer demand, while strengthening strategic retail development partnerships in the Indian market.",
+  },
+  {
+    year: "2025",
+    title: "Global Holding & New Continental Hubs",
+    description:
+      "Established Premier Industries as the Group holding company, launched Premier Creative Vietnam and a Central Vietnam joint-venture manufacturing facility, and expanded our global network to Canada and Dubai, UAE.",
+  },
 ];
 
 /* ---------------- APPROACH ---------------- */

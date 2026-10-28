@@ -190,7 +190,7 @@ export default function Story() {
         <Container>
           <Reveal as="up" className="max-w-2xl">
             <p className="eyebrow mb-3">Our history</p>
-            <h2 className="section-title text-balance">Two decades of advancement</h2>
+            <h2 className="section-title text-balance">Over two decades of growth &amp; evolution</h2>
           </Reveal>
 
           <Reveal as="up" delay={0.08} className="mt-7">
