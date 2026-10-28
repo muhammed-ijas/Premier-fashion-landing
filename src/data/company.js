@@ -44,7 +44,7 @@ export const highlights = [
 /* ---------------- GROUP FIGURES ---------------- */
 
 export const groupStats = [
-   { value: "US$100M+", label: "Group Turnover" },
+  { value: "US$100M+", label: "Group Turnover" },
   { value: "12–13M", label: "Garments Annually" },
   { value: "60", label: "Production Lines" },
   { value: "4,500+", label: "Workforce" },
@@ -197,7 +197,7 @@ export const offices = [
     country: "China",
     label: "Sourcing Office",
     location: "Zhejiang, China",
-    established: "2010",
+    established: "2008",
     function: "Fabric & trims sourcing, research & development",
     entity: "Premier Exim China Ltd.",
     address:
